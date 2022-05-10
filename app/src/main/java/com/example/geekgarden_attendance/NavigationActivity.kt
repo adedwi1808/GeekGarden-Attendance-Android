@@ -29,15 +29,16 @@ class NavigationActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_attendance,
+                R.id.navigation_history, R.id.navigation_more
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        if (!Prefs(this).getIsLogin(true)){
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+//        if (!Prefs(this).getIsLogin(true)){
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }
