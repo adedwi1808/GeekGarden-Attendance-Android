@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:padding="@dimen/_17sdp"
     tools:context=".ui.login.LoginActivity">
 
@@ -77,10 +78,11 @@
             android:layout_height="wrap_content"
             android:text="Lupa Password ? "/>
         <TextView
+            android:id="@+id/btn_lupaPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Klik disini"
-            android:textColor="@color/purple_500"/>
+            android:textColor="@color/colorPrimaryVariant"/>
     </LinearLayout>
 
 

@@ -2,12 +2,10 @@ package com.example.geekgarden_attendance
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.geekgarden_attendance.databinding.ActivityNavigationBinding
 import com.example.geekgarden_attendance.ui.login.LoginActivity
@@ -33,12 +31,16 @@ class NavigationActivity : AppCompatActivity() {
                 R.id.navigation_history, R.id.navigation_more
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        if (!Prefs(this).getIsLogin(true)){
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//        }
+        //Memeriksa apakah user sudah login/tidak
+        checkSignIn()
     }
+
+    private fun checkSignIn(){
+        if (!Prefs(this).getIsLogin(true)){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
 }
