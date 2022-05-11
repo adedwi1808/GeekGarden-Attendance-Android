@@ -47,19 +47,27 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Retrofit
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.7'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     //Live Data
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
-    // Koin
-    implementation "org.koin:koin-android:2.2.2"
-    implementation 'org.koin:koin-androidx-viewmodel:2.2.2'
+
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:3.2.0"
+    // No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
+
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:3.2.0"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:3.2.0"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:3.2.0"
 
     //Scalable size unit
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
