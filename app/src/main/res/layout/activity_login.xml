@@ -93,6 +93,7 @@
         android:layout_gravity="center"
         android:text="Sign In"
         android:textAllCaps="false"
-        android:textSize="@dimen/_14sdp" />
+        android:textSize="@dimen/_14sdp"
+        android:theme="@style/Button.OutlineBox"/>
 
 </LinearLayout>
