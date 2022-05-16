@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_vertical"
-    android:padding="@dimen/_17sdp"
+    android:padding="@dimen/_18sdp"
     tools:context=".ui.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
     <ImageView
         android:layout_width="@dimen/_220sdp"
@@ -38,7 +42,9 @@
             android:id="@+id/Textinput_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:text="adedwip1808@gmail.com"/>
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +69,9 @@
                 android:id="@+id/Textinput_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="123123"
+                android:hint="Password"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
@@ -95,5 +103,13 @@
         android:textAllCaps="false"
         android:textSize="@dimen/_14sdp"
         android:theme="@style/Button.OutlineBox"/>
+    </LinearLayout>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>

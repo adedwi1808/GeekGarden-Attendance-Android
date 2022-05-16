@@ -2,7 +2,10 @@ package com.example.geekgarden_attendance.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.geekgarden_attendance.R
+import android.widget.Toast
+import androidx.core.view.isVisible
+import com.example.geekgarden_attendance.core.data.source.remote.network.State
+import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,19 +23,45 @@ class LoginActivity : AppCompatActivity() {
         setData()
     }
 
-    fun setData(){
+    fun setData() {
         viewModel.text.observe(this) {
             binding.TextinputEmail.setText(it)
         }
 
         binding.btnSignIn.setOnClickListener {
-            viewModel.ubahData()
+            login()
         }
     }
 
-    fun testData() {
+    private fun login() {
 
+        if (binding.TextinputEmail.text!!.isEmpty()) binding.TextinputEmail.setError("Harap Masukkan Email")
+        if (binding.TextinputPassword.text!!.isEmpty()) binding.TextinputPassword.setError("Harap Masukkan Password")
+
+
+        val body = LoginRequest(
+            binding.TextinputEmail.text.toString(),
+            binding.TextinputPassword.text.toString(),
+        )
+
+        viewModel.login(body).observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
     }
-
 
 }
