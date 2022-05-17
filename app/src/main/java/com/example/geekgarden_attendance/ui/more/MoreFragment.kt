@@ -49,9 +49,12 @@ class MoreFragment : Fragment() {
         val user = Prefs.getUser()
 
         if (user != null) {
+            val userNameInitial = user.name?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+
             binding.apply {
                 textViewNama.text = user.name
                 textViewPosisi.text = "Belum ada"
+                textViewNameInitial.text =  userNameInitial
             }
         }
     }
