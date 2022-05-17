@@ -5,6 +5,7 @@ import com.example.geekgarden_attendance.core.data.source.local.LocalDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
+import com.example.geekgarden_attendance.util.Prefs
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
 
@@ -17,8 +18,13 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         try {
             remote.login(data).let {
                 if (it.isSuccessful){
+                    Prefs.isLogin = true
                     val body = it.body()
-                    emit(Resource.success(body?.data))
+                    val user = body?.data
+
+                    Prefs.setUser(user)
+
+                    emit(Resource.success(user))
                     Log.d("SUC", "Success : ${body.toString()}")
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())

@@ -3,20 +3,24 @@ package com.example.geekgarden_attendance.util
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.chibatching.kotpref.KotprefModel
+import com.example.geekgarden_attendance.core.data.source.model.User
+import com.google.gson.Gson
 
-class Prefs(activity: Activity) {
-    private var sp: SharedPreferences? = null
+object Prefs: KotprefModel(){
+    var isLogin by booleanPref(false)
+    var user by stringPref()
 
-    init {
-        sp = activity.getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
+    fun setUser(data: User?){
+        val gson = Gson()
+        user = gson.toJson(data)
     }
 
-    val login = "login"
-    fun setIsLogin(value: Boolean){
-        sp!!.edit().putBoolean(login, value).apply()
+    fun getUser(): User? {
+        if (user.isEmpty()) return null
+        val gson = Gson()
+        return gson.fromJson(user, User::class.java)
     }
 
-    fun getIsLogin(value: Boolean): Boolean{
-        return sp!!.getBoolean(login, false)
-    }
+
 }

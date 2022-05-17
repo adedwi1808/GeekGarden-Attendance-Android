@@ -37,7 +37,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     private fun checkSignIn(){
-        if (!Prefs(this).getIsLogin(true)){
+        if (!Prefs.isLogin){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }

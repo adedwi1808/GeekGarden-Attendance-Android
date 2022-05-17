@@ -1,13 +1,15 @@
 package com.example.geekgarden_attendance.ui.more
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.geekgarden_attendance.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
+import com.example.geekgarden_attendance.util.Prefs
 
 class MoreFragment : Fragment() {
 
@@ -27,12 +29,31 @@ class MoreFragment : Fragment() {
 
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        buttonAction()
+        setUserData()
         return root
+    }
+
+    private fun buttonAction() {
+        binding.buttonLogOut.setOnClickListener {
+            Prefs.isLogin = false
+            val intent = Intent(this@MoreFragment.requireContext(), NavigationActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
+
+
+    private fun setUserData() {
+        val user = Prefs.getUser()
+
+        if (user != null) {
+            binding.apply {
+                textViewNama.text = user.name
+                textViewPosisi.text = "Belum ada"
+            }
+        }
     }
 
     override fun onDestroyView() {

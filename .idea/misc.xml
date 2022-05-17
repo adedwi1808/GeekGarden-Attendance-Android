@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/ic_baseline_alternate_email_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_alternate_lock.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_alternate_lock_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_attendance.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_history.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_more.xml" value="0.1" />
@@ -14,7 +16,7 @@
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1609375" />
-        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.11510416666666666" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2203023758099352" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/xml/network_security.xml" value="0.11510416666666666" />
       </map>

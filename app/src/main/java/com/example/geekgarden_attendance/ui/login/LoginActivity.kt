@@ -1,9 +1,11 @@
 package com.example.geekgarden_attendance.ui.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.example.geekgarden_attendance.NavigationActivity
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
@@ -25,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun setData() {
         viewModel.text.observe(this) {
-            binding.TextinputEmail.setText(it)
+            binding.textInputEmail.setText(it)
         }
 
         binding.btnSignIn.setOnClickListener {
@@ -35,13 +37,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login() {
 
-        if (binding.TextinputEmail.text!!.isEmpty()) binding.TextinputEmail.setError("Harap Masukkan Email")
-        if (binding.TextinputPassword.text!!.isEmpty()) binding.TextinputPassword.setError("Harap Masukkan Password")
+        if (binding.textInputEmail.text!!.isEmpty()) binding.textInputEmail.setError("Harap Masukkan Email")
+        if (binding.textInputPassword.text!!.isEmpty()) binding.textInputPassword.setError("Harap Masukkan Password")
 
 
         val body = LoginRequest(
-            binding.TextinputEmail.text.toString(),
-            binding.TextinputPassword.text.toString(),
+            binding.textInputEmail.text.toString(),
+            binding.textInputPassword.text.toString(),
         )
 
         viewModel.login(body).observe(this) {
@@ -49,7 +51,10 @@ class LoginActivity : AppCompatActivity() {
                 State.SUCCES -> {
                     Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
-
+                    val intent = Intent(this, NavigationActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
