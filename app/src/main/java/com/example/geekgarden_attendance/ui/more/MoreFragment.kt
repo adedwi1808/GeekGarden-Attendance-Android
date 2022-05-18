@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
+import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Prefs
 
 class MoreFragment : Fragment() {
@@ -40,6 +41,11 @@ class MoreFragment : Fragment() {
             val intent = Intent(this@MoreFragment.requireContext(), NavigationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        binding.imageButtonEdit.setOnClickListener {
+            val intent = Intent(this@MoreFragment.requireContext(), UpdateProfileActivity::class.java)
             startActivity(intent)
         }
     }

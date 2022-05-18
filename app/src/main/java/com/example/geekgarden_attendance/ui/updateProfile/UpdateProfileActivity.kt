@@ -1,16 +1,12 @@
 package com.example.geekgarden_attendance.ui.updateProfile
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.view.isVisible
-import com.example.geekgarden_attendance.NavigationActivity
-import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
+import androidx.appcompat.widget.Toolbar
+import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
-import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
 import com.example.geekgarden_attendance.databinding.ActivityUpdateProfileBinding
+import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateProfileActivity : AppCompatActivity() {
@@ -24,11 +20,29 @@ class UpdateProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityUpdateProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setToolBar()
         setData()
     }
 
-    fun setData() {
+    fun setToolBar(){
+        val toolBar = findViewById(R.id.toolbar) as Toolbar?
+        setSupportActionBar(toolBar)
 
+
+    }
+
+    fun setData() {
+        val user = Prefs.getUser()
+
+        if (user != null) {
+            binding.apply {
+                textInputEditUsername.setText(user.name)
+//                textViewPosisi.text = "Belum ada"
+                textInputEditEmail.setText(user.email)
+                textInputEditPhone.setText(user.phone)
+            }
+        }
     }
 
     private fun login() {
