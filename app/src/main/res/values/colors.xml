@@ -3,8 +3,8 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="colorPrimary">#68799D</color>
     <color name="colorPrimaryVariant">#2D4B87</color>
-    <color name="colorSecondary">#FF03DAC5</color>
-    <color name="colorSecondaryVariant">#FF018786</color>
+    <color name="colorSecondary">#F4F8FF</color>
+    <color name="colorSecondaryVariant">#FF03DAC5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

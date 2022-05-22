@@ -3,11 +3,11 @@ package com.example.geekgarden_attendance.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.geekgarden_attendance.core.data.source.local.DummyData
+import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
 
 class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    val listMadingGeekGarden: LiveData<List<MadingGeekGarden>> = MutableLiveData<List<MadingGeekGarden>>().apply {
+        value = DummyData.listMadingGeekGarden
     }
-    val text: LiveData<String> = _text
 }

@@ -27,9 +27,7 @@ class MoreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(MoreViewModel::class.java)
-
+        val homeViewModel = ViewModelProvider(this).get(MoreViewModel::class.java)
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         buttonAction()
@@ -51,7 +49,7 @@ class MoreFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.imageButtonEdit.setOnClickListener {
+        binding.miniProfile.imageButtonEdit.setOnClickListener {
             val intent = Intent(this@MoreFragment.requireContext(), UpdateProfileActivity::class.java)
             startActivity(intent)
         }
@@ -64,11 +62,11 @@ class MoreFragment : Fragment() {
         if (user != null) {
             val userNameInitial = user.name?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
 
-            binding.apply {
+            binding.miniProfile.apply {
                 textViewNama.text = user.name
                 textViewPosisi.text = "Belum ada"
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(USER_URL+user.image).into(binding.imageViewProfile)
+                Picasso.get().load(USER_URL+user.image).into(binding.miniProfile.imageViewProfile)
             }
         }
     }
