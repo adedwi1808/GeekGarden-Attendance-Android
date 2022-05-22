@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
+import com.example.geekgarden_attendance.util.Constants.USER_URL
 import com.example.geekgarden_attendance.util.Prefs
+import com.squareup.picasso.Picasso
 
 class MoreFragment : Fragment() {
 
@@ -31,8 +33,13 @@ class MoreFragment : Fragment() {
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         buttonAction()
-        setUserData()
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUserData()
+
     }
 
     private fun buttonAction() {
@@ -61,6 +68,7 @@ class MoreFragment : Fragment() {
                 textViewNama.text = user.name
                 textViewPosisi.text = "Belum ada"
                 textViewNameInitial.text =  userNameInitial
+                Picasso.get().load(USER_URL+user.image).into(binding.imageViewProfile)
             }
         }
     }

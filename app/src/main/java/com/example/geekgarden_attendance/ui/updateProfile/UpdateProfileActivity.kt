@@ -12,17 +12,20 @@ import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.databinding.ActivityUpdateProfileBinding
+import com.example.geekgarden_attendance.extension.toMultipartBody
+import com.example.geekgarden_attendance.util.Constants
 import com.example.geekgarden_attendance.util.Prefs
 import com.github.drjacky.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class UpdateProfileActivity : AppCompatActivity() {
 
     private val viewModel: UpdateProfileViewModel by viewModel()
-
     private var _binding: ActivityUpdateProfileBinding? = null
     private val binding get() = _binding!!
+    private var fileImage: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,11 @@ class UpdateProfileActivity : AppCompatActivity() {
 
     fun buttonAction(){
         binding.buttonEdit.setOnClickListener {
+            if (fileImage != null){
+                upload()
+            } else{
             updateUser()
+            }
         }
 
         binding.imageViewProfile.setOnClickListener {
@@ -46,6 +53,7 @@ class UpdateProfileActivity : AppCompatActivity() {
 
     private fun picImage() {
         ImagePicker.with(this)
+            .crop()
             .maxResultSize(1080, 1080, true)
             .createIntentFromDialog { launcher.launch(it) }
     }
@@ -53,7 +61,7 @@ class UpdateProfileActivity : AppCompatActivity() {
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data!!
-            // Use the uri to load the image
+            fileImage = File(uri.path!!)
             Picasso.get().load(uri).into(binding.imageViewProfile)
         }
     }
@@ -76,6 +84,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                 textInputEditEmail.setText(user.email)
                 textInputEditPhone.setText(user.phone)
                 textViewNameInitial.setText(userNameInitial)
+                Picasso.get().load(Constants.USER_URL +user.image).into(binding.imageViewProfile)
             }
         }
     }
@@ -101,6 +110,29 @@ class UpdateProfileActivity : AppCompatActivity() {
                     Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     onBackPressed()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
+
+    private fun upload(){
+        val idUser = Prefs.getUser()?.id
+        val file = fileImage.toMultipartBody()
+        viewModel.uploadImage(idUser, file).observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+                    updateUser()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

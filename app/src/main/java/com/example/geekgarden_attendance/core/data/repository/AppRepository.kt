@@ -8,6 +8,7 @@ import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRe
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.util.Prefs
 import kotlinx.coroutines.flow.flow
+import okhttp3.MultipartBody
 import org.json.JSONObject
 
 
@@ -44,6 +45,26 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         emit(Resource.loading(null))
         try {
             remote.updateUser(data).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val user = body?.data
+
+                    Prefs.setUser(user)
+                    emit(Resource.success(user))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.uploadImage(id, fileImage).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val user = body?.data
