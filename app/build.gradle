@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -74,6 +75,10 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     //Kotpref library untuk sharedpreferences
-    implementation 'com.chibatching.kotpref:kotpref:2.13.1'
+    implementation 'com.chibatching.kotpref:kotpref:2.13.2'
 
+    //DrJacky Image Picker
+    implementation 'com.github.Drjacky:ImagePicker:2.1.11'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
