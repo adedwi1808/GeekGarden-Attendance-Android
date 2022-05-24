@@ -3,6 +3,8 @@ package com.example.geekgarden_attendance.core.data.source.remote.network
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.core.data.source.remote.response.LoginResponse
+import com.example.geekgarden_attendance.core.data.source.remote.response.SelectAllMadingResponse
+import com.example.geekgarden_attendance.util.Prefs
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -15,6 +17,7 @@ interface ApiService {
 
     @PUT("update-user/{id}")
     suspend fun updateUser(
+        @Header("Authorization") token: String,
         @Path("id") int: Int,
         @Body data: UpdateProfileRequest
     ): Response<LoginResponse>
@@ -22,7 +25,12 @@ interface ApiService {
     @Multipart
     @POST("upload-user/{id}")
     suspend fun uploadImage(
+        @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
         @Part data: MultipartBody.Part? = null
     ): Response<LoginResponse>
+
+    @GET("madings")
+    suspend fun selectAllMading(
+    ): Response<SelectAllMadingResponse>
 }

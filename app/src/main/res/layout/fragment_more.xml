@@ -12,7 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include android:id="@+id/miniProfile" layout="@layout/layout_mini_profile"/>
+        <include
+            android:id="@+id/miniProfile"
+            layout="@layout/layout_mini_profile"/>
+
+        <include
+            android:id="@+id/dataKehadiran"
+            layout="@layout/layout_data_kehadiran"/>
 
         <Button
             android:id="@+id/buttonLogOut"

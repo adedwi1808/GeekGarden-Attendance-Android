@@ -39,7 +39,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/textViewHadir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20"
@@ -69,7 +71,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/textViewSakit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="1"
@@ -99,7 +103,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/textViewIzin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="2"
@@ -130,6 +136,7 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/textViewAlpha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="5"

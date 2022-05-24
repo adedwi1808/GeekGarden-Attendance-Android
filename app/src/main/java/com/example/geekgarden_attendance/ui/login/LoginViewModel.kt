@@ -16,4 +16,6 @@ class LoginViewModel(var repository: AppRepository) : ViewModel() {
     val text: LiveData<String> = _text
 
     fun login(data: LoginRequest) = repository.login(data).asLiveData()
+    fun madings() = repository.selectAllMading().asLiveData()
+
 }

@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.geekgarden_attendance.core.data.source.local.DummyData
 import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
+import com.example.geekgarden_attendance.util.Prefs
 
 class HomeViewModel : ViewModel() {
+
+
     val listMadingGeekGarden: LiveData<List<MadingGeekGarden>> = MutableLiveData<List<MadingGeekGarden>>().apply {
-        value = DummyData.listMadingGeekGarden
+        value = Prefs.getMading()
     }
+
 }

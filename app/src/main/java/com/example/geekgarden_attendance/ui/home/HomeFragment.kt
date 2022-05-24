@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.geekgarden_attendance.core.data.repository.AppRepository
 import com.example.geekgarden_attendance.databinding.FragmentHomeBinding
 import com.example.geekgarden_attendance.ui.home.adapter.MadingGeekGardenAdapter
 import com.example.geekgarden_attendance.util.Constants
 import com.example.geekgarden_attendance.util.Prefs
 import com.squareup.picasso.Picasso
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val adapterMading = MadingGeekGardenAdapter()
@@ -33,18 +31,22 @@ class HomeFragment : Fragment() {
 
         setupAdapter()
         setUserData()
+        setupMadings()
         return root
     }
+
 
     private fun setupAdapter(){
         binding.recyclerViewMading.adapter = adapterMading
     }
 
-    private fun setUserData() {
-
-        homeViewModel.listMadingGeekGarden.observe(requireActivity(),{
+    private fun setupMadings(){
+        homeViewModel.listMadingGeekGarden.observe(requireActivity()) {
             adapterMading.addItems(it)
-        })
+        }
+    }
+
+    private fun setUserData() {
 
         val user = Prefs.getUser()
 
@@ -59,6 +61,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

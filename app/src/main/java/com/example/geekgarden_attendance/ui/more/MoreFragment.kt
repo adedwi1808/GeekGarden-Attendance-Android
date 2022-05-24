@@ -17,17 +17,15 @@ import com.squareup.picasso.Picasso
 class MoreFragment : Fragment() {
 
     private var _binding: FragmentMoreBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var moreViewModel: MoreViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(MoreViewModel::class.java)
+        moreViewModel = ViewModelProvider(this).get(MoreViewModel::class.java)
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         buttonAction()
@@ -66,7 +64,18 @@ class MoreFragment : Fragment() {
                 textViewNama.text = user.name
                 textViewPosisi.text = "Belum ada"
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(USER_URL+user.image).into(binding.miniProfile.imageViewProfile)
+                Picasso.get().load(USER_URL+user.image).into(imageViewProfile)
+            }
+
+
+
+            binding.dataKehadiran.apply {
+                moreViewModel.attendanceStats.observe(viewLifecycleOwner,{
+                    textViewHadir.text = it.hadir.toString()
+                    textViewAlpha.text = it.alpha.toString()
+                    textViewIzin.text = it.izin.toString()
+                    textViewSakit.text = it.sakit.toString()
+                })
             }
         }
     }

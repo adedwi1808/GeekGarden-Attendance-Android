@@ -15,6 +15,7 @@ import org.json.JSONObject
 
 
 class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
+
     fun login(data: LoginRequest) = flow {
         emit(Resource.loading(null))
         try {
@@ -25,13 +26,14 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val user = body?.data
 
                     Prefs.setUser(user)
+                    Prefs.setToken(body!!.token!!)
 
                     emit(Resource.success(user))
-                    Log.d("SUC", "Success : ${body.toString()}")
+//                    Log.d("SUC", "Success : ${body.toString()}")
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to login"))
-                    Log.d("ERR", "ERROR")
+//                    Log.d("ERR", "ERROR")
                 }
             }
         }catch (err:Exception){
@@ -61,6 +63,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+
     fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
         emit(Resource.loading(null))
         try {
@@ -71,6 +74,26 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
 
                     Prefs.setUser(user)
                     emit(Resource.success(user))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun selectAllMading() = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.selectAllMading().let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val madings = body?.data
+                    Log.d("mading", madings.toString())
+                    Prefs.setMading(madings)
+                    emit(Resource.success(madings))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))

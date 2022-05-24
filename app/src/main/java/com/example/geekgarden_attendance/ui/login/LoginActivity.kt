@@ -3,6 +3,7 @@ package com.example.geekgarden_attendance.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.geekgarden_attendance.NavigationActivity
@@ -51,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                 State.SUCCES -> {
                     Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
+                    madings()
                     val intent = Intent(this, NavigationActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -58,6 +60,30 @@ class LoginActivity : AppCompatActivity() {
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+
+
+
+
+    }
+
+    fun madings(){
+        viewModel.madings().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    binding.progressBar.isVisible = false
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
                     binding.progressBar.isVisible = false
 
                 }
