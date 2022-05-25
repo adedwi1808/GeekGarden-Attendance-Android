@@ -13,6 +13,25 @@ object Prefs: KotprefModel(){
     var userToken by stringPref()
     var attendanceStats  by stringPref()
     var madings by stringPref()
+    var userLongitude by stringPref("0.0")
+    var userLatitude by stringPref("0.0")
+
+    fun setLongitude(data: String){
+        this.userLongitude = data
+    }
+
+    fun getLongitude(): String{
+        return userLongitude
+    }
+
+    fun setLatitude(data: String){
+        this.userLatitude = data
+    }
+
+    fun getLatitude(): String{
+        return userLatitude
+    }
+
 
     fun setMading(data: List<MadingGeekGarden>?){
         val gson = Gson()

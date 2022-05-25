@@ -18,8 +18,10 @@
         <entry key="app/src/main/res/drawable/ic_clock_solid.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/ic_location_solid.xml" value="0.1915" />
+        <entry key="app/src/main/res/layout/activity_form_attendance.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />

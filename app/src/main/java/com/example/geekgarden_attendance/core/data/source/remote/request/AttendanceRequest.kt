@@ -6,4 +6,5 @@ data class AttendanceRequest(
     val status_absensi: String? = null,
     val longitude: String? = null,
     val latitude: String? = null,
+    val foto_absensi: String? = null
 )

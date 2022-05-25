@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/_3sdp"
     tools:context=".ui.attendance.AttendanceFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
 
     <TextClock
@@ -76,4 +83,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonLocationInformation"
         android:layout_marginTop="70dp" />
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

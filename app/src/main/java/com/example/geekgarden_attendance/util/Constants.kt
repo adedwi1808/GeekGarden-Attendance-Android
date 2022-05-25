@@ -6,5 +6,4 @@ object Constants {
 //    const val BASE_URL = "http://172.20.10.3:8888/"
     const val USER_URL = BASE_URL + "storage/user/"
     const val MADING_URL = BASE_URL + "storage/mading/"
-
 }

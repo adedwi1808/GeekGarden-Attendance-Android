@@ -10,6 +10,7 @@ import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
+import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -50,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}" + Prefs.getLongitude(), Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     madings()
                 }

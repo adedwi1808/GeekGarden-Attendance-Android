@@ -41,6 +41,7 @@ class MoreFragment : Fragment() {
     private fun buttonAction() {
         binding.buttonLogOut.setOnClickListener {
             Prefs.isLogin = false
+            Prefs.clear()
             val intent = Intent(this@MoreFragment.requireContext(), NavigationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
