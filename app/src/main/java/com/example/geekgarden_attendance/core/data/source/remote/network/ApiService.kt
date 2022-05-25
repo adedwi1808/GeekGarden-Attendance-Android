@@ -1,5 +1,6 @@
 package com.example.geekgarden_attendance.core.data.source.remote.network
 
+import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.core.data.source.remote.response.LoginResponse
@@ -32,5 +33,12 @@ interface ApiService {
 
     @GET("madings")
     suspend fun selectAllMading(
+        @Header("Authorization") token: String,
+        ): Response<SelectAllMadingResponse>
+
+    @POST("fill-attendance")
+    suspend fun doAttendance(
+        @Header("Authorization") token: String,
+        @Body data: AttendanceRequest
     ): Response<SelectAllMadingResponse>
 }

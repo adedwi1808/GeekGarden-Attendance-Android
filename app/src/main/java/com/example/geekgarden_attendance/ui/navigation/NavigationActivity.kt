@@ -1,4 +1,4 @@
-package com.example.geekgarden_attendance
+package com.example.geekgarden_attendance.ui.navigation
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.databinding.ActivityNavigationBinding
 import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.util.Prefs
@@ -25,12 +26,6 @@ class NavigationActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_navigation)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_attendance,
-                R.id.navigation_history, R.id.navigation_more
-            )
-        )
         navView.setupWithNavController(navController)
         //Memeriksa apakah user sudah login/tidak
         checkSignIn()

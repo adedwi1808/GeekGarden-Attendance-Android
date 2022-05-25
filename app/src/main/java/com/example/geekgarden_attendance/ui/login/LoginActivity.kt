@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.example.geekgarden_attendance.NavigationActivity
+import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
@@ -53,10 +53,6 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     madings()
-                    val intent = Intent(this, NavigationActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -80,6 +76,10 @@ class LoginActivity : AppCompatActivity() {
             when(it.state){
                 State.SUCCES -> {
                     binding.progressBar.isVisible = false
+                    val intent = Intent(this, NavigationActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

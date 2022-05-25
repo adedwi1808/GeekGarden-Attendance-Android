@@ -12,16 +12,23 @@
         <entry key="app/src/main/res/drawable/ic_baseline_menu_attendance.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_history.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_more.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_touch.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_clock_plus.xml" value="0.1205" />
+        <entry key="app/src/main/res/drawable/ic_clock_remove.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_clock_solid.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1045" />
+        <entry key="app/src/main/res/drawable/ic_location_solid.xml" value="0.1915" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.17783050537109374" />
+        <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16923076923076924" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2203023758099352" />
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />
+        <entry key="app/src/main/res/layout/layout_info_absen.xml" value="0.2141119221411192" />
         <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.10833333333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/xml/network_security.xml" value="0.11510416666666666" />

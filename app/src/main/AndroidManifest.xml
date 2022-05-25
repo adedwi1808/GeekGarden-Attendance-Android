@@ -26,7 +26,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.GeekGardenAttendance.NoActionBar" />
         <activity
-            android:name=".NavigationActivity"
+            android:name=".ui.navigation.NavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation">
             <intent-filter>

@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.core.data.source.remote
 
 import com.example.geekgarden_attendance.core.data.source.remote.network.ApiService
+import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.util.Prefs
@@ -14,6 +15,8 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadImage("Bearer ${Prefs.getToken()}",id, fileImage)
 
-    suspend fun selectAllMading() = api.selectAllMading()
+    suspend fun selectAllMading() = api.selectAllMading("Bearer ${Prefs.getToken()}")
+
+    suspend fun doAttendance(data: AttendanceRequest) = api.doAttendance("Bearer ${Prefs.getToken()}", data)
 
 }

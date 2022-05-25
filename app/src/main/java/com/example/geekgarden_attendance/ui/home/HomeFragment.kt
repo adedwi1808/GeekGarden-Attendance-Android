@@ -42,7 +42,9 @@ class HomeFragment : Fragment() {
 
     private fun setupMadings(){
         homeViewModel.listMadingGeekGarden.observe(requireActivity()) {
-            adapterMading.addItems(it)
+            if(!it.isNullOrEmpty()) {
+                adapterMading.addItems(it)
+            }
         }
     }
 
