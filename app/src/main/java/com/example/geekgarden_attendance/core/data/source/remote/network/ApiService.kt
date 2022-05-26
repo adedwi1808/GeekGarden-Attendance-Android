@@ -3,9 +3,9 @@ package com.example.geekgarden_attendance.core.data.source.remote.network
 import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
+import com.example.geekgarden_attendance.core.data.source.remote.response.AttendanceResponse
 import com.example.geekgarden_attendance.core.data.source.remote.response.LoginResponse
 import com.example.geekgarden_attendance.core.data.source.remote.response.SelectAllMadingResponse
-import com.example.geekgarden_attendance.util.Prefs
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -36,9 +36,18 @@ interface ApiService {
         @Header("Authorization") token: String,
         ): Response<SelectAllMadingResponse>
 
-    @POST("fill-attendance")
+    @POST("fill-attendance/{id}")
     suspend fun doAttendance(
         @Header("Authorization") token: String,
-        @Body data: AttendanceRequest
-    ): Response<SelectAllMadingResponse>
+        @Path("id") int: Int? = null,
+        @Body data: AttendanceRequest,
+    ): Response<AttendanceResponse>
+
+    @Multipart
+    @POST("upload-attendance-image/{id}")
+    suspend fun uploadAttendanceImage(
+        @Header("Authorization") token: String,
+        @Path("id") int: Int? = null,
+        @Part data: MultipartBody.Part? = null
+    ): Response<AttendanceResponse>
 }

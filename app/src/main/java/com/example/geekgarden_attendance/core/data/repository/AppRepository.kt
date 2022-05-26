@@ -43,7 +43,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-
     fun updateUser(data: UpdateProfileRequest) = flow {
         emit(Resource.loading(null))
         try {
@@ -63,7 +62,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
             emit(Resource.error(null, err.message ?: "Fail to login"))
         }
     }
-
 
     fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
         emit(Resource.loading(null))
@@ -92,7 +90,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful){
                     val body = it.body()
                     val madings = body?.data
-                    Log.d("mading", madings.toString())
                     Prefs.setMading(madings)
                     emit(Resource.success(madings))
                 }else{
@@ -105,27 +102,44 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun doAttendance(data: AttendanceRequest) = flow {
+    fun doAttendance(id : Int? = null, data: AttendanceRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.doAttendance(data).let {
+            remote.doAttendance(id, data).let {
                 if (it.isSuccessful){
-                    Prefs.isLogin = true
                     val body = it.body()
-                    val user = body?.data
+                    val attendance = body?.data
 
-
-                    emit(Resource.success(user))
-//                    Log.d("SUC", "Success : ${body.toString()}")
+                    Prefs.setAttendance(attendance)
+                    emit(Resource.success(attendance))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to login"))
-//                    Log.d("ERR", "ERROR")
                 }
             }
         }catch (err:Exception){
             emit(Resource.error(null, err.message ?: "Fail to login"))
             Log.d("ERR", "Login Err: ${err.message}")
+        }
+    }
+
+    fun uploadAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.uploadAttendanceImage(id, fileImage).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val attendance = body?.data
+
+                    Prefs.setAttendance(attendance)
+                    emit(Resource.success(attendance))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
         }
     }
 

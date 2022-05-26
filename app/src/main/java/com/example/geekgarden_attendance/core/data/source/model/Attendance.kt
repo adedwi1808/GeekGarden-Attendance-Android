@@ -1,7 +1,7 @@
-package com.example.geekgarden_attendance.core.data.source.remote.request
+package com.example.geekgarden_attendance.core.data.source.model
 
-data class AttendanceRequest(
-    val id: Int? = null,
+data class Attendance(
+    val id: Int? = 0,
     val id_user: Int,
     val tempat_absensi_datang: String? = null,
     val status_absensi_datang: String? = null,

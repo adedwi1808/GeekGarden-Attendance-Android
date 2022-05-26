@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.util
 
 import com.chibatching.kotpref.KotprefModel
+import com.example.geekgarden_attendance.core.data.source.model.Attendance
 import com.example.geekgarden_attendance.core.data.source.model.AttendanceStats
 import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
 import com.example.geekgarden_attendance.core.data.source.model.User
@@ -11,6 +12,7 @@ object Prefs: KotprefModel(){
     var isLogin by booleanPref(false)
     var user by stringPref()
     var userToken by stringPref()
+    var attendance by stringPref()
     var attendanceStats  by stringPref()
     var madings by stringPref()
     var userLongitude by stringPref("0.0")
@@ -63,6 +65,17 @@ object Prefs: KotprefModel(){
         if (user.isEmpty()) return null
         val gson = Gson()
         return gson.fromJson(user, User::class.java)
+    }
+
+    fun setAttendance(data: Attendance?){
+        val gson = Gson()
+        attendance = gson.toJson(data)
+    }
+
+    fun getAttendance(): Attendance? {
+        if (attendance.isEmpty()) return null
+        val gson = Gson()
+        return gson.fromJson(attendance, Attendance::class.java)
     }
 
     fun setAttendanceStats(data: AttendanceStats?){

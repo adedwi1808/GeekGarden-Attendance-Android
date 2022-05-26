@@ -107,7 +107,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         viewModel.updateUser(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data Berhasil DIubah${it?.data?.name}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     onBackPressed()
                 }
@@ -130,7 +130,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         viewModel.uploadImage(idUser, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Selamat Datang ${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Photo Profile Berhasil Digunakan", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     updateUser()
                 }
