@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.core.data.source.remote.network
 
 import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.core.data.source.remote.response.AttendanceResponse
@@ -43,9 +44,25 @@ interface ApiService {
         @Body data: AttendanceRequest,
     ): Response<AttendanceResponse>
 
+
     @Multipart
     @POST("upload-attendance-image/{id}")
     suspend fun uploadAttendanceImage(
+        @Header("Authorization") token: String,
+        @Path("id") int: Int? = null,
+        @Part data: MultipartBody.Part? = null
+    ): Response<AttendanceResponse>
+
+    @PUT("complete-attendance/{id}")
+    suspend fun completeAttendance(
+        @Header("Authorization") token: String,
+        @Path("id") int: Int? = null,
+        @Body data: CompleteAttendanceRequest
+    ):Response<AttendanceResponse>
+
+    @Multipart
+    @POST("upload-complete-attendance-image/{id}")
+    suspend fun uploadCompleteAttendanceImage(
         @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
         @Part data: MultipartBody.Part? = null

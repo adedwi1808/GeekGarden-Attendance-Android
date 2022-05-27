@@ -14,18 +14,17 @@
         android:layout_height="match_parent">
 
 
-
-    <TextClock
-        android:id="@+id/textClockLive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:format12Hour="H:mm"
-        android:format24Hour="H:mm"
-        android:text="11.00"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_50sdp"
-        android:textStyle="bold" />
+        <TextClock
+            android:id="@+id/textClockLive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:format12Hour="HH:mm"
+            android:format24Hour="HH:mm"
+            android:text="11.00"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_50sdp"
+            android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewCurrentDate"
@@ -77,11 +76,12 @@
     </LinearLayout>
 
 
-    <include
-        layout="@layout/layout_info_absen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonLocationInformation"
-        android:layout_marginTop="70dp" />
+        <include
+            android:id="@+id/infoAbsen"
+            layout="@layout/layout_info_absen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonLocationInformation"
+            android:layout_marginTop="70dp" />
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

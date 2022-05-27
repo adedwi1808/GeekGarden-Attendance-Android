@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +15,15 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.databinding.FragmentAttendanceBinding
 import com.example.geekgarden_attendance.ui.maps.MapsActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.util.Prefs
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AttendanceFragment : Fragment() {
 
@@ -60,17 +61,31 @@ class AttendanceFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getCurrentLocation()
+        Log.d("ADE MANTAP", Prefs.getAttendance().toString())
         setupData()
     }
 
-    fun setupData(){
+    fun setupData() {
         if (checkDistance() > 100) {
             binding.textViewLocation.text = "DiLuar Kantor"
-        }else{
+        } else {
             binding.textViewLocation.text = "Di Area Kantor"
         }
+
+        //Tanggal Dibawah JAM
+        val formattedDatesString = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(Date()).toString()
+        binding.textViewCurrentDate.text = formattedDatesString
+
+        if (Prefs.getAttendance() != null) {
+            val formattedDatesString =
+                SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date()).toString()
+            binding.infoAbsen.textViewJamHadir.text = formattedDatesString
+        }
     }
-    fun checkDistance(): Double{
+
+
+
+    fun checkDistance(): Double {
         val startPoint = Location("locationA")
         startPoint.latitude = Prefs.getLatitude().toDouble()
         startPoint.longitude = Prefs.getLongitude().toDouble()
@@ -82,11 +97,16 @@ class AttendanceFragment : Fragment() {
         return startPoint.distanceTo(endPoint).toDouble()
     }
 
-    fun setupButtonAction(){
+    fun setupButtonAction() {
         binding.buttonAttend.setOnClickListener {
-//            doAttendance()
-            val intent = Intent(requireContext(), FormAttendanceActivity::class.java)
-            startActivity(intent)
+            if (Prefs.userDidNotFinishAttendance) {
+                val intent = Intent(requireContext(), FormCompleteAttendanceActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(requireContext(), FormAttendanceActivity::class.java)
+                startActivity(intent)
+                binding.infoAbsen.textViewJamHadir.text = SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date()).toString()
+            }
         }
 
         binding.buttonLocationInformation.setOnClickListener {
@@ -95,15 +115,19 @@ class AttendanceFragment : Fragment() {
         }
     }
 
-
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
         // checking location permission
-        if (ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             // request permission
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE);
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
+            );
             return
         }
         fusedLocationClient.lastLocation
@@ -114,10 +138,13 @@ class AttendanceFragment : Fragment() {
                 setupData()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Failed on getting current location",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(), "Failed on getting current location",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -125,12 +152,15 @@ class AttendanceFragment : Fragment() {
         when (requestCode) {
             LOCATION_PERMISSION_REQ_CODE -> {
                 if (grantResults.isNotEmpty() &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
                     // permission granted
                 } else {
                     // permission denied
-                    Toast.makeText(requireContext(), "You need to grant permission to access location",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(), "You need to grant permission to access location",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 object ApiConfig {
@@ -14,6 +15,8 @@ object ApiConfig {
     private val client: Retrofit
         get() {
             val gson = GsonBuilder()
+                .serializeNulls()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
                 .setLenient()
                 .create()
 

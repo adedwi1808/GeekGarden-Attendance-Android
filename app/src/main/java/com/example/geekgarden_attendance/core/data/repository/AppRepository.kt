@@ -5,6 +5,7 @@ import com.example.geekgarden_attendance.core.data.source.local.LocalDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
 import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.util.Prefs
@@ -30,11 +31,9 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     Prefs.setToken(body!!.token!!)
 
                     emit(Resource.success(user))
-//                    Log.d("SUC", "Success : ${body.toString()}")
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to login"))
-//                    Log.d("ERR", "ERROR")
                 }
             }
         }catch (err:Exception){
@@ -110,6 +109,10 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val attendance = body?.data
 
+                    if (attendance != null) {
+                    }
+
+
                     Prefs.setAttendance(attendance)
                     emit(Resource.success(attendance))
                 }else{
@@ -130,7 +133,50 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
+                    Prefs.userDidNotFinishAttendance = true
 
+                    Prefs.setAttendance(attendance)
+                    emit(Resource.success(attendance))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun completeAttendance(data: CompleteAttendanceRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.completeAttendance(data).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val attendance = body?.data
+                    Log.d("Mantappp", Prefs.getAttendance().toString())
+                    emit(Resource.success(attendance))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+
+    fun uploadCompleteAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.uploadCompleteAttendanceImage(id, fileImage).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val attendance = body?.data
+                    Log.d("qwert", attendance.toString())
+
+                    Prefs.userDidNotFinishAttendance = false
                     Prefs.setAttendance(attendance)
                     emit(Resource.success(attendance))
                 }else{

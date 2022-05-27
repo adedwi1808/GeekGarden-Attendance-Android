@@ -52,6 +52,7 @@
             android:exported="true"></activity>
         <activity android:name=".ui.updateProfile.UpdateProfileActivity" />
         <activity android:name=".ui.attendance.FormAttendanceActivity" />
+        <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
     </application>
 
 </manifest>

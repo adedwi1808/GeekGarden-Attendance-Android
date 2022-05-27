@@ -9,9 +9,9 @@ import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
 import com.example.geekgarden_attendance.databinding.ItemMadingGeekgardenBinding
 import com.example.geekgarden_attendance.util.Constants
 import com.squareup.picasso.Picasso
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 @SuppressLint("NotifyDataSetChanged")
 class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.ViewHolder>() {
@@ -27,7 +27,8 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
 
                 TextViewJudulMading.text = item.judul_mading
                 TextViewBodyMading.text = item.body_mading
-                TextViewTanggalMading.text = item.create_at?.substring(0,10)
+                TextViewTanggalMading.text = dateFormat(item.create_at)
+//                TextViewTanggalMading.text = item.create_at
             }
         }
     }
@@ -37,6 +38,14 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
             data.addAll(item)
             notifyDataSetChanged()
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun dateFormat(date: String?): String?{
+        if(date == null) return null
+        val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
+        val formattedDatesString = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(myFormat)
+        return formattedDatesString.toString()
     }
 
 

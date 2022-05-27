@@ -12,8 +12,8 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
-import com.example.geekgarden_attendance.databinding.ActivityFormAttendanceBinding
+import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
+import com.example.geekgarden_attendance.databinding.ActivityFormCompleteAttendanceBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.util.Prefs
@@ -21,12 +21,11 @@ import com.github.drjacky.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-import java.util.*
 
-class FormAttendanceActivity : AppCompatActivity() {
+class FormCompleteAttendanceActivity : AppCompatActivity() {
 
     private val viewModel: NavigationViewModel by viewModel()
-    private var _binding: ActivityFormAttendanceBinding? = null
+    private var _binding: ActivityFormCompleteAttendanceBinding? = null
     private val binding get() = _binding!!
     private var fileImage: File? = null
     private var imageViewIsNull: Boolean = true
@@ -34,7 +33,7 @@ class FormAttendanceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityFormAttendanceBinding.inflate(layoutInflater)
+        _binding = ActivityFormCompleteAttendanceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupData()
@@ -53,8 +52,8 @@ class FormAttendanceActivity : AppCompatActivity() {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data!!
             fileImage = File(uri.path!!)
-            binding.imageViewAttendance.setPadding(0)
-            Picasso.get().load(uri).fit().centerCrop().into(binding.imageViewAttendance)
+            binding.imageViewCompleteAttendance.setPadding(0)
+            Picasso.get().load(uri).fit().centerCrop().into(binding.imageViewCompleteAttendance)
             imageViewIsNull = false
         }
     }
@@ -66,11 +65,11 @@ class FormAttendanceActivity : AppCompatActivity() {
     }
 
     fun setButtonAction(){
-        binding.buttonEdit.setOnClickListener {
+        binding.buttonSubmit.setOnClickListener {
             doAttendance()
         }
 
-        binding.imageViewAttendance.setOnClickListener {
+        binding.imageViewCompleteAttendance.setOnClickListener {
             picImage()
         }
     }
@@ -82,21 +81,21 @@ class FormAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idUser = Prefs.getUser()?.id
-        val body = AttendanceRequest(
-            id_user = idUser ?: 0,
-            tempat_absensi_datang = tempatAbsen ,
-            status_absensi_datang = "asdas",
-            longitude_datang = Prefs.getLongitude(),
-            latitude_datang = Prefs.getLatitude(),
+        val idAttendance = Prefs.getAttendance()?.id
+        val body = CompleteAttendanceRequest(
+            id = idAttendance ?: 0,
+            tempat_absensi_pulang = tempatAbsen ,
+            status_absensi_pulang = "asdas",
+            longitude_pulang = Prefs.getLongitude(),
+            latitude_pulang = Prefs.getLatitude()
             )
 
-        viewModel.doAttendance(idUser, body).observe(this) {
+        viewModel.completeAttendance(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
-                    uploadAttendanceImage()
+                    uploadCompleteAttendanceImage()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -112,10 +111,10 @@ class FormAttendanceActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadAttendanceImage(){
+    private fun uploadCompleteAttendanceImage(){
         val idAbsen = Prefs.getAttendance()?.id
         val file = fileImage.toMultipartBody()
-        viewModel.uploadAttendanceImage(idAbsen, file).observe(this) {
+        viewModel.uploadCompleteAttendanceImage(idAbsen, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     Toast.makeText(this, "PPPP", Toast.LENGTH_SHORT).show()

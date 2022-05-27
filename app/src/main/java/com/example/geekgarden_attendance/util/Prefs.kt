@@ -6,6 +6,7 @@ import com.example.geekgarden_attendance.core.data.source.model.AttendanceStats
 import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
 import com.example.geekgarden_attendance.core.data.source.model.User
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
 object Prefs: KotprefModel(){
@@ -17,6 +18,7 @@ object Prefs: KotprefModel(){
     var madings by stringPref()
     var userLongitude by stringPref("0.0")
     var userLatitude by stringPref("0.0")
+    var userDidNotFinishAttendance by booleanPref(false)
 
     fun setLongitude(data: String){
         this.userLongitude = data
