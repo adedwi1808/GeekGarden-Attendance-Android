@@ -10,7 +10,7 @@ import okhttp3.MultipartBody
 
 class NavigationViewModel(val repository: AppRepository) : ViewModel() {
 
-    fun doAttendance(id: Int? = null, data: AttendanceRequest) = repository.doAttendance(id, data).asLiveData()
+    fun doAttendance(id: Int? = null, data: AttendanceRequest, file: MultipartBody.Part? = null) = repository.doAttendance(id, data, file).asLiveData()
 
     fun uploadAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = repository.uploadAttendanceImage(id, fileImage).asLiveData()
 

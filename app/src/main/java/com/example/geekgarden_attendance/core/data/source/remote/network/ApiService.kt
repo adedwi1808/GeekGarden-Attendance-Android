@@ -41,8 +41,9 @@ interface ApiService {
     suspend fun doAttendance(
         @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
-        @Body data: AttendanceRequest,
-    ): Response<AttendanceResponse>
+        @Part data: AttendanceRequest,
+        @Part fileImage: MultipartBody.Part? = null,
+        ): Response<AttendanceResponse>
 
 
     @Multipart
@@ -50,7 +51,7 @@ interface ApiService {
     suspend fun uploadAttendanceImage(
         @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
-        @Part data: MultipartBody.Part? = null
+        @Part data: MultipartBody.Part? = null,
     ): Response<AttendanceResponse>
 
     @PUT("complete-attendance/{id}")
@@ -65,6 +66,7 @@ interface ApiService {
     suspend fun uploadCompleteAttendanceImage(
         @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
-        @Part data: MultipartBody.Part? = null
+        @Part data: MultipartBody.Part? = null,
+
     ): Response<AttendanceResponse>
 }
