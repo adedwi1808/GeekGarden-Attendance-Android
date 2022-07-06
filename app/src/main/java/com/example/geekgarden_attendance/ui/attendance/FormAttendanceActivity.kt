@@ -21,7 +21,6 @@ import com.github.drjacky.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-import java.util.*
 
 class FormAttendanceActivity : AppCompatActivity() {
 
@@ -82,7 +81,7 @@ class FormAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idUser = Prefs.getUser()?.id
+        val idUser = Prefs.getUser()?.id_pegawai
         val body = AttendanceRequest(
             id_user = idUser ?: 0,
             tempat_absensi_datang = tempatAbsen ,

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".util.MyApp"
@@ -53,6 +54,7 @@
         <activity android:name=".ui.updateProfile.UpdateProfileActivity" />
         <activity android:name=".ui.attendance.FormAttendanceActivity" />
         <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
+        <activity android:name=".ui.more.FormWorkPermitActivity" />
     </application>
 
 </manifest>

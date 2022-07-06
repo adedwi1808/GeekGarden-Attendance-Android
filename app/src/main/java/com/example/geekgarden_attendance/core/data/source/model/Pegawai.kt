@@ -1,7 +1,7 @@
 package com.example.geekgarden_attendance.core.data.source.model
 
 data class Pegawai(
-    val id: Int?,
+    val id_pegawai: Int?,
     val nama: String?,
     val nomor_hp: String?,
     val jenis_kelamin: String?,

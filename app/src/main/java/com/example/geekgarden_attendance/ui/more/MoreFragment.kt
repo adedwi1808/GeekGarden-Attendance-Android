@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
+import com.example.geekgarden_attendance.ui.attendance.FormCompleteAttendanceActivity
 import com.example.geekgarden_attendance.ui.home.adapter.OtherMoreButtonAdapter
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants.USER_URL
@@ -63,9 +64,15 @@ class MoreFragment : Fragment() {
         binding.recyclerViewOtherMoreButton.adapter = adapterOtherMoreButton
         adapterOtherMoreButton.setOnItemClickListener(object : OtherMoreButtonAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-
-                Toast.makeText(requireContext(),"Mengklik $position",Toast.LENGTH_SHORT).show()
-
+                when(position){
+                    0 -> {
+                        val intent = Intent(requireContext(), FormWorkPermitActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else -> {
+                        Toast.makeText(requireContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         })
     }
@@ -77,7 +84,6 @@ class MoreFragment : Fragment() {
             }
         }
     }
-
 
     private fun setUserData() {
         val user = Prefs.getUser()
