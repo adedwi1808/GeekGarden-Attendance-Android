@@ -3,6 +3,7 @@ package com.example.geekgarden_attendance.ui.home.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
@@ -34,6 +35,9 @@ class OtherMoreButtonAdapter: RecyclerView.Adapter<OtherMoreButtonAdapter.ViewHo
             itemBinding.apply {
                 textViewNamaButton.text = item.namaButton
                 imageViewIcon.setImageResource(item.icon)
+                if (position == 2){
+                    bottomBorder.isVisible = false
+                }
             }
         }
         init {

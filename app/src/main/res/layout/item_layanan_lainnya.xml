@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_5sdp"
+    app:cardElevation="0dp"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -50,6 +51,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/bottomBorder"
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
             android:layout_gravity="right"
