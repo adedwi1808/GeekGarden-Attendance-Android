@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
+import com.example.geekgarden_attendance.ui.home.adapter.OtherMoreButtonAdapter
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants.USER_URL
 import com.example.geekgarden_attendance.util.Prefs
@@ -19,6 +21,7 @@ class MoreFragment : Fragment() {
     private var _binding: FragmentMoreBinding? = null
     private val binding get() = _binding!!
     private lateinit var moreViewModel: MoreViewModel
+    private val adapterOtherMoreButton = OtherMoreButtonAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +32,8 @@ class MoreFragment : Fragment() {
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         buttonAction()
+        setupAdapter()
+        setupOtherMoreButton()
         return root
     }
 
@@ -54,21 +59,38 @@ class MoreFragment : Fragment() {
         }
     }
 
+    private fun setupAdapter(){
+        binding.recyclerViewOtherMoreButton.adapter = adapterOtherMoreButton
+        adapterOtherMoreButton.setOnItemClickListener(object : OtherMoreButtonAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Toast.makeText(requireContext(),"Mengklik $position",Toast.LENGTH_SHORT).show()
+
+            }
+        })
+    }
+
+    private fun setupOtherMoreButton(){
+        moreViewModel.listOtherMoreButton.observe(requireActivity()) {
+            if(!it.isNullOrEmpty()) {
+                adapterOtherMoreButton.addItems(it)
+            }
+        }
+    }
+
 
     private fun setUserData() {
         val user = Prefs.getUser()
 
         if (user != null) {
-            val userNameInitial = user.name?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
 
             binding.miniProfile.apply {
-                textViewNama.text = user.name
+                textViewNama.text = user.nama
                 textViewPosisi.text = "Belum ada"
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(USER_URL+user.image).into(imageViewProfile)
+                Picasso.get().load(USER_URL+user.foto_profile).into(imageViewProfile)
             }
-
-
 
             binding.dataKehadiran.apply {
                 moreViewModel.attendanceStats.observe(viewLifecycleOwner,{

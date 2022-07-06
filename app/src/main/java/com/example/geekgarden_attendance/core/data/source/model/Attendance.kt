@@ -12,10 +12,4 @@ data class Attendance(
     val latitude_datang: String? = null,
     val foto_absensi_datang: String? = null,
     val tanggal_absensi_datang: String? = null,
-    val tempat_absensi_pulang: String? = null,
-    val status_absensi_pulang: String? = null,
-    val longitude_pulang: String? = null,
-    val latitude_pulang: String? = null,
-    val foto_absensi_pulang: String? = null,
-    val tanggal_absensi_pulang: String? = null
 )

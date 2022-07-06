@@ -21,12 +21,12 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
     inner class ViewHolder(private val itemBinding: ItemMadingGeekgardenBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: MadingGeekGarden, position: Int){
             itemBinding.apply {
-                Picasso.get().load(Constants.MADING_URL + item.foto_mading).fit().centerCrop()
+                Picasso.get().load(Constants.MADING_URL + item.foto).fit().centerCrop()
                     .error(R.drawable.ic_baseline_image_not_supported_24)
                     .into(imageViewMading)
 
-                TextViewJudulMading.text = item.judul_mading
-                TextViewBodyMading.text = item.body_mading
+                TextViewJudulMading.text = item.judul
+                TextViewBodyMading.text = item.informasi
                 TextViewTanggalMading.text = dateFormat(item.create_at)
 //                TextViewTanggalMading.text = item.create_at
             }

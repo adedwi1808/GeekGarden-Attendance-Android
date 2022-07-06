@@ -3,7 +3,6 @@ package com.example.geekgarden_attendance.ui.updateProfile
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
@@ -77,14 +76,14 @@ class UpdateProfileActivity : AppCompatActivity() {
         val user = Prefs.getUser()
 
         if (user != null) {
-            val userNameInitial = user.name?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
             binding.apply {
-                textInputEditUsername.setText(user.name)
+                textInputEditUsername.setText(user.nama)
 //                textViewPosisi.text = "Belum ada"
                 textInputEditEmail.setText(user.email)
-                textInputEditPhone.setText(user.phone)
+                textInputEditPhone.setText(user.nomor_hp)
                 textViewNameInitial.setText(userNameInitial)
-                Picasso.get().load(Constants.USER_URL +user.image).into(binding.imageViewProfile)
+                Picasso.get().load(Constants.USER_URL +user.foto_profile).into(binding.imageViewProfile)
             }
         }
     }
@@ -107,7 +106,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         viewModel.updateUser(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Data Berhasil DIubah${it?.data?.name}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data Berhasil DIubah${it?.data?.nama}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     onBackPressed()
                 }

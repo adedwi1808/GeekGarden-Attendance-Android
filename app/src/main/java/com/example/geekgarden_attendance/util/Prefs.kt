@@ -4,9 +4,8 @@ import com.chibatching.kotpref.KotprefModel
 import com.example.geekgarden_attendance.core.data.source.model.Attendance
 import com.example.geekgarden_attendance.core.data.source.model.AttendanceStats
 import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
-import com.example.geekgarden_attendance.core.data.source.model.User
+import com.example.geekgarden_attendance.core.data.source.model.Pegawai
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
 object Prefs: KotprefModel(){
@@ -58,15 +57,15 @@ object Prefs: KotprefModel(){
         return userToken
     }
 
-    fun setUser(data: User?){
+    fun setUser(data: Pegawai?){
         val gson = Gson()
         user = gson.toJson(data)
     }
 
-    fun getUser(): User? {
+    fun getUser(): Pegawai? {
         if (user.isEmpty()) return null
         val gson = Gson()
-        return gson.fromJson(user, User::class.java)
+        return gson.fromJson(user, Pegawai::class.java)
     }
 
     fun setAttendance(data: Attendance?){

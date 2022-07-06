@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="42dp"
+    android:height="42dp"
+    android:viewportWidth="42"
+    android:viewportHeight="42">
+    <path
+        android:strokeColor="#FF68799D"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M13.91 8.75h-3.47c-0.93 0-1.81 0.37-2.46 1.03-0.66 0.65-1.02 1.54-1.02 2.47v21c0 0.93 0.36 1.82 1.02 2.47 0.65 0.66 1.53 1.03 2.46 1.03h9.9m10.97-17.5v-7c0-0.93-0.37-1.82-1.02-2.47-0.65-0.66-1.54-1.03-2.46-1.03h-3.48"/>
+    <path
+        android:strokeColor="#FF68799D"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M20.87 5.25H17.4c-1.92 0-3.48 1.57-3.48 3.5s1.56 3.5 3.48 3.5h3.48c1.92 0 3.48-1.57 3.48-3.5s-1.56-3.5-3.48-3.5Z"/>
+    <path
+        android:strokeColor="#FF68799D"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M13.91 26.25h5.22m-5.22-7h6.96-6.96Z"/>
+    <path
+        android:fillColor="#FF68799D"
+        android:pathData="M37.55 27.88l-3.62-3.64c-0.14-0.15-0.34-0.23-0.55-0.23h-5.13c-0.2 0-0.4 0.08-0.54 0.22l-3.62 3.65c-0.14 0.14-0.23 0.34-0.23 0.55v5.15c0 0.21 0.09 0.4 0.23 0.55l3.61 3.64c0.15 0.15 0.35 0.24 0.55 0.24h5.13c0.2 0 0.4-0.09 0.55-0.23l3.61-3.64c0.08-0.07 0.13-0.16 0.17-0.25 0.04-0.1 0.06-0.2 0.06-0.3v-5.16c0-0.2-0.08-0.4-0.22-0.55Zm-1.32 5.38l-3.17 3.2h-4.48l-3.17-3.2v-4.5l3.17-3.2h4.48l3.17 3.2v4.5Z"/>
+    <path
+        android:fillColor="#FF68799D"
+        android:pathData="M30.82 34.9c0.43 0 0.77-0.35 0.77-0.78 0-0.43-0.34-0.78-0.77-0.78s-0.77 0.35-0.77 0.78c0 0.43 0.34 0.78 0.77 0.78Z"/>
+    <path
+        android:fillColor="#FF68799D"
+        android:pathData="M30.82 27.12c-0.43 0-0.77 0.35-0.77 0.78v3.89c0 0.42 0.34 0.77 0.77 0.77 0.42 0 0.77-0.35 0.77-0.77v-3.9c0-0.42-0.35-0.77-0.77-0.77Z"/>
+</vector>

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.geekgarden_attendance.core.data.repository.AppRepository
 import com.example.geekgarden_attendance.databinding.FragmentHomeBinding
 import com.example.geekgarden_attendance.ui.home.adapter.MadingGeekGardenAdapter
 import com.example.geekgarden_attendance.util.Constants
@@ -53,13 +52,13 @@ class HomeFragment : Fragment() {
         val user = Prefs.getUser()
 
         if (user != null) {
-            val userNameInitial = user.name?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
 
             binding.miniProfile.apply {
-                textViewNama.text = user.name
+                textViewNama.text = user.nama
                 textViewPosisi.text = "Belum ada"
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(Constants.USER_URL +user.image).into(binding.miniProfile.imageViewProfile)
+                Picasso.get().load(Constants.USER_URL +user.foto_profile).into(binding.miniProfile.imageViewProfile)
             }
         }
     }

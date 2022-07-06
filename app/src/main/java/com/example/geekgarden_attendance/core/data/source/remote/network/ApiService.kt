@@ -12,7 +12,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
-    @POST("login")
+    @POST("login-pegawai")
     suspend fun login(
         @Body login:LoginRequest
     ): Response<LoginResponse>
