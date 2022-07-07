@@ -125,6 +125,8 @@
                             android:id="@+id/textViewNamaSurat"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:maxLines="1"
                             android:gravity="center"
                             android:text="blabla.pdf"
                             android:textSize="@dimen/_13sdp"/>

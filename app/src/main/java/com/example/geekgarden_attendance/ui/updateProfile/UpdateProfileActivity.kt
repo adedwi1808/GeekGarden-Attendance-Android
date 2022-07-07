@@ -73,7 +73,7 @@ class UpdateProfileActivity : AppCompatActivity() {
 
 
     fun setData() {
-        val user = Prefs.getUser()
+        val user = Prefs.getPegawai()
 
         if (user != null) {
             val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
@@ -95,7 +95,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         if (binding.textInputEditPhone.text!!.isEmpty()) binding.textInputEditPhone.setError("Harap Masukkan Nomor HP")
 
 
-        val idUser = Prefs.getUser()?.id_pegawai
+        val idUser = Prefs.getPegawai()?.id_pegawai
         val body = UpdateProfileRequest(
             idUser ?: 0,
             name = binding.textInputEditUsername.text.toString(),
@@ -124,7 +124,7 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun upload(){
-        val idUser = Prefs.getUser()?.id_pegawai
+        val idUser = Prefs.getPegawai()?.id_pegawai
         val file = fileImage.toMultipartBody()
         viewModel.uploadImage(idUser, file).observe(this) {
             when(it.state){

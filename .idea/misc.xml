@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_location_solid.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_unknown_file_picker.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_form_attendance.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_form_complete_attendance.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
@@ -38,7 +39,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16923076923076924" />
-        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2421705752313732" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_layanan_lainnya.xml" value="0.6421068185586425" />
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />

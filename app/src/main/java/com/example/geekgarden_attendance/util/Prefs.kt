@@ -57,12 +57,12 @@ object Prefs: KotprefModel(){
         return userToken
     }
 
-    fun setUser(data: Pegawai?){
+    fun setPegawai(data: Pegawai?){
         val gson = Gson()
         user = gson.toJson(data)
     }
 
-    fun getUser(): Pegawai? {
+    fun getPegawai(): Pegawai? {
         if (user.isEmpty()) return null
         val gson = Gson()
         return gson.fromJson(user, Pegawai::class.java)

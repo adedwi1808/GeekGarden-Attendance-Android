@@ -6,6 +6,7 @@ data class Pegawai(
     val nomor_hp: String?,
     val jenis_kelamin: String?,
     val email: String?,
+    val jabatan: String?,
     val foto_profile: String?,
     val email_verified_at: Any?,
 )

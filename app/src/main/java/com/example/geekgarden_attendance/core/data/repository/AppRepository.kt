@@ -27,7 +27,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val user = body?.data
 
-                    Prefs.setUser(user)
+                    Prefs.setPegawai(user)
                     Prefs.setToken(body!!.token!!)
 
                     emit(Resource.success(user))
@@ -50,7 +50,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val user = body?.data
 
-                    Prefs.setUser(user)
+                    Prefs.setPegawai(user)
                     emit(Resource.success(user))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
@@ -70,7 +70,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val user = body?.data
 
-                    Prefs.setUser(user)
+                    Prefs.setPegawai(user)
                     emit(Resource.success(user))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())

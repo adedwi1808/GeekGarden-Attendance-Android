@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
-import com.example.geekgarden_attendance.ui.attendance.FormCompleteAttendanceActivity
 import com.example.geekgarden_attendance.ui.home.adapter.OtherMoreButtonAdapter
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants.USER_URL
@@ -64,17 +63,21 @@ class MoreFragment : Fragment() {
         binding.recyclerViewOtherMoreButton.adapter = adapterOtherMoreButton
         adapterOtherMoreButton.setOnItemClickListener(object : OtherMoreButtonAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                when(position){
-                    0 -> {
-                        val intent = Intent(requireContext(), FormWorkPermitActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else -> {
-                        Toast.makeText(requireContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                otherMoreButtonOnClickLogic(position)
             }
         })
+    }
+
+    private fun otherMoreButtonOnClickLogic(position: Int){
+        when(position){
+            0 -> {
+                val intent = Intent(requireContext(), FormWorkPermitActivity::class.java)
+                startActivity(intent)
+            }
+            else -> {
+                Toast.makeText(requireContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupOtherMoreButton(){
@@ -86,16 +89,16 @@ class MoreFragment : Fragment() {
     }
 
     private fun setUserData() {
-        val user = Prefs.getUser()
+        val pegawai = Prefs.getPegawai()
 
-        if (user != null) {
-            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+        if (pegawai != null) {
+            val userNameInitial = pegawai.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
 
             binding.miniProfile.apply {
-                textViewNama.text = user.nama
-                textViewPosisi.text = "Belum ada"
+                textViewNama.text = pegawai.nama
+                textViewPosisi.text = pegawai.jabatan
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(USER_URL+user.foto_profile).into(imageViewProfile)
+                Picasso.get().load(USER_URL+pegawai.foto_profile).into(imageViewProfile)
             }
 
             binding.dataKehadiran.apply {

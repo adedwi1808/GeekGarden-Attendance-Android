@@ -49,16 +49,16 @@ class HomeFragment : Fragment() {
 
     private fun setUserData() {
 
-        val user = Prefs.getUser()
+        val pegawai = Prefs.getPegawai()
 
-        if (user != null) {
-            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+        if (pegawai != null) {
+            val userNameInitial = pegawai.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
 
             binding.miniProfile.apply {
-                textViewNama.text = user.nama
-                textViewPosisi.text = "Belum ada"
+                textViewNama.text = pegawai.nama
+                textViewPosisi.text = pegawai.jabatan
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(Constants.USER_URL +user.foto_profile).into(binding.miniProfile.imageViewProfile)
+                Picasso.get().load(Constants.USER_URL +pegawai.foto_profile).into(binding.miniProfile.imageViewProfile)
             }
         }
     }

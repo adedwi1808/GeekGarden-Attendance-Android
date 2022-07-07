@@ -81,7 +81,7 @@ class FormAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idUser = Prefs.getUser()?.id_pegawai
+        val idUser = Prefs.getPegawai()?.id_pegawai
         val body = AttendanceRequest(
             id_user = idUser ?: 0,
             tempat_absensi_datang = tempatAbsen ,
