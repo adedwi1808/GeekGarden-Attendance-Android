@@ -12,7 +12,10 @@ import androidx.appcompat.widget.Toolbar
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.databinding.ActivityWorkPermitBinding
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FormWorkPermitActivity : AppCompatActivity() {
 
@@ -20,6 +23,7 @@ class FormWorkPermitActivity : AppCompatActivity() {
     private var _binding: ActivityWorkPermitBinding? = null
     private val binding get() = _binding!!
     private lateinit var pdfUri: Uri
+    private var cal = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,26 +33,52 @@ class FormWorkPermitActivity : AppCompatActivity() {
         setSpinner()
         setButtonAction()
     }
-    fun setToolBar(){
+
+    private fun setToolBar() {
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
         toolBar?.title = "Form Mengajukan Izin"
         setSupportActionBar(toolBar)
     }
 
-    fun setSpinner(){
+    private fun setSpinner() {
         val jenisIzin = resources.getStringArray(R.array.jenisIzin)
         var adapterSpinner = ArrayAdapter(this, R.layout.spinner_item, jenisIzin)
         adapterSpinner.setDropDownViewResource(R.layout.spinner_dropdown_layout)
         binding.spinner.adapter = adapterSpinner
     }
 
-    fun setButtonAction(){
-     binding.buttonSuratSakit.setOnClickListener {
-         val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
-         pdfIntent.type = "application/pdf"
-         pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-         startActivityForResult(pdfIntent, 12)
-     }
+
+    private fun setButtonAction() {
+        binding.buttonSuratSakit.setOnClickListener {
+            val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
+            pdfIntent.type = "application/pdf"
+            pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(pdfIntent, 12)
+        }
+
+        binding.datePicker.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker().build()
+            datePicker.show(supportFragmentManager, "DatePicker")
+
+            // Setting up the event for when ok is clicked
+            datePicker.addOnPositiveButtonClickListener {
+                // formatting date in dd-mm-yyyy format.
+                val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
+                val date = dateFormatter.format(Date(it))
+                Toast.makeText(this, "$date is selected", Toast.LENGTH_LONG).show()
+            }
+
+            // Setting up the event for when cancelled is clicked
+            datePicker.addOnNegativeButtonClickListener {
+                Toast.makeText(this, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            // Setting up the event for when back button is pressed
+            datePicker.addOnCancelListener {
+                Toast.makeText(this, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,16 +94,18 @@ class FormWorkPermitActivity : AppCompatActivity() {
                 if (uriString.startsWith("content://")) {
                     var myCursor: Cursor? = null
                     try {
-                        myCursor = applicationContext!!.contentResolver.query(uri, null, null, null, null)
+                        myCursor =
+                            applicationContext!!.contentResolver.query(uri, null, null, null, null)
                         if (myCursor != null && myCursor.moveToFirst()) {
-                            pdfName = myCursor.getString(myCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                            pdfName =
+                                myCursor.getString(myCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                             binding.textViewNamaSurat.text = pdfName
                         }
                     } finally {
                         myCursor?.close()
                     }
                 }
-            } else{
+            } else {
                 Toast.makeText(this, "Anda Tidak Jadi Memilih File", Toast.LENGTH_SHORT).show()
             }
         }

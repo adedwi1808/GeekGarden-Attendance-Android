@@ -11,3 +11,4 @@ fun File?.toMultipartBody(name: String = "image"): MultipartBody.Part? {
     val reqFile: RequestBody = this.asRequestBody("image/*".toMediaTypeOrNull())
     return MultipartBody.Part.createFormData("image", this.name, reqFile)
 }
+
