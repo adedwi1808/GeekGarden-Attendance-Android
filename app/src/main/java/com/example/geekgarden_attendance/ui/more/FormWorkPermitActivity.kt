@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.databinding.ActivityWorkPermitBinding
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -57,27 +58,42 @@ class FormWorkPermitActivity : AppCompatActivity() {
         }
 
         binding.datePicker.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker().build()
-            datePicker.show(supportFragmentManager, "DatePicker")
+            datePickerHandler()
+        }
+    }
 
-            // Setting up the event for when ok is clicked
-            datePicker.addOnPositiveButtonClickListener {
-                // formatting date in dd-mm-yyyy format.
-                val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
-                val date = dateFormatter.format(Date(it))
-                Toast.makeText(this, "$date is selected", Toast.LENGTH_LONG).show()
-            }
+    fun datePickerHandler() {
+        val dateRangePicker =
+            MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("Pilih Tanggal")
+                .setSelection(
+                    androidx.core.util.Pair(
+                        MaterialDatePicker.thisMonthInUtcMilliseconds(),
+                        MaterialDatePicker.todayInUtcMilliseconds(),
+                    )
+                )
+                .build()
+        dateRangePicker.show(supportFragmentManager, "DatePicker")
 
-            // Setting up the event for when cancelled is clicked
-            datePicker.addOnNegativeButtonClickListener {
-                Toast.makeText(this, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG)
-                    .show()
-            }
+        // Setting up the event for when ok is clicked
+        dateRangePicker.addOnPositiveButtonClickListener {
+            // formatting date in dd-mm-yyyy format.
+            val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
+            val first = dateFormatter.format(Date(it.first))
+            val second = dateFormatter.format(Date(it.second))
+            Toast.makeText(this, "$first - $second", Toast.LENGTH_LONG).show()
 
-            // Setting up the event for when back button is pressed
-            datePicker.addOnCancelListener {
-                Toast.makeText(this, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
-            }
+            binding.datePicker.text = "$first - $second"
+        }
+
+        // Setting up the event for when cancelled is clicked
+        dateRangePicker.addOnNegativeButtonClickListener {
+            Toast.makeText(this, "Batal memilih tanggal", Toast.LENGTH_LONG).show()
+        }
+
+        // Setting up the event for when back button is pressed
+        dateRangePicker.addOnCancelListener {
+            Toast.makeText(this, "Batal memilih tanggal", Toast.LENGTH_LONG).show()
         }
     }
 

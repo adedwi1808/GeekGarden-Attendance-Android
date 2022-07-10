@@ -69,18 +69,26 @@
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:text="Tanggal Izin:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/datePicker"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/rounded_edittext"
-                    android:text="Tanggal"
+                    android:text="Pilih Tanggal"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
@@ -141,7 +149,8 @@
                             android:paddingHorizontal="@dimen/_5sdp"
                             android:maxLines="1"
                             android:gravity="center"
-                            android:text="blabla.pdf"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Pilih Surat"
                             android:textSize="@dimen/_13sdp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
