@@ -74,6 +74,10 @@ class MoreFragment : Fragment() {
                 val intent = Intent(requireContext(), FormWorkPermitActivity::class.java)
                 startActivity(intent)
             }
+            1 -> {
+                val intent = Intent(requireContext(), FormReportAttendanceActivity::class.java)
+                startActivity(intent)
+            }
             else -> {
                 Toast.makeText(requireContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
             }

@@ -56,6 +56,7 @@
         <activity android:name=".ui.attendance.FormAttendanceActivity" />
         <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
         <activity android:name=".ui.more.FormWorkPermitActivity" />
+        <activity android:name=".ui.more.FormReportAttendanceActivity" />
     </application>
 
 </manifest>

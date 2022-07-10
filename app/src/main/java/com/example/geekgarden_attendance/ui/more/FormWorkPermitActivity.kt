@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.databinding.ActivityWorkPermitBinding
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -43,7 +42,7 @@ class FormWorkPermitActivity : AppCompatActivity() {
 
     private fun setSpinner() {
         val jenisIzin = resources.getStringArray(R.array.jenisIzin)
-        var adapterSpinner = ArrayAdapter(this, R.layout.spinner_item, jenisIzin)
+        val adapterSpinner = ArrayAdapter(this, R.layout.spinner_item, jenisIzin)
         adapterSpinner.setDropDownViewResource(R.layout.spinner_dropdown_layout)
         binding.spinner.adapter = adapterSpinner
     }
