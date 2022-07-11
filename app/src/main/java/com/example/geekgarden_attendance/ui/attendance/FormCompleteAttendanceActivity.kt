@@ -81,7 +81,7 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idAttendance = Prefs.getAttendance()?.id
+        val idAttendance = Prefs.getAttendance()?.id_pegawai
         val body = CompleteAttendanceRequest(
             id = idAttendance ?: 0,
             tempat_absensi_pulang = tempatAbsen ,
@@ -112,7 +112,7 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
     }
 
     private fun uploadCompleteAttendanceImage(){
-        val idAbsen = Prefs.getAttendance()?.id
+        val idAbsen = Prefs.getAttendance()?.id_pegawai
         val file = fileImage.toMultipartBody()
         viewModel.uploadCompleteAttendanceImage(idAbsen, file).observe(this) {
             when(it.state){

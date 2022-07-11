@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Selamat Datang ${it?.data?.nama}" + Prefs.getLongitude(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Selamat Datang ${it?.data?.nama}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     madings()
                 }

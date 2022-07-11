@@ -22,7 +22,7 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun doAttendance(id: Int? = null, data: AttendanceRequest) = api.doAttendance("Bearer ${Prefs.getToken()}", id, data)
 
-    suspend fun completeAttendance(data: CompleteAttendanceRequest) = api.completeAttendance("Bearer ${Prefs.getToken()}", Prefs.getAttendance()!!.id, data)
+    suspend fun completeAttendance(data: CompleteAttendanceRequest) = api.completeAttendance("Bearer ${Prefs.getToken()}", Prefs.getAttendance()!!.id_pegawai, data)
 
     suspend fun uploadCompleteAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadCompleteAttendanceImage("Bearer ${Prefs.getToken()}",id, fileImage)
 

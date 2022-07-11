@@ -81,21 +81,20 @@ class FormAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idUser = Prefs.getPegawai()?.id_pegawai
+        val idPegawai = Prefs.getPegawai()?.id_pegawai
         val body = AttendanceRequest(
-            id_user = idUser ?: 0,
-            tempat_absensi_datang = tempatAbsen ,
-            status_absensi_datang = "asdas",
-            longitude_datang = Prefs.getLongitude(),
-            latitude_datang = Prefs.getLatitude(),
+            id_pegawai = idPegawai ?: 0,
+            tempat = tempatAbsen ,
+            status = "asdas",
+            longitude = Prefs.getLongitude(),
+            latitude = Prefs.getLatitude()
             )
 
-        viewModel.doAttendance(idUser, body).observe(this) {
+        viewModel.doAttendance(idPegawai, body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
-//                    uploadAttendanceImage()
+                    uploadAttendanceImage()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -112,18 +111,17 @@ class FormAttendanceActivity : AppCompatActivity() {
     }
 
     private fun uploadAttendanceImage(){
-        val idAbsen = Prefs.getAttendance()?.id
-        val file = fileImage.toMultipartBody()
+        val idAbsen = Prefs.getAttendance()?.id_absensi
+        val file = fileImage.toMultipartBody("foto")
         viewModel.uploadAttendanceImage(idAbsen, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "PPPP", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     onBackPressed()
                 }
                 State.ERROR -> {
-//                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("180801",it.message.toString())
+                    Log.d("ERR",it.message.toString())
                     binding.progressBar.isVisible = false
 
                 }

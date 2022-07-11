@@ -37,19 +37,19 @@ interface ApiService {
         @Header("Authorization") token: String,
         ): Response<SelectAllMadingResponse>
 
-    @POST("fill-attendance/{id}")
+    @POST("absensi-hadir/{id_pegawai}")
     suspend fun doAttendance(
         @Header("Authorization") token: String,
-        @Path("id") int: Int? = null,
+        @Path("id_pegawai") int: Int? = null,
         @Body data: AttendanceRequest
         ): Response<AttendanceResponse>
 
 
     @Multipart
-    @POST("upload-attendance-image/{id}")
+    @POST("upload-bukti-absensi/{id_absensi}")
     suspend fun uploadAttendanceImage(
         @Header("Authorization") token: String,
-        @Path("id") int: Int? = null,
+        @Path("id_absensi") int: Int? = null,
         @Part data: MultipartBody.Part? = null,
     ): Response<AttendanceResponse>
 

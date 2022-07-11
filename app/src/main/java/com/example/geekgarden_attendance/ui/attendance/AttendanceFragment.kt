@@ -77,9 +77,8 @@ class AttendanceFragment : Fragment() {
         binding.textViewCurrentDate.text = formattedDatesString
 
         if (Prefs.getAttendance() != null) {
-            val formattedDatesString =
-                SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date()).toString()
-            binding.infoAbsen.textViewJamHadir.text = formattedDatesString
+            val formattedDatesString = SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date())
+            binding.infoAbsen.textViewJamHadir.text = formattedDatesString.toString()
         }
     }
 
@@ -145,6 +144,7 @@ class AttendanceFragment : Fragment() {
             }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {

@@ -109,10 +109,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val attendance = body?.data
 
-                    if (attendance != null) {
-                    }
-
-
                     Prefs.setAttendance(attendance)
                     emit(Resource.success(attendance))
                 }else{
