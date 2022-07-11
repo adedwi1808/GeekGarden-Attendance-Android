@@ -28,7 +28,6 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
                 TextViewJudulMading.text = item.judul
                 TextViewBodyMading.text = item.informasi
                 TextViewTanggalMading.text = dateFormat(item.create_at)
-//                TextViewTanggalMading.text = item.create_at
             }
         }
     }

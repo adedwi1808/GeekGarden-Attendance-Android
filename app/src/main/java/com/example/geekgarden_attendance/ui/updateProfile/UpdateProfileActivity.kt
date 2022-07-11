@@ -73,17 +73,17 @@ class UpdateProfileActivity : AppCompatActivity() {
 
 
     fun setData() {
-        val user = Prefs.getPegawai()
+        val pegawai = Prefs.getPegawai()
 
-        if (user != null) {
-            val userNameInitial = user.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
+        if (pegawai != null) {
+            val userNameInitial = pegawai.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
             binding.apply {
-                textInputEditUsername.setText(user.nama)
-//                textViewPosisi.text = "Belum ada"
-                textInputEditEmail.setText(user.email)
-                textInputEditPhone.setText(user.nomor_hp)
+                textInputEditUsername.setText(pegawai.nama)
+                textInputEditEmail.setText(pegawai.email)
+                textInputEditPhone.setText(pegawai.nomor_hp)
                 textViewNameInitial.setText(userNameInitial)
-                Picasso.get().load(Constants.USER_URL +user.foto_profile).into(binding.imageViewProfile)
+                Picasso.get().load(Constants.PEGAWAI_URL + pegawai.foto_profile)
+                    .into(binding.imageViewProfile)
             }
         }
     }
@@ -98,9 +98,9 @@ class UpdateProfileActivity : AppCompatActivity() {
         val idUser = Prefs.getPegawai()?.id_pegawai
         val body = UpdateProfileRequest(
             idUser ?: 0,
-            name = binding.textInputEditUsername.text.toString(),
+            nama = binding.textInputEditUsername.text.toString(),
             email = binding.textInputEditEmail.text.toString(),
-            phone = binding.textInputEditPhone.text.toString()
+            nomor_hp = binding.textInputEditPhone.text.toString()
         )
 
         viewModel.updateUser(body).observe(this) {

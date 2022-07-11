@@ -101,10 +101,10 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun doAttendance(id : Int? = null, data: AttendanceRequest, fileImage: MultipartBody.Part? = null) = flow {
+    fun doAttendance(id : Int? = null, data: AttendanceRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.doAttendance(id, data, fileImage).let {
+            remote.doAttendance(id, data).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data

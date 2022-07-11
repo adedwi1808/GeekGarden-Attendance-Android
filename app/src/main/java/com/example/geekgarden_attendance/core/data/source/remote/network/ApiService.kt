@@ -17,18 +17,18 @@ interface ApiService {
         @Body login:LoginRequest
     ): Response<LoginResponse>
 
-    @PUT("update-user/{id}")
-    suspend fun updateUser(
+    @PUT("update-pegawai/{id_pegawai}")
+    suspend fun updatePegawai(
         @Header("Authorization") token: String,
-        @Path("id") int: Int,
+        @Path("id_pegawai") int: Int,
         @Body data: UpdateProfileRequest
     ): Response<LoginResponse>
 
     @Multipart
-    @POST("upload-user/{id}")
+    @POST("foto-pegawai/{id_pegawai}")
     suspend fun uploadImage(
         @Header("Authorization") token: String,
-        @Path("id") int: Int? = null,
+        @Path("id_pegawai") int: Int? = null,
         @Part data: MultipartBody.Part? = null
     ): Response<LoginResponse>
 
@@ -41,8 +41,7 @@ interface ApiService {
     suspend fun doAttendance(
         @Header("Authorization") token: String,
         @Path("id") int: Int? = null,
-        @Part data: AttendanceRequest,
-        @Part fileImage: MultipartBody.Part? = null,
+        @Body data: AttendanceRequest
         ): Response<AttendanceResponse>
 
 

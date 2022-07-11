@@ -12,7 +12,7 @@ import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
 import com.example.geekgarden_attendance.ui.home.adapter.OtherMoreButtonAdapter
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
-import com.example.geekgarden_attendance.util.Constants.USER_URL
+import com.example.geekgarden_attendance.util.Constants.PEGAWAI_URL
 import com.example.geekgarden_attendance.util.Prefs
 import com.squareup.picasso.Picasso
 
@@ -97,12 +97,11 @@ class MoreFragment : Fragment() {
 
         if (pegawai != null) {
             val userNameInitial = pegawai.nama?.split(' ')?.mapNotNull { it.firstOrNull()?.toString() }?.reduce { acc, s -> acc + s }
-
             binding.miniProfile.apply {
                 textViewNama.text = pegawai.nama
                 textViewPosisi.text = pegawai.jabatan
                 textViewNameInitial.text =  userNameInitial
-                Picasso.get().load(USER_URL+pegawai.foto_profile).into(imageViewProfile)
+                Picasso.get().load(PEGAWAI_URL+pegawai.foto_profile).into(imageViewProfile)
             }
 
             binding.dataKehadiran.apply {

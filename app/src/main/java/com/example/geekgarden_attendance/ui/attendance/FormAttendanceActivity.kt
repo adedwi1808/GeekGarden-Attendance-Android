@@ -89,10 +89,8 @@ class FormAttendanceActivity : AppCompatActivity() {
             longitude_datang = Prefs.getLongitude(),
             latitude_datang = Prefs.getLatitude(),
             )
-        val file = fileImage.toMultipartBody()
 
-
-        viewModel.doAttendance(idUser, body, file).observe(this) {
+        viewModel.doAttendance(idUser, body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
