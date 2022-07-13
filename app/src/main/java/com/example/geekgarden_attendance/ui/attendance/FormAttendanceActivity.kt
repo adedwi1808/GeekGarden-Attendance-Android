@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.ui.attendance
 
 import android.app.Activity
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -81,16 +82,14 @@ class FormAttendanceActivity : AppCompatActivity() {
             return
         }
 
-        val idPegawai = Prefs.getPegawai()?.id_pegawai
         val body = AttendanceRequest(
-            id_pegawai = idPegawai ?: 0,
             tempat = tempatAbsen ,
-            status = "asdas",
+            status = "Hadir",
             longitude = Prefs.getLongitude(),
             latitude = Prefs.getLatitude()
             )
 
-        viewModel.doAttendance(idPegawai, body).observe(this) {
+        viewModel.doAttendance(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     binding.progressBar.isVisible = false
@@ -110,15 +109,36 @@ class FormAttendanceActivity : AppCompatActivity() {
         }
     }
 
+    fun checkAbsensi(){
+        viewModel.checkAbsensi().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    Toast.makeText(this, "Berhasil Melakukan Absensi Kehadiran", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+                    onBackPressed()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
+
+
     private fun uploadAttendanceImage(){
         val idAbsen = Prefs.getAttendance()?.id_absensi
         val file = fileImage.toMultipartBody("foto")
         viewModel.uploadAttendanceImage(idAbsen, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
-                    binding.progressBar.isVisible = false
-                    onBackPressed()
+                    checkAbsensi()
                 }
                 State.ERROR -> {
                     Log.d("ERR",it.message.toString())

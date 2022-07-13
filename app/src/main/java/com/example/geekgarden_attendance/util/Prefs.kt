@@ -1,10 +1,7 @@
 package com.example.geekgarden_attendance.util
 
 import com.chibatching.kotpref.KotprefModel
-import com.example.geekgarden_attendance.core.data.source.model.Attendance
-import com.example.geekgarden_attendance.core.data.source.model.AttendanceStats
-import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
-import com.example.geekgarden_attendance.core.data.source.model.Pegawai
+import com.example.geekgarden_attendance.core.data.source.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -18,6 +15,19 @@ object Prefs: KotprefModel(){
     var userLongitude by stringPref("0.0")
     var userLatitude by stringPref("0.0")
     var userDidNotFinishAttendance by booleanPref(false)
+    var jumlahAbsenHariIni by intPref(0)
+    var checkAbsensi by stringPref()
+
+    fun setCheckAbsensi(data: CheckAbsensi?){
+        val gson = Gson()
+        checkAbsensi = gson.toJson(data)
+    }
+
+    fun getCheckAbsensi(): CheckAbsensi? {
+        if (checkAbsensi.isEmpty()) return null
+        val gson = Gson()
+        return gson.fromJson(checkAbsensi, CheckAbsensi::class.java)
+    }
 
     fun setLongitude(data: String){
         this.userLongitude = data

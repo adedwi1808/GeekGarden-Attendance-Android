@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
+import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
 import com.example.geekgarden_attendance.databinding.ActivityFormCompleteAttendanceBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
@@ -80,22 +81,18 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
             Toast.makeText(this,"Harap Masukkan gambar", Toast.LENGTH_SHORT).show()
             return
         }
-
-        val idAttendance = Prefs.getAttendance()?.id_pegawai
         val body = CompleteAttendanceRequest(
-            id = idAttendance ?: 0,
-            tempat_absensi_pulang = tempatAbsen ,
-            status_absensi_pulang = "asdas",
-            longitude_pulang = Prefs.getLongitude(),
-            latitude_pulang = Prefs.getLatitude()
+            tempat = tempatAbsen ,
+            status = "Pulang",
+            longitude = Prefs.getLongitude(),
+            latitude = Prefs.getLatitude(),
+            progress_hari_ini = binding.textViewProgresshariIni.text.toString()
             )
 
         viewModel.completeAttendance(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
-                    binding.progressBar.isVisible = false
-                    uploadCompleteAttendanceImage()
+                    uploadAttendanceImage()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -111,19 +108,16 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadCompleteAttendanceImage(){
-        val idAbsen = Prefs.getAttendance()?.id_pegawai
-        val file = fileImage.toMultipartBody()
-        viewModel.uploadCompleteAttendanceImage(idAbsen, file).observe(this) {
+    private fun uploadAttendanceImage(){
+        val idAbsen = Prefs.getAttendance()?.id_absensi
+        val file = fileImage.toMultipartBody("foto")
+        viewModel.uploadAttendanceImage(idAbsen, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "PPPP", Toast.LENGTH_SHORT).show()
-                    binding.progressBar.isVisible = false
-                    onBackPressed()
+                    checkAbsensi()
                 }
                 State.ERROR -> {
-//                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("180801",it.message.toString())
+                    Log.d("ERR",it.message.toString())
                     binding.progressBar.isVisible = false
 
                 }
@@ -135,7 +129,27 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
         }
     }
 
+    fun checkAbsensi(){
+        viewModel.checkAbsensi().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    Toast.makeText(this, "Anda Berhasil Melakukan Absensi", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.isVisible = false
+                    onBackPressed()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+                    binding.progressBar.isVisible = false
 
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
 
     fun setupData(){
         if (checkDistance() > 100) {

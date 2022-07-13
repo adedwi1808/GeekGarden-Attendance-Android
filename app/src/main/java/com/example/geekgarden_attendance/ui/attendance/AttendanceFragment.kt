@@ -53,15 +53,12 @@ class AttendanceFragment : Fragment() {
         }
         setupButtonAction()
         getCurrentLocation()
-
-
         return root
     }
 
     override fun onResume() {
         super.onResume()
         getCurrentLocation()
-        Log.d("ADE MANTAP", Prefs.getAttendance().toString())
         setupData()
     }
 
@@ -71,14 +68,57 @@ class AttendanceFragment : Fragment() {
         } else {
             binding.textViewLocation.text = "Di Area Kantor"
         }
+        if (Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini == 2) {
+            binding.infoAbsen.textViewTotalJam.text =
+                totalJam(
+                    Prefs.getCheckAbsensi()?.jam_hadir?.tanggal,
+                    Prefs.getCheckAbsensi()?.jam_pulang?.tanggal
+                )
+            binding.infoAbsen.textViewJamHadir.text =
+                dateFormat(Prefs.getCheckAbsensi()?.jam_hadir?.tanggal)?: "-"
+            binding.infoAbsen.textViewJamPulang.text =
+                dateFormat(Prefs.getCheckAbsensi()?.jam_pulang?.tanggal)?: "-"
+        }else if(Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini == 1){
+            binding.infoAbsen.textViewJamHadir.text =
+                dateFormat(Prefs.getCheckAbsensi()?.jam_hadir?.tanggal)?: "-"
+        }
+
 
         //Tanggal Dibawah JAM
-        val formattedDatesString = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(Date()).toString()
-        binding.textViewCurrentDate.text = formattedDatesString
+        val formattedDatesString =
+            SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID"))
+            .format(Date())
+        binding.textViewCurrentDate.text = formattedDatesString.toString()
 
         if (Prefs.getAttendance() != null) {
-            val formattedDatesString = SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date())
+            val formattedDatesString =
+                SimpleDateFormat("hh.mm", Locale("in", "ID"))
+                    .format(Date())
             binding.infoAbsen.textViewJamHadir.text = formattedDatesString.toString()
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun dateFormat(date: String?): String?{
+        if(date == null) return null
+        val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
+        val formattedDatesString = SimpleDateFormat("hh.mm", Locale("in", "ID")).format(myFormat)
+        return formattedDatesString.toString()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun totalJam(date: String?, date2: String?): String?{
+        if(date == null) return null
+        val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
+        val myFormat2 = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date2)
+        val diff = myFormat2.time - myFormat.time
+        val diffMinutes = diff / (60*1000)
+        val diffHours = diff / (60*60*1000)
+
+        if(diffHours>=1){
+            return "$diffHours.$diffMinutes"
+        }else{
+            return "00.$diffMinutes"
         }
     }
 
@@ -98,13 +138,22 @@ class AttendanceFragment : Fragment() {
 
     fun setupButtonAction() {
         binding.buttonAttend.setOnClickListener {
-            if (Prefs.userDidNotFinishAttendance) {
+            if (Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini == 1) {
                 val intent = Intent(requireContext(), FormCompleteAttendanceActivity::class.java)
                 startActivity(intent)
-            } else {
+            } else if(Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini == 0) {
                 val intent = Intent(requireContext(), FormAttendanceActivity::class.java)
                 startActivity(intent)
-                binding.infoAbsen.textViewJamHadir.text = SimpleDateFormat("hh.mm", Locale("in", "ID")).format(Date()).toString()
+            } else if(Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini == 2)  {
+                Toast.makeText(
+                    requireContext(), "Anda Sudah Melengkapi Absen, Kembali Lagi Besok",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else {
+                Toast.makeText(
+                    requireContext(), "Terjadi Kesalahan",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -132,8 +181,10 @@ class AttendanceFragment : Fragment() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
                 // getting the last known or current location
-                Prefs.setLatitude(location.latitude.toString())
-                Prefs.setLongitude(location.longitude.toString())
+                if(location != null) {
+                    Prefs.setLatitude(location.latitude.toString())
+                    Prefs.setLongitude(location.longitude.toString())
+                }
                 setupData()
             }
             .addOnFailureListener {

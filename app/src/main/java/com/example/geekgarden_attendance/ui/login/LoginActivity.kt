@@ -76,6 +76,26 @@ class LoginActivity : AppCompatActivity() {
         viewModel.madings().observe(this) {
             when(it.state){
                 State.SUCCES -> {
+                    checkAbsensi()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
+
+    fun checkAbsensi(){
+        viewModel.checkAbsensi().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
                     binding.progressBar.isVisible = false
                     val intent = Intent(this, NavigationActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY

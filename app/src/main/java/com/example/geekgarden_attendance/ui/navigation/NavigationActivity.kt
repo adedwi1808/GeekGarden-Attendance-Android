@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -37,8 +38,9 @@ class NavigationActivity : AppCompatActivity() {
             override fun onLocationResult(locationResult: LocationResult) {
                 if(locationResult.equals(null)) return
                 for (location in locationResult.locations){
-                    // Update UI with location data
-                    // ...
+                    Prefs.setLatitude(location.latitude.toString())
+                    Prefs.setLongitude(location.longitude.toString())
+                    Log.d("GPS","${location.latitude} ${location.longitude}")
                 }
             }
         }

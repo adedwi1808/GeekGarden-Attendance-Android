@@ -101,10 +101,28 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun doAttendance(id : Int? = null, data: AttendanceRequest) = flow {
+    fun checkAbsensi() = flow {
         emit(Resource.loading(null))
         try {
-            remote.doAttendance(id, data).let {
+            remote.checkAbsensi().let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    Prefs.setCheckAbsensi(body?.data!!)
+                    emit(Resource.success(body))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun doAttendance(data: AttendanceRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.doAttendance( data).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
@@ -150,30 +168,9 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
-                    Log.d("Mantappp", Prefs.getAttendance().toString())
-                    emit(Resource.success(attendance))
-                }else{
-                    val errJSON = JSONObject(it.errorBody()?.string())
-                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
-                }
-            }
-        }catch (err:Exception){
-            emit(Resource.error(null, err.message ?: "Fail to login"))
-        }
-    }
-
-
-    fun uploadCompleteAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
-        emit(Resource.loading(null))
-        try {
-            remote.uploadCompleteAttendanceImage(id, fileImage).let {
-                if (it.isSuccessful){
-                    val body = it.body()
-                    val attendance = body?.data
-                    Log.d("qwert", attendance.toString())
-
-                    Prefs.userDidNotFinishAttendance = false
                     Prefs.setAttendance(attendance)
+
+                    Log.d("SUCC", Prefs.getAttendance().toString())
                     emit(Resource.success(attendance))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())

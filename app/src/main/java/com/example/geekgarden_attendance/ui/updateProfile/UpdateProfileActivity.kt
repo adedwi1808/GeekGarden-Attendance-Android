@@ -106,7 +106,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         viewModel.updateUser(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Data Berhasil DIubah${it?.data?.nama}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data Berhasil Diubah", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                     onBackPressed()
                 }

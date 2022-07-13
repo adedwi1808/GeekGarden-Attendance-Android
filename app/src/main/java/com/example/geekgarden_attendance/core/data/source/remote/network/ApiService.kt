@@ -5,6 +5,7 @@ import com.example.geekgarden_attendance.core.data.source.remote.request.Complet
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
 import com.example.geekgarden_attendance.core.data.source.remote.response.AttendanceResponse
+import com.example.geekgarden_attendance.core.data.source.remote.response.CheckAbsensiResponse
 import com.example.geekgarden_attendance.core.data.source.remote.response.LoginResponse
 import com.example.geekgarden_attendance.core.data.source.remote.response.SelectAllMadingResponse
 import okhttp3.MultipartBody
@@ -37,10 +38,14 @@ interface ApiService {
         @Header("Authorization") token: String,
         ): Response<SelectAllMadingResponse>
 
-    @POST("absensi-hadir/{id_pegawai}")
+    @GET("cek-absensi")
+    suspend fun checkAbsensi(
+        @Header("Authorization") token: String,
+    ): Response<CheckAbsensiResponse>
+
+    @POST("absensi-hadir")
     suspend fun doAttendance(
         @Header("Authorization") token: String,
-        @Path("id_pegawai") int: Int? = null,
         @Body data: AttendanceRequest
         ): Response<AttendanceResponse>
 
@@ -53,19 +58,11 @@ interface ApiService {
         @Part data: MultipartBody.Part? = null,
     ): Response<AttendanceResponse>
 
-    @PUT("complete-attendance/{id}")
+    @POST("absensi-pulang")
     suspend fun completeAttendance(
         @Header("Authorization") token: String,
-        @Path("id") int: Int? = null,
         @Body data: CompleteAttendanceRequest
     ):Response<AttendanceResponse>
 
-    @Multipart
-    @POST("upload-complete-attendance-image/{id}")
-    suspend fun uploadCompleteAttendanceImage(
-        @Header("Authorization") token: String,
-        @Path("id") int: Int? = null,
-        @Part data: MultipartBody.Part? = null,
 
-    ): Response<AttendanceResponse>
 }
