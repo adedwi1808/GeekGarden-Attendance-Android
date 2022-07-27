@@ -7,13 +7,16 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.databinding.FragmentAttendanceBinding
 import com.example.geekgarden_attendance.ui.maps.MapsActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
@@ -48,17 +51,20 @@ class AttendanceFragment : Fragment() {
             Handler().postDelayed({
                 getCurrentLocation()
                 setupData()
+                checkAbsensi()
                 binding.swipe.isRefreshing = false
             }, 1000)
         }
         setupButtonAction()
         getCurrentLocation()
+        checkAbsensi()
         return root
     }
 
     override fun onResume() {
         super.onResume()
         getCurrentLocation()
+        checkAbsensi()
         setupData()
     }
 
@@ -126,9 +132,11 @@ class AttendanceFragment : Fragment() {
         val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss",
             Locale("in", "ID")
         ).parse(date)
-        val myFormat2 = SimpleDateFormat("yyyy-MM-dd hh:mm:ss",
-            Locale("in", "ID")
-        ).parse(date2)
+        val myFormat2 = date2?.let {
+            SimpleDateFormat("yyyy-MM-dd hh:mm:ss",
+                Locale("in", "ID")
+            ).parse(it)
+        }
 
         val diff = (myFormat2?.time ?: 0) - (myFormat?.time ?: 0)
         val diffMinutes = diff / (60*1000)
@@ -138,7 +146,11 @@ class AttendanceFragment : Fragment() {
         if(diffHours>=1){
             return df.format(diffHours).toString()
         }else{
-            return "00.${diffMinutes.toString().substring(0,2)}"
+            if(diffMinutes.toString().length > 1) {
+                return "00.${diffMinutes.toString().substring(0, 2)}"
+            }else{
+                return "00.$diffMinutes"
+            }
         }
     }
 
@@ -217,6 +229,28 @@ class AttendanceFragment : Fragment() {
                 ).show()
             }
     }
+
+    fun checkAbsensi(){
+        navigationViewModel.checkAbsensi().observe(requireActivity()) {
+            when(it.state){
+                State.SUCCES -> {
+                    Log.d("Check Absensi", Prefs.getCheckAbsensi().toString())
+//                    binding.progressBar.isVisible = false
+                }
+                State.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+//                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+//                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
+
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
