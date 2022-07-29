@@ -4,10 +4,7 @@ import android.util.Log
 import com.example.geekgarden_attendance.core.data.source.local.LocalDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.*
 import com.example.geekgarden_attendance.util.Prefs
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
@@ -172,6 +169,46 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
 
                     Log.d("SUCC", Prefs.getAttendance().toString())
                     emit(Resource.success(attendance))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun WorkPermit(data: PengajuanIzinRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.workPermit(data).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val pengajuanIzin = body?.data
+                    Prefs.setPengajuanIzin(pengajuanIzin)
+
+                    Log.d("SUCC", body.toString())
+                    emit(Resource.success(pengajuanIzin))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun uploadWorkPermitApplicationLetter(id: Int? = null, img: MultipartBody.Part? = null) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.uploadWorkPermitApplicationLetter(id, img).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val pengajuanIzin = body?.data
+                    Prefs.setPengajuanIzin(pengajuanIzin)
+                    emit(Resource.success(pengajuanIzin))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))

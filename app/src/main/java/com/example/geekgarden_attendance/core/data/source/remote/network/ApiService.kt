@@ -1,13 +1,7 @@
 package com.example.geekgarden_attendance.core.data.source.remote.network
 
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.UpdateProfileRequest
-import com.example.geekgarden_attendance.core.data.source.remote.response.AttendanceResponse
-import com.example.geekgarden_attendance.core.data.source.remote.response.CheckAbsensiResponse
-import com.example.geekgarden_attendance.core.data.source.remote.response.LoginResponse
-import com.example.geekgarden_attendance.core.data.source.remote.response.SelectAllMadingResponse
+import com.example.geekgarden_attendance.core.data.source.remote.request.*
+import com.example.geekgarden_attendance.core.data.source.remote.response.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -64,5 +58,18 @@ interface ApiService {
         @Body data: CompleteAttendanceRequest
     ):Response<AttendanceResponse>
 
+    @POST("pengajuan-izin")
+    suspend fun workPermit(
+        @Header("Authorization") token: String,
+        @Body data: PengajuanIzinRequest
+    ):Response<PengajuanIzinResponse>
+
+    @Multipart
+    @POST("upload-pengajuan-izin/{id_pengajuan_izin}")
+    suspend fun uploadWorkPermitApplicationLetter(
+        @Header("Authorization") token: String,
+        @Path("id_pengajuan_izin") int: Int? = null,
+        @Part data: MultipartBody.Part? = null,
+    ): Response<PengajuanIzinResponse>
 
 }

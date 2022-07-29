@@ -10,13 +10,24 @@ object Prefs: KotprefModel(){
     var user by stringPref()
     var userToken by stringPref()
     var attendance by stringPref()
+    var pengajuanIzin by stringPref()
     var attendanceStats  by stringPref()
     var madings by stringPref()
     var userLongitude by stringPref("0.0")
     var userLatitude by stringPref("0.0")
     var userDidNotFinishAttendance by booleanPref(false)
-    var jumlahAbsenHariIni by intPref(0)
     var checkAbsensi by stringPref()
+
+    fun setPengajuanIzin(data: PengajuanIzin?){
+        val gson = Gson()
+        pengajuanIzin = gson.toJson(data)
+    }
+
+    fun getPengajuanIzin(): PengajuanIzin? {
+        if (pengajuanIzin.isEmpty()) return null
+        val gson = Gson()
+        return gson.fromJson(pengajuanIzin, PengajuanIzin::class.java)
+    }
 
     fun setCheckAbsensi(data: CheckAbsensi?){
         val gson = Gson()
