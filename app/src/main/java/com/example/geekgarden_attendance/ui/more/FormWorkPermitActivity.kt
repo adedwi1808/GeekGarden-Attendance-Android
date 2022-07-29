@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.ui.more
 
 import android.app.Activity
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -17,6 +18,8 @@ import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.PengajuanIzinRequest
 import com.example.geekgarden_attendance.databinding.ActivityWorkPermitBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
+import com.example.geekgarden_attendance.ui.login.LoginActivity
+import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.util.Prefs
 import com.github.drjacky.imagepicker.ImagePicker
@@ -116,10 +119,10 @@ class FormWorkPermitActivity : AppCompatActivity(){
                     }
                 }
                 State.ERROR -> {
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("ERR", it.message.toString())
+                    val message = it.message.toString()
+                    Log.d("ERR", message)
+                    checkToken(message)
                     binding.progressBar.isVisible = false
-
                 }
                 State.LOADING -> {
                     binding.progressBar.isVisible = true
@@ -141,16 +144,30 @@ class FormWorkPermitActivity : AppCompatActivity(){
                     onBackPressed()
                 }
                 State.ERROR -> {
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("ERR",it.message.toString())
+                    val message = it.message.toString()
+                    Log.d("ERR", message)
                     binding.progressBar.isVisible = false
-
+                    checkToken(message)
                 }
                 State.LOADING -> {
                     binding.progressBar.isVisible = true
                 }
             }
 
+        }
+    }
+
+    fun checkToken(message: String){
+        if(message == "Token is Expired" || message == "Authorization Token not found" || message == "Token is Invalid"){
+            Toast.makeText(this, "Sessi Telah Selesai, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+            Prefs.isLogin = false
+            Prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 
