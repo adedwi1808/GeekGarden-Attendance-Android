@@ -83,7 +83,7 @@ dependencies {
     implementation 'com.chibatching.kotpref:kotpref:2.13.2'
 
     //DrJacky Image Picker
-    implementation 'com.github.Drjacky:ImagePicker:2.1.11'
+    implementation 'com.github.Drjacky:ImagePicker:2.1.16'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
