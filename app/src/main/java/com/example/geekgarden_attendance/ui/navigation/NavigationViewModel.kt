@@ -23,4 +23,6 @@ class NavigationViewModel(val repository: AppRepository) : ViewModel() {
 
     fun checkAbsensi() = repository.checkAbsensi().asLiveData()
 
+    fun riwayatAbsensi() = repository.riwayatAbsensi().asLiveData()
+
 }

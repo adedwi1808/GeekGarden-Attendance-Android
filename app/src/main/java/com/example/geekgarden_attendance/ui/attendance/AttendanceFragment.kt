@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
@@ -46,15 +45,6 @@ class AttendanceFragment : Fragment() {
         _binding = FragmentAttendanceBinding.inflate(inflater, container, false)
         val root: View = binding.root
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
-        binding.swipe.setOnRefreshListener {
-            Handler().postDelayed({
-                getCurrentLocation()
-                setupData()
-                checkAbsensi()
-                binding.swipe.isRefreshing = false
-            }, 1000)
-        }
         setupButtonAction()
         getCurrentLocation()
         checkAbsensi()
@@ -167,6 +157,16 @@ class AttendanceFragment : Fragment() {
     }
 
     fun setupButtonAction() {
+
+        binding.swipe.setOnRefreshListener {
+            Handler().postDelayed({
+                getCurrentLocation()
+                setupData()
+                checkAbsensi()
+                binding.swipe.isRefreshing = false
+            }, 1000)
+        }
+
         binding.buttonAttend.setOnClickListener {
             when(Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini){
                 0->{
@@ -202,7 +202,7 @@ class AttendanceFragment : Fragment() {
     private fun getCurrentLocation() {
         // checking location permission
         if (ActivityCompat.checkSelfPermission(
-                requireContext(),
+                requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
@@ -210,7 +210,7 @@ class AttendanceFragment : Fragment() {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
-            );
+            )
             return
         }
         fusedLocationClient.lastLocation
