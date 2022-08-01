@@ -13,6 +13,7 @@ object Prefs: KotprefModel(){
     var pengajuanIzin by stringPref()
     var attendanceStats  by stringPref()
     var madings by stringPref()
+    var riwayatAbsensi by stringPref()
     var userLongitude by stringPref("0.0")
     var userLatitude by stringPref("0.0")
     var userDidNotFinishAttendance by booleanPref(false)
@@ -69,6 +70,18 @@ object Prefs: KotprefModel(){
         return gson.fromJson<List<MadingGeekGarden>>(madings, myType)
     }
 
+    fun setRiwayatAbsensi(data: List<Absensi>?){
+        val gson = Gson()
+        riwayatAbsensi = gson.toJson(data)
+    }
+
+    fun getRiwayatAbsensi(): List<Absensi>? {
+        if (riwayatAbsensi.isEmpty()) return null
+        val gson = Gson()
+        val myType = object : TypeToken<List<Absensi>>() {}.type
+        return gson.fromJson<List<Absensi>>(riwayatAbsensi, myType)
+    }
+
 
     fun setToken(token: String){
         userToken= token
@@ -89,15 +102,15 @@ object Prefs: KotprefModel(){
         return gson.fromJson(user, Pegawai::class.java)
     }
 
-    fun setAttendance(data: Attendance?){
+    fun setAttendance(data: Absensi?){
         val gson = Gson()
         attendance = gson.toJson(data)
     }
 
-    fun getAttendance(): Attendance? {
+    fun getAttendance(): Absensi? {
         if (attendance.isEmpty()) return null
         val gson = Gson()
-        return gson.fromJson(attendance, Attendance::class.java)
+        return gson.fromJson(attendance, Absensi::class.java)
     }
 
     fun setAttendanceStats(data: AttendanceStats?){

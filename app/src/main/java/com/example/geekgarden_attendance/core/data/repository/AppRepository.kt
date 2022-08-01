@@ -87,6 +87,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val madings = body?.data
                     Prefs.setMading(madings)
+                    Prefs.setMading(madings)
                     emit(Resource.success(madings))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
@@ -95,6 +96,27 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
             }
         }catch (err:Exception){
             emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun riwayatAbsensi() = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.riwayatAbsensi().let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val riwayatAbsensi = body?.data
+
+                    Prefs.setRiwayatAbsensi(riwayatAbsensi)
+
+                    emit(Resource.success(riwayatAbsensi))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to get riwayat absensi"))
         }
     }
 

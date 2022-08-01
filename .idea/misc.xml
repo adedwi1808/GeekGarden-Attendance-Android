@@ -40,9 +40,10 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16923076923076924" />
-        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.26234130859375004" />
         <entry key="app/src/main/res/layout/item_layanan_lainnya.xml" value="0.6421068185586425" />
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />
+        <entry key="app/src/main/res/layout/item_riwayat_absensi.xml" value="0.43626861572265624" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/layout_info_absen.xml" value="0.2141119221411192" />
         <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.10833333333333334" />

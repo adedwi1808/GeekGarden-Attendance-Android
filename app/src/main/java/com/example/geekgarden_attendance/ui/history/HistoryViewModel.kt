@@ -3,11 +3,13 @@ package com.example.geekgarden_attendance.ui.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.geekgarden_attendance.core.data.source.model.Absensi
+import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
+import com.example.geekgarden_attendance.util.Prefs
 
 class HistoryViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    val listRiwayatAbsensi: LiveData<List<Absensi>> = MutableLiveData<List<Absensi>>().apply {
+        value = Prefs.getRiwayatAbsensi()
     }
-    val text: LiveData<String> = _text
 }

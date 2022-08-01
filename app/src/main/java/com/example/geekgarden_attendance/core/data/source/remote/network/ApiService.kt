@@ -32,6 +32,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         ): Response<SelectAllMadingResponse>
 
+    @GET("riwayat-absensi")
+    suspend fun riwayatAbsensi(
+        @Header("Authorization") token: String,
+    ): Response<RiwayatAbsensiResponse>
+
     @GET("cek-absensi")
     suspend fun checkAbsensi(
         @Header("Authorization") token: String,

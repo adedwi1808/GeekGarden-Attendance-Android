@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                 State.SUCCES -> {
                     Toast.makeText(this, "Selamat Datang ${it?.data?.nama}", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
-                    madings()
+                    riwayatAbsensi()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -66,10 +66,25 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    }
+    fun riwayatAbsensi(){
+        viewModel.riwayatAbsensi().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    madings()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+                    binding.progressBar.isVisible = false
 
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
 
-
-
+        }
     }
 
     fun madings(){
