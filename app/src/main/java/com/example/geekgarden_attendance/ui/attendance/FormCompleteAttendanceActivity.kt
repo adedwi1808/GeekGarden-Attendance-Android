@@ -12,7 +12,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
 import com.example.geekgarden_attendance.databinding.ActivityFormCompleteAttendanceBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody

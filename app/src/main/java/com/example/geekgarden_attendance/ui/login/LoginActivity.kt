@@ -1,16 +1,15 @@
 package com.example.geekgarden_attendance.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.LoginRequest
 import com.example.geekgarden_attendance.databinding.ActivityLoginBinding
-import com.example.geekgarden_attendance.util.Prefs
+import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {

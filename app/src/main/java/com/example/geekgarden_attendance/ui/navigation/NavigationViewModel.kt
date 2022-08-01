@@ -9,7 +9,7 @@ import com.example.geekgarden_attendance.core.data.source.remote.request.Pengaju
 import okhttp3.MultipartBody
 
 
-class NavigationViewModel(val repository: AppRepository) : ViewModel() {
+class NavigationViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun doAttendance(data: AttendanceRequest) = repository.doAttendance(data).asLiveData()
 

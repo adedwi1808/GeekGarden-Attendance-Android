@@ -5,16 +5,10 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.model.Absensi
-import com.example.geekgarden_attendance.core.data.source.model.MadingGeekGarden
-import com.example.geekgarden_attendance.databinding.ItemMadingGeekgardenBinding
 import com.example.geekgarden_attendance.databinding.ItemRiwayatAbsensiBinding
-import com.example.geekgarden_attendance.util.Constants
-import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 @SuppressLint("NotifyDataSetChanged")
 class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHolder>() {
@@ -52,7 +46,11 @@ class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHold
     fun tanggalFormat(date: String?): String?{
         if(date == null) return null
         val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
-        val formattedDatesString = SimpleDateFormat("dd", Locale("in", "ID")).format(myFormat)
+        val formattedDatesString = myFormat?.let {
+            SimpleDateFormat("dd", Locale("in", "ID")).format(
+                it
+            )
+        }
         return formattedDatesString.toString()
     }
 
@@ -60,7 +58,11 @@ class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHold
     fun jamFormat(date: String?): String?{
         if(date == null) return null
         val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
-        val formattedDatesString = SimpleDateFormat("h:mm", Locale("in", "ID")).format(myFormat)
+        val formattedDatesString = myFormat?.let {
+            SimpleDateFormat("h:mm", Locale("in", "ID")).format(
+                it
+            )
+        }
         return formattedDatesString.toString()
     }
 
@@ -68,7 +70,11 @@ class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHold
     fun hariFormat(date: String?): String?{
         if(date == null) return null
         val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
-        val formattedDatesString = SimpleDateFormat("EEE", Locale("in", "ID")).format(myFormat)
+        val formattedDatesString = myFormat?.let {
+            SimpleDateFormat("EEE", Locale("in", "ID")).format(
+                it
+            )
+        }
         return formattedDatesString.toString()
     }
 

@@ -43,7 +43,8 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
     fun dateFormat(date: String?): String?{
         if(date == null) return null
         val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
-        val formattedDatesString = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(myFormat)
+        val formattedDatesString =
+            myFormat?.let { SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(it) }
         return formattedDatesString.toString()
     }
 

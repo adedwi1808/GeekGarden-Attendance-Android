@@ -25,6 +25,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/ic_baseline_menu_history"
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,15 +46,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRiwayatAbsensi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="6"
-        tools:listitem="@layout/item_riwayat_absensi" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewRiwayatAbsensi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="15"
+            tools:listitem="@layout/item_riwayat_absensi" />
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
