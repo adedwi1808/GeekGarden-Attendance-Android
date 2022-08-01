@@ -19,6 +19,7 @@
             android:id="@+id/textClockLive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
             android:layout_centerHorizontal="true"
             android:format12Hour="HH:mm"
             android:format24Hour="HH:mm"
