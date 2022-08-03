@@ -13,7 +13,7 @@ import java.util.*
 @SuppressLint("NotifyDataSetChanged")
 class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHolder>() {
 
-    private var data = ArrayList<Absensi>()
+    private var data = mutableListOf<Absensi>()
 
     inner class ViewHolder(private val itemBinding: ItemRiwayatAbsensiBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: Absensi, position: Int){
@@ -36,10 +36,9 @@ class RiwayatAbsensiAdapter: RecyclerView.Adapter<RiwayatAbsensiAdapter.ViewHold
     }
 
     fun addItems(item: List<Absensi>){
-        if (data.isEmpty()) {
+            data.clear()
             data.addAll(item)
             notifyDataSetChanged()
-        }
     }
 
     @SuppressLint("SimpleDateFormat")

@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-
         if (binding.textInputEmail.text!!.isEmpty()) binding.textInputEmail.setError("Harap Masukkan Email")
         if (binding.textInputPassword.text!!.isEmpty()) binding.textInputPassword.setError("Harap Masukkan Password")
 

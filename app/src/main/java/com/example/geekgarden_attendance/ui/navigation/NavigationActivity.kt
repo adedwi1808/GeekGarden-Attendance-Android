@@ -76,8 +76,6 @@ class NavigationActivity : AppCompatActivity() {
         startLocationUpdates()
     }
 
-
-
     private fun checkSignIn(){
         if (!Prefs.isLogin){
             val intent = Intent(this, LoginActivity::class.java)

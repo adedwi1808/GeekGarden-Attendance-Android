@@ -13,10 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.databinding.FragmentAttendanceBinding
+import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.ui.maps.MapsActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.util.Prefs
@@ -238,10 +240,10 @@ class AttendanceFragment : Fragment() {
 //                    binding.progressBar.isVisible = false
                 }
                 State.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("ERR", it.message.toString())
+                    val message = it.message.toString()
+                    Log.d("ERR", message)
+                    checkToken(message)
 //                    binding.progressBar.isVisible = false
-
                 }
                 State.LOADING -> {
 //                    binding.progressBar.isVisible = true
@@ -250,6 +252,21 @@ class AttendanceFragment : Fragment() {
 
         }
     }
+
+    fun checkToken(message: String){
+        if(message == "Token is Expired" || message == "Authorization Token not found" || message == "Token is Invalid"){
+            Toast.makeText(requireActivity(), "Sessi Telah Selesai, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+            Prefs.isLogin = false
+            Prefs.clear()
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }else{
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
 
     @Deprecated("Deprecated in Java")

@@ -6,6 +6,9 @@ import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSourc
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
 import com.example.geekgarden_attendance.core.data.source.remote.request.*
 import com.example.geekgarden_attendance.util.Prefs
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import org.json.JSONObject
@@ -99,8 +102,9 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun riwayatAbsensi() = flow {
-        emit(Resource.loading(null))
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun riwayatAbsensi() = channelFlow{
+        send(Resource.loading(null))
         try {
             remote.riwayatAbsensi().let {
                 if (it.isSuccessful){
@@ -109,14 +113,18 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
 
                     Prefs.setRiwayatAbsensi(riwayatAbsensi)
 
-                    emit(Resource.success(riwayatAbsensi))
+                    async {send(Resource.success(riwayatAbsensi))}
                 }else{
+                    async {
                     val errJSON = JSONObject(it.errorBody()?.string())
-                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                    send(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                    }
                 }
             }
         }catch (err:Exception){
-            emit(Resource.error(null, err.message ?: "Fail to get riwayat absensi"))
+            async {
+            send(Resource.error(null, err.message ?: "Fail to get riwayat absensi"))
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.geekgarden_attendance.ui.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -13,9 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.databinding.FragmentHistoryBinding
 import com.example.geekgarden_attendance.ui.history.adapter.RiwayatAbsensiAdapter
+import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
+import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
@@ -34,8 +38,8 @@ class HistoryFragment : Fragment() {
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        setupButton()
         setupAdapter()
+        setupButton()
         setupRiwayatAbsensi()
         return root
     }
@@ -56,6 +60,7 @@ class HistoryFragment : Fragment() {
         binding.swipeHistory.setOnRefreshListener {
             Handler().postDelayed({
                 riwayatAbsensi()
+                setupRiwayatAbsensi()
                 binding.swipeHistory.isRefreshing = false
             }, 1000)
         }
@@ -68,8 +73,9 @@ class HistoryFragment : Fragment() {
                     binding.progressBar.isVisible = false
                 }
                 State.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("ERR", it.message.toString())
+                    val message = it.message.toString()
+                    Log.d("ERR", message)
+                    checkToken(message)
                     binding.progressBar.isVisible = false
 
                 }
@@ -77,7 +83,20 @@ class HistoryFragment : Fragment() {
                     binding.progressBar.isVisible = true
                 }
             }
+        }
+    }
 
+    fun checkToken(message: String){
+        if(message == "Token is Expired" || message == "Authorization Token not found" || message == "Token is Invalid"){
+            Toast.makeText(requireActivity(), "Sessi Telah Selesai, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+            Prefs.isLogin = false
+            Prefs.clear()
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }else{
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
         }
     }
 
