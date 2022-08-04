@@ -14,21 +14,23 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadImage("Bearer ${Prefs.getToken()}",id, fileImage)
 
-    suspend fun uploadAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadAttendanceImage("Bearer ${Prefs.getToken()}",id, fileImage)
+    suspend fun uploadBuktiAbsensi(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadBuktiAbsensi("Bearer ${Prefs.getToken()}",id, fileImage)
 
     suspend fun selectAllMading() = api.selectAllMading("Bearer ${Prefs.getToken()}")
 
     suspend fun riwayatAbsensi() = api.riwayatAbsensi("Bearer ${Prefs.getToken()}")
 
-    suspend fun doAttendance(data: AttendanceRequest) = api.doAttendance("Bearer ${Prefs.getToken()}", data)
+    suspend fun absensiHadir(data: AttendanceRequest) = api.absensiHadir("Bearer ${Prefs.getToken()}", data)
 
     suspend fun checkAbsensi() = api.checkAbsensi("Bearer ${Prefs.getToken()}")
 
-    suspend fun completeAttendance(data: CompleteAttendanceRequest) = api.completeAttendance("Bearer ${Prefs.getToken()}", data)
+    suspend fun absensiPulang(data: CompleteAttendanceRequest) = api.absensiPulang("Bearer ${Prefs.getToken()}", data)
 
-    suspend fun workPermit(data: PengajuanIzinRequest) = api.workPermit("Bearer ${Prefs.getToken()}", data)
+    suspend fun pengajuanIzin(data: PengajuanIzinRequest) = api.pengajuanIzin("Bearer ${Prefs.getToken()}", data)
 
-    suspend fun uploadWorkPermitApplicationLetter(id: Int? = null, img: MultipartBody.Part? = null) = api.uploadWorkPermitApplicationLetter("Bearer ${Prefs.getToken()}",id, img)
+    suspend fun laporkanAbsensi(data: LaporkanAbsensiRequest) = api.laporkanAbsensi("Bearer ${Prefs.getToken()}", data)
+
+    suspend fun uploadSuratPengajuanIzin(id: Int? = null, img: MultipartBody.Part? = null) = api.uploadSuratPengajuanIzin("Bearer ${Prefs.getToken()}",id, img)
 
 
 }

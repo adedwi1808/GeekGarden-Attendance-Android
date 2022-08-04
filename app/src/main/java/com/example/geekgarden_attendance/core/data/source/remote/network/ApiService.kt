@@ -43,7 +43,7 @@ interface ApiService {
     ): Response<CheckAbsensiResponse>
 
     @POST("absensi-hadir")
-    suspend fun doAttendance(
+    suspend fun absensiHadir(
         @Header("Authorization") token: String,
         @Body data: AttendanceRequest
         ): Response<AttendanceResponse>
@@ -51,30 +51,35 @@ interface ApiService {
 
     @Multipart
     @POST("upload-bukti-absensi/{id_absensi}")
-    suspend fun uploadAttendanceImage(
+    suspend fun uploadBuktiAbsensi(
         @Header("Authorization") token: String,
         @Path("id_absensi") int: Int? = null,
         @Part data: MultipartBody.Part? = null,
     ): Response<AttendanceResponse>
 
     @POST("absensi-pulang")
-    suspend fun completeAttendance(
+    suspend fun absensiPulang(
         @Header("Authorization") token: String,
         @Body data: CompleteAttendanceRequest
     ):Response<AttendanceResponse>
 
     @POST("pengajuan-izin")
-    suspend fun workPermit(
+    suspend fun pengajuanIzin(
         @Header("Authorization") token: String,
         @Body data: PengajuanIzinRequest
     ):Response<PengajuanIzinResponse>
 
     @Multipart
     @POST("upload-pengajuan-izin/{id_pengajuan_izin}")
-    suspend fun uploadWorkPermitApplicationLetter(
+    suspend fun uploadSuratPengajuanIzin(
         @Header("Authorization") token: String,
         @Path("id_pengajuan_izin") int: Int? = null,
         @Part data: MultipartBody.Part? = null,
     ): Response<PengajuanIzinResponse>
 
+    @POST("laporkan-absensi")
+    suspend fun laporkanAbsensi(
+        @Header("Authorization") token: String,
+        @Body data: LaporkanAbsensiRequest
+    ):Response<LaporkanAbsensiResponse>
 }

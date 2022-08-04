@@ -2,6 +2,7 @@ package com.example.geekgarden_attendance.core.data.repository
 
 import android.util.Log
 import com.example.geekgarden_attendance.core.data.source.local.LocalDataSource
+import com.example.geekgarden_attendance.core.data.source.model.LaporAbsensi
 import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
 import com.example.geekgarden_attendance.core.data.source.remote.request.*
@@ -149,7 +150,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     fun doAttendance(data: AttendanceRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.doAttendance( data).let {
+            remote.absensiHadir( data).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
@@ -170,7 +171,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     fun uploadAttendanceImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = flow {
         emit(Resource.loading(null))
         try {
-            remote.uploadAttendanceImage(id, fileImage).let {
+            remote.uploadBuktiAbsensi(id, fileImage).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
@@ -191,7 +192,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     fun completeAttendance(data: CompleteAttendanceRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.completeAttendance(data).let {
+            remote.absensiPulang(data).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val attendance = body?.data
@@ -212,7 +213,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     fun WorkPermit(data: PengajuanIzinRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.workPermit(data).let {
+            remote.pengajuanIzin(data).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val pengajuanIzin = body?.data
@@ -233,12 +234,32 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     fun uploadWorkPermitApplicationLetter(id: Int? = null, img: MultipartBody.Part? = null) = flow {
         emit(Resource.loading(null))
         try {
-            remote.uploadWorkPermitApplicationLetter(id, img).let {
+            remote.uploadSuratPengajuanIzin(id, img).let {
                 if (it.isSuccessful){
                     val body = it.body()
                     val pengajuanIzin = body?.data
                     Prefs.setPengajuanIzin(pengajuanIzin)
                     emit(Resource.success(pengajuanIzin))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+        }
+    }
+
+    fun LaporkanAbsensi(data: LaporkanAbsensiRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.laporkanAbsensi(data).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val laporkanAbsensi = body?.data
+
+                    Log.d("SUCC", body.toString())
+                    emit(Resource.success(laporkanAbsensi))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))

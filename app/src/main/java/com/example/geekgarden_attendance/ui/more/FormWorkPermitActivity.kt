@@ -35,8 +35,8 @@ class FormWorkPermitActivity : AppCompatActivity(){
     private val viewModel: NavigationViewModel by viewModel()
     private var _binding: ActivityWorkPermitBinding? = null
     private val binding get() = _binding!!
-    private lateinit var tanggalMulaiIzin: String
-    private lateinit var tanggalSelesaiIzin: String
+    private var tanggalMulaiIzin: String = ""
+    private var tanggalSelesaiIzin: String = ""
     private var fileImage: File? = null
 
 
