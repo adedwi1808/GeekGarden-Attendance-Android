@@ -13,6 +13,7 @@ object Prefs: KotprefModel(){
     var pengajuanIzin by stringPref()
     var attendanceStats  by stringPref()
     var madings by stringPref()
+    var laporanAbsensi by stringPref()
     var riwayatAbsensi by stringPref()
     var userLongitude by stringPref("0.0")
     var userLatitude by stringPref("0.0")
@@ -57,7 +58,6 @@ object Prefs: KotprefModel(){
         return userLatitude
     }
 
-
     fun setMading(data: List<MadingGeekGarden>?){
         val gson = Gson()
         madings = gson.toJson(data)
@@ -68,6 +68,18 @@ object Prefs: KotprefModel(){
         val gson = Gson()
         val myType = object : TypeToken<List<MadingGeekGarden>>() {}.type
         return gson.fromJson<List<MadingGeekGarden>>(madings, myType)
+    }
+
+    fun setLaporanAbsensi(data: List<LaporAbsensi>?){
+        val gson = Gson()
+        laporanAbsensi = gson.toJson(data)
+    }
+
+    fun getLaporanAbsensi(): List<LaporAbsensi>? {
+        if (laporanAbsensi.isEmpty()) return null
+        val gson = Gson()
+        val myType = object : TypeToken<List<LaporAbsensi>>() {}.type
+        return gson.fromJson<List<LaporAbsensi>>(laporanAbsensi, myType)
     }
 
     fun setRiwayatAbsensi(data: List<Absensi>?){

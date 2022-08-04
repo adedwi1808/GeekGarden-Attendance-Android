@@ -22,11 +22,9 @@ class NavigationViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun workPermit(data: PengajuanIzinRequest) = repository.WorkPermit(data).asLiveData()
 
-
     fun laporkanAbsensi(data: LaporkanAbsensiRequest) = repository.LaporkanAbsensi(data).asLiveData()
 
     fun checkAbsensi() = repository.checkAbsensi().asLiveData()
 
     fun riwayatAbsensi() = repository.riwayatAbsensi().asLiveData()
-
 }

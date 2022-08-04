@@ -91,7 +91,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                     val body = it.body()
                     val madings = body?.data
                     Prefs.setMading(madings)
-                    Prefs.setMading(madings)
                     emit(Resource.success(madings))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
@@ -257,8 +256,10 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful){
                     val body = it.body()
                     val laporkanAbsensi = body?.data
+                    Prefs.setLaporanAbsensi(laporkanAbsensi)
 
                     Log.d("SUCC", body.toString())
+                    Log.d("INILAPORANABSENSI", Prefs.getLaporanAbsensi().toString())
                     emit(Resource.success(laporkanAbsensi))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
