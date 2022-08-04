@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginViewModel by viewModel()
-
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding!!
 

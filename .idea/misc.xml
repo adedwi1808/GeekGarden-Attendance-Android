@@ -34,6 +34,8 @@
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_report_attendance.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/activity_status_laporan.xml" value="0.15806159420289856" />
+        <entry key="app/src/main/res/layout/activity_status_laporan_absensi.xml" value="0.1015625" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_work_permit.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />
@@ -44,6 +46,7 @@
         <entry key="app/src/main/res/layout/item_layanan_lainnya.xml" value="0.6421068185586425" />
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />
         <entry key="app/src/main/res/layout/item_riwayat_absensi.xml" value="0.43626861572265624" />
+        <entry key="app/src/main/res/layout/item_status_laporan_absensi.xml" value="0.24473419189453127" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/layout_info_absen.xml" value="0.2141119221411192" />
         <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.10833333333333334" />

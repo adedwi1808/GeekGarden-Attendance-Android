@@ -2,7 +2,6 @@ package com.example.geekgarden_attendance.core.data.repository
 
 import android.util.Log
 import com.example.geekgarden_attendance.core.data.source.local.LocalDataSource
-import com.example.geekgarden_attendance.core.data.source.model.LaporAbsensi
 import com.example.geekgarden_attendance.core.data.source.remote.RemoteDataSource
 import com.example.geekgarden_attendance.core.data.source.remote.network.Resource
 import com.example.geekgarden_attendance.core.data.source.remote.request.*

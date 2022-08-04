@@ -70,16 +70,16 @@ object Prefs: KotprefModel(){
         return gson.fromJson<List<MadingGeekGarden>>(madings, myType)
     }
 
-    fun setLaporanAbsensi(data: List<LaporAbsensi>?){
+    fun setLaporanAbsensi(data: List<LaporanAbsensi>?){
         val gson = Gson()
         laporanAbsensi = gson.toJson(data)
     }
 
-    fun getLaporanAbsensi(): List<LaporAbsensi>? {
+    fun getLaporanAbsensi(): List<LaporanAbsensi>? {
         if (laporanAbsensi.isEmpty()) return null
         val gson = Gson()
-        val myType = object : TypeToken<List<LaporAbsensi>>() {}.type
-        return gson.fromJson<List<LaporAbsensi>>(laporanAbsensi, myType)
+        val myType = object : TypeToken<List<LaporanAbsensi>>() {}.type
+        return gson.fromJson<List<LaporanAbsensi>>(laporanAbsensi, myType)
     }
 
     fun setRiwayatAbsensi(data: List<Absensi>?){

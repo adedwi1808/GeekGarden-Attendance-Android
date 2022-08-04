@@ -19,7 +19,6 @@ import com.example.geekgarden_attendance.core.data.source.remote.request.Pengaju
 import com.example.geekgarden_attendance.databinding.ActivityWorkPermitBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
 import com.example.geekgarden_attendance.ui.login.LoginActivity
-import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.util.Prefs
 import com.github.drjacky.imagepicker.ImagePicker

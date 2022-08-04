@@ -1,6 +1,6 @@
 package com.example.geekgarden_attendance.core.data.source.model
 
-data class LaporAbsensi(
+data class LaporanAbsensi(
     val id_laporan_absensi: Int? = null,
     val id_pegawai: String? = null,
     val id_admin: String? = null,

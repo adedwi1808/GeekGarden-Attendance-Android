@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
 import com.example.geekgarden_attendance.databinding.FragmentMoreBinding
 import com.example.geekgarden_attendance.ui.home.adapter.OtherMoreButtonAdapter
+import com.example.geekgarden_attendance.ui.navigation.NavigationActivity
+import com.example.geekgarden_attendance.ui.statusLaporanAbsensi.StatusLaporanAbsensiActivity
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants.PEGAWAI_URL
 import com.example.geekgarden_attendance.util.Prefs
@@ -76,6 +77,10 @@ class MoreFragment : Fragment() {
             }
             1 -> {
                 val intent = Intent(requireContext(), FormReportAttendanceActivity::class.java)
+                startActivity(intent)
+            }
+            2 -> {
+                val intent = Intent(requireContext(), StatusLaporanAbsensiActivity::class.java)
                 startActivity(intent)
             }
             else -> {

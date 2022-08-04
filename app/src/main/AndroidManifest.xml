@@ -69,6 +69,7 @@
         <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
         <activity android:name=".ui.more.FormWorkPermitActivity" />
         <activity android:name=".ui.more.FormReportAttendanceActivity" />
+        <activity android:name=".ui.statusLaporanAbsensi.StatusLaporanAbsensiActivity" />
     </application>
 
 </manifest>
