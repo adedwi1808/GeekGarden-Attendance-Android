@@ -42,6 +42,26 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+    fun lupaPassword(data: LupaPasswordRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.lupaPassword(data).let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val user = body?.data
+
+                    emit(Resource.success(user))
+                }else{
+                    val errJSON = JSONObject(it.errorBody()?.string())
+                    emit(Resource.error(null, errJSON.getString("message") ?:"Failed to login"))
+                }
+            }
+        }catch (err:Exception){
+            emit(Resource.error(null, err.message ?: "Fail to login"))
+            Log.d("ERR", "Login Err: ${err.message}")
+        }
+    }
+
     fun updateUser(data: UpdateProfileRequest) = flow {
         emit(Resource.loading(null))
         try {

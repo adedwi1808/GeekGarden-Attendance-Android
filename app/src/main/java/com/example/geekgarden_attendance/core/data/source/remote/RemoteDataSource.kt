@@ -10,6 +10,8 @@ class RemoteDataSource(private val api: ApiService) {
     //AUTH
     suspend fun login(data: LoginRequest) = api.login(data)
 
+    suspend fun lupaPassword(data: LupaPasswordRequest) = api.lupaPassword(data)
+
     suspend fun updateUser(data: UpdateProfileRequest) = api.updatePegawai("Bearer ${Prefs.getToken()}", data.id_pegawai, data)
 
     suspend fun uploadImage(id: Int? = null, fileImage: MultipartBody.Part? = null) = api.uploadImage("Bearer ${Prefs.getToken()}",id, fileImage)

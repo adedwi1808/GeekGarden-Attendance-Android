@@ -12,6 +12,11 @@ interface ApiService {
         @Body login:LoginRequest
     ): Response<LoginResponse>
 
+    @POST("lupa-password")
+    suspend fun lupaPassword(
+        @Body login:LupaPasswordRequest
+    ): Response<LoginResponse>
+
     @PUT("update-pegawai/{id_pegawai}")
     suspend fun updatePegawai(
         @Header("Authorization") token: String,

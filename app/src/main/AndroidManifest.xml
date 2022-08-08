@@ -70,6 +70,7 @@
         <activity android:name=".ui.more.FormWorkPermitActivity" />
         <activity android:name=".ui.more.FormReportAttendanceActivity" />
         <activity android:name=".ui.statusLaporanAbsensi.StatusLaporanAbsensiActivity" />
+        <activity android:name=".ui.login.LupaPasswordActivity" />
     </application>
 
 </manifest>

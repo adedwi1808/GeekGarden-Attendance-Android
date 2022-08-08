@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.core.di
 
 import com.example.geekgarden_attendance.ui.login.LoginViewModel
+import com.example.geekgarden_attendance.ui.login.LupaPasswordViewModel
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.example.geekgarden_attendance.ui.statusLaporanAbsensi.StatusLaporanAbsensiViewModel
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileViewModel
@@ -12,4 +13,5 @@ val viewModelModule = module {
     viewModel { UpdateProfileViewModel(get()) }
     viewModel { NavigationViewModel(get()) }
     viewModel { StatusLaporanAbsensiViewModel(get()) }
+    viewModel { LupaPasswordViewModel(get()) }
 }

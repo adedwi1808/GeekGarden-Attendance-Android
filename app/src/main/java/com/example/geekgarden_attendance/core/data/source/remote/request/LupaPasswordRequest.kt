@@ -1,6 +1,5 @@
 package com.example.geekgarden_attendance.core.data.source.remote.request
 
-data class LoginRequest(
+data class LupaPasswordRequest(
     val email: String,
-    val password: String
 )
