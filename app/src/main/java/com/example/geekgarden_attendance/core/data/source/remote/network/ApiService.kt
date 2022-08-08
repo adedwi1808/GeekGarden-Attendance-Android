@@ -15,7 +15,7 @@ interface ApiService {
     @POST("lupa-password")
     suspend fun lupaPassword(
         @Body login:LupaPasswordRequest
-    ): Response<LoginResponse>
+    ): Response<LupaPasswordResponse>
 
     @PUT("update-pegawai/{id_pegawai}")
     suspend fun updatePegawai(

@@ -38,8 +38,9 @@ class LupaPasswordActivity : AppCompatActivity() {
         viewModel.lupaPassword(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Selamat Datang ${it?.data?.nama}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Silahkan Buka Email Untuk Melakukan Reset Password", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
+                    onBackPressed()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

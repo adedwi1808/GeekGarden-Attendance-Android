@@ -49,7 +49,6 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful){
                     val body = it.body()
                     val user = body?.data
-
                     emit(Resource.success(user))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
