@@ -1,6 +1,7 @@
 package com.example.geekgarden_attendance.ui.history.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,11 +18,19 @@ class StatusLaporanAbsensiAdapter: RecyclerView.Adapter<StatusLaporanAbsensiAdap
     inner class ViewHolder(private val itemBinding: ItemStatusLaporanAbsensiBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: LaporanAbsensi, position: Int){
             itemBinding.apply {
-                textViewTanggalPengajuan.text = tanggalFormat(item.tanggal_laporan)
+                textViewTanggalLaporan.text = tanggalFormat(item.tanggal_laporan)
+                textViewHariLaporan.text = hariFormat(item.tanggal_laporan)
                 textViewTanggalAbsen.text = tanggalAbsenFormat(item.tanggal_absen)
-                textViewStatusAbsen.text = item.status_laporan
-                textViewHariPengajuan.text = hariFormat(item.tanggal_laporan)
+                textViewStatusLaporan.text = item.status_laporan
                 textViewKonfirmator.text = item.admin?.nama ?: "-"
+                if (position%2 == 1){
+                    cardMain.setCardBackgroundColor(Color.rgb(104,121,157))
+                    textViewStatusLaporan.setTextColor(Color.WHITE)
+                    textViewKonfirmator.setTextColor(Color.WHITE)
+                    textViewTanggalAbsen.setTextColor(Color.WHITE)
+                }else{
+                    cardMain.setCardBackgroundColor(Color.rgb(244,248,255))
+                }
             }
         }
     }

@@ -146,6 +146,32 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun riwayatLaporanAbsensi() = channelFlow{
+        send(Resource.loading(null))
+        try {
+            remote.riwayatLaporanAbsensi().let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val riwayatlaporanAbsensi = body?.data
+
+                    Prefs.setLaporanAbsensi(riwayatlaporanAbsensi)
+
+                    async {send(Resource.success(riwayatlaporanAbsensi))}
+                }else{
+                    async {
+                        val errJSON = JSONObject(it.errorBody()?.string())
+                        send(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                    }
+                }
+            }
+        }catch (err:Exception){
+            async {
+                send(Resource.error(null, err.message ?: "Fail to get riwayat laporan absensi"))
+            }
+        }
+    }
+
     fun checkAbsensi() = flow {
         emit(Resource.loading(null))
         try {

@@ -22,6 +22,8 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun riwayatAbsensi() = api.riwayatAbsensi("Bearer ${Prefs.getToken()}")
 
+    suspend fun riwayatLaporanAbsensi() = api.riwayatLaporanAbsensi("Bearer ${Prefs.getToken()}")
+
     suspend fun absensiHadir(data: AttendanceRequest) = api.absensiHadir("Bearer ${Prefs.getToken()}", data)
 
     suspend fun checkAbsensi() = api.checkAbsensi("Bearer ${Prefs.getToken()}")

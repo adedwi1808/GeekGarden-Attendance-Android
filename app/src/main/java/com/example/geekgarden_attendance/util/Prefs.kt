@@ -94,7 +94,6 @@ object Prefs: KotprefModel(){
         return gson.fromJson<List<Absensi>>(riwayatAbsensi, myType)
     }
 
-
     fun setToken(token: String){
         userToken= token
     }

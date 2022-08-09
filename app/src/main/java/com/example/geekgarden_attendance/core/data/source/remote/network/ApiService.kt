@@ -87,4 +87,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body data: LaporkanAbsensiRequest
     ):Response<LaporkanAbsensiResponse>
+
+    @GET("riwayat-laporan-absensi")
+    suspend fun riwayatLaporanAbsensi(
+        @Header("Authorization") token: String,
+    ): Response<RiwayatLaporanAbsensiResponse>
 }
