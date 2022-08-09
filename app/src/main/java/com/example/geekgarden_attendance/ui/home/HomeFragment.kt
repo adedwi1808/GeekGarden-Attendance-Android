@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.databinding.FragmentHomeBinding
 import com.example.geekgarden_attendance.ui.home.adapter.MadingGeekGardenAdapter
-import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants
 import com.example.geekgarden_attendance.util.Prefs
@@ -42,6 +40,11 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter(){
         binding.recyclerViewMading.adapter = adapterMading
+        adapterMading.setOnItemClickListener(object : MadingGeekGardenAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+
+            }
+        })
     }
 
     private fun setupMadings(){

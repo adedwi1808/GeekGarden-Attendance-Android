@@ -122,8 +122,6 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -11,14 +11,22 @@ import com.example.geekgarden_attendance.util.Constants
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 @SuppressLint("NotifyDataSetChanged")
 class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.ViewHolder>() {
 
     private var data = ArrayList<MadingGeekGarden>()
+    private lateinit var mListener: onItemClickListener
 
-    inner class ViewHolder(private val itemBinding: ItemMadingGeekgardenBinding): RecyclerView.ViewHolder(itemBinding.root){
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
+
+    inner class ViewHolder(private val itemBinding: ItemMadingGeekgardenBinding, listener: onItemClickListener): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: MadingGeekGarden, position: Int){
             itemBinding.apply {
                 Picasso.get().load(Constants.MADING_URL + item.foto).fit().centerCrop()
@@ -28,6 +36,12 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
                 TextViewJudulMading.text = item.judul
                 TextViewBodyMading.text = item.informasi
                 TextViewTanggalMading.text = dateFormat(item.create_at)
+            }
+        }
+
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
             }
         }
     }
@@ -54,7 +68,7 @@ class MadingGeekGardenAdapter: RecyclerView.Adapter<MadingGeekGardenAdapter.View
         return ViewHolder(ItemMadingGeekgardenBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false))
+            false), mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
