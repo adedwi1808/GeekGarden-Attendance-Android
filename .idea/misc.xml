@@ -42,7 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.1935063680013021" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16923076923076924" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.26234130859375004" />
         <entry key="app/src/main/res/layout/item_layanan_lainnya.xml" value="0.6421068185586425" />
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />

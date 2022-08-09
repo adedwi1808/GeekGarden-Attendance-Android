@@ -112,7 +112,6 @@ class MoreFragment : Fragment() {
             binding.dataKehadiran.apply {
                 moreViewModel.attendanceStats.observe(viewLifecycleOwner,{
                     textViewHadir.text = it.hadir.toString()
-                    textViewAlpha.text = it.alpha.toString()
                     textViewIzin.text = it.izin.toString()
                     textViewSakit.text = it.sakit.toString()
                 })
