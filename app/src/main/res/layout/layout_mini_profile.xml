@@ -11,7 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryVariant"
+            android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:padding="@dimen/_8sdp">
 
@@ -30,9 +30,9 @@
                         android:id="@+id/textViewNameInitial"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/white"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorPrimary"
                         android:text=".."
                         android:textSize="@dimen/_18sdp"
                         android:textStyle="bold"/>

@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/drawable/ic_unknown_file_picker.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_detail_mading.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_form_attendance.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_form_complete_attendance.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18792785644531249" />
@@ -50,7 +51,7 @@
         <entry key="app/src/main/res/layout/item_status_laporan_absensi.xml" value="0.24473419189453127" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/layout_info_absen.xml" value="0.2141119221411192" />
-        <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.10833333333333334" />
+        <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.6173116048177083" />
         <entry key="app/src/main/res/layout/spinner_dropdown_layout.xml" value="0.1390625" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.1390625" />
         <entry key="app/src/main/res/layout/spinner_style.xml" value="0.1390625" />

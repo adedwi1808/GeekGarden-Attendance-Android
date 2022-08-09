@@ -27,7 +27,7 @@
             android:padding="@dimen/_8sdp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:background="@color/colorPrimaryVariant">
+            android:background="@color/colorPrimary">
 
 
             <androidx.cardview.widget.CardView

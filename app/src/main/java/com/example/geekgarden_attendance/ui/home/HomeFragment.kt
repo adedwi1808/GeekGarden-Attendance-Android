@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.databinding.FragmentHomeBinding
+import com.example.geekgarden_attendance.ui.home.DetailMading.DetailMadingActivity
 import com.example.geekgarden_attendance.ui.home.adapter.MadingGeekGardenAdapter
 import com.example.geekgarden_attendance.ui.updateProfile.UpdateProfileActivity
 import com.example.geekgarden_attendance.util.Constants
@@ -42,7 +43,13 @@ class HomeFragment : Fragment() {
         binding.recyclerViewMading.adapter = adapterMading
         adapterMading.setOnItemClickListener(object : MadingGeekGardenAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-
+                val intent = Intent(requireActivity(), DetailMadingActivity::class.java)
+                intent.putExtra("judul", Prefs.getMading()!![position].judul)
+                intent.putExtra("informasi", Prefs.getMading()!![position].informasi)
+                intent.putExtra("foto", Prefs.getMading()!![position].foto)
+                intent.putExtra("tanggal", Prefs.getMading()!![position].create_at)
+//
+                startActivity(intent)
             }
         })
     }
