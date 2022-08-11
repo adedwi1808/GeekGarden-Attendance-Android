@@ -18,7 +18,9 @@
                 android:id="@+id/miniProfile"
                 layout="@layout/layout_mini_profile"/>
 
-            <include layout="@layout/layout_data_kehadiran"/>
+            <include
+                android:id="@+id/dataKehadiran"
+                layout="@layout/layout_data_kehadiran"/>
 
             <TextView
                 android:layout_width="match_parent"

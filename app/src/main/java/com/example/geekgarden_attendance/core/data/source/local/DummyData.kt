@@ -1,7 +1,6 @@
 package com.example.geekgarden_attendance.core.data.source.local
 
 import com.example.geekgarden_attendance.R
-import com.example.geekgarden_attendance.core.data.source.model.AttendanceStats
 import com.example.geekgarden_attendance.core.data.source.model.OtherMoreButton
 
 object DummyData {
@@ -16,5 +15,4 @@ object DummyData {
     OtherMoreButton(id = 1, icon = R.drawable.ic_baseline_laporkan_absensi, namaButton = "Laporkan Absensi"),
     OtherMoreButton(id = 3, icon = R.drawable.ic_baseline_status_laporan, namaButton = "Status Laporan")
     )
-    val attendanceStatsDummy = AttendanceStats(id = 1, hadir = 20, izin = 3, sakit = 7, alpha = 5)
 }

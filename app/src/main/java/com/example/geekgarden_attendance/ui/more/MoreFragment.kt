@@ -113,7 +113,8 @@ class MoreFragment : Fragment() {
                 moreViewModel.attendanceStats.observe(viewLifecycleOwner,{
                     textViewHadir.text = it.hadir.toString()
                     textViewIzin.text = it.izin.toString()
-                    textViewSakit.text = it.sakit.toString()
+                    textViewCuti.text = it.cuti.toString()
+                    textViewLembur.text = it.lembur.toString()
                 })
             }
         }

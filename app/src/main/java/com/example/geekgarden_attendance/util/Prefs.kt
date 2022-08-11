@@ -11,7 +11,7 @@ object Prefs: KotprefModel(){
     var userToken by stringPref()
     var attendance by stringPref()
     var pengajuanIzin by stringPref()
-    var attendanceStats  by stringPref()
+    var dataAbsensi  by stringPref()
     var madings by stringPref()
     var laporanAbsensi by stringPref()
     var riwayatAbsensi by stringPref()
@@ -124,15 +124,15 @@ object Prefs: KotprefModel(){
         return gson.fromJson(attendance, Absensi::class.java)
     }
 
-    fun setAttendanceStats(data: AttendanceStats?){
+    fun setDataAbsensi(data: DataAbsensi?){
         val gson = Gson()
-        attendanceStats = gson.toJson(data)
+        dataAbsensi = gson.toJson(data)
     }
 
-    fun getAttendanceStats(): AttendanceStats? {
-        if (attendanceStats.isEmpty()) return null
+    fun getDataAbsensi(): DataAbsensi? {
+        if (dataAbsensi.isEmpty()) return null
         val gson = Gson()
-        return gson.fromJson(attendanceStats, AttendanceStats::class.java)
+        return gson.fromJson(dataAbsensi, DataAbsensi::class.java)
     }
 
 }

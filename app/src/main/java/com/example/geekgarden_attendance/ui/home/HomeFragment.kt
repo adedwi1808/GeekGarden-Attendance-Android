@@ -76,6 +76,16 @@ class HomeFragment : Fragment() {
                 Picasso.get().load(Constants.PEGAWAI_URL + pegawai.foto_profile)
                     .into(binding.miniProfile.imageViewProfile)
             }
+
+            binding.dataKehadiran.apply {
+                homeViewModel.attendanceStats.observe(viewLifecycleOwner,{
+                    textViewHadir.text = it.hadir.toString()
+                    textViewIzin.text = it.izin.toString()
+                    textViewCuti.text = it.cuti.toString()
+                    textViewLembur.text = it.lembur.toString()
+                })
+            }
+
         }
     }
 

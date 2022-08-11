@@ -18,6 +18,7 @@ class LoginViewModel(var repository: AppRepository) : ViewModel() {
     fun login(data: LoginRequest) = repository.login(data).asLiveData()
     fun madings() = repository.selectAllMading().asLiveData()
     fun riwayatAbsensi() = repository.riwayatAbsensi().asLiveData()
+    fun dataAbsensi() = repository.dataAbsensi().asLiveData()
     fun checkAbsensi() = repository.checkAbsensi().asLiveData()
 
 }

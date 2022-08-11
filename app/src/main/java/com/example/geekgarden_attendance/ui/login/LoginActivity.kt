@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.riwayatAbsensi().observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    madings()
+                    dataAbsensi()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -94,6 +94,26 @@ class LoginActivity : AppCompatActivity() {
             when(it.state){
                 State.SUCCES -> {
                     checkAbsensi()
+                }
+                State.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("ERR", it.message.toString())
+                    binding.progressBar.isVisible = false
+
+                }
+                State.LOADING -> {
+                    binding.progressBar.isVisible = true
+                }
+            }
+
+        }
+    }
+
+    fun dataAbsensi(){
+        viewModel.dataAbsensi().observe(this) {
+            when(it.state){
+                State.SUCCES -> {
+                    madings()
                 }
                 State.ERROR -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

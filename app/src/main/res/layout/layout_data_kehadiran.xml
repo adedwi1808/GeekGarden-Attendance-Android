@@ -29,9 +29,8 @@
             android:gravity="center"
             android:background="@color/colorPrimary">
 
-
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
@@ -63,7 +62,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
@@ -73,7 +72,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewSakit"
+                        android:id="@+id/textViewCuti"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="1"
@@ -84,7 +83,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sakit"
+                        android:text="Cuti"
                         android:textSize="@dimen/_16sdp"
                         android:textAlignment="center"/>
 
@@ -95,7 +94,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
@@ -117,6 +116,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Izin"
+                        android:textSize="@dimen/_16sdp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewLembur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="@dimen/_25sdp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lembur"
                         android:textSize="@dimen/_16sdp"
                         android:textAlignment="center"/>
 
