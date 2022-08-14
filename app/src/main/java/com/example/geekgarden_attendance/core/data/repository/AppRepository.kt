@@ -216,7 +216,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun doAttendance(data: AttendanceRequest) = flow {
+    fun doAttendance(data: AbsenRequest) = flow {
         emit(Resource.loading(null))
         try {
             remote.absensiHadir( data).let {
@@ -258,7 +258,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun completeAttendance(data: CompleteAttendanceRequest) = flow {
+    fun completeAttendance(data: absensiPulangRequest) = flow {
         emit(Resource.loading(null))
         try {
             remote.absensiPulang(data).let {

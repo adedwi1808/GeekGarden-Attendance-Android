@@ -1,10 +1,10 @@
 package com.example.geekgarden_attendance.ui.updateProfile
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import com.example.geekgarden_attendance.R
@@ -93,14 +93,15 @@ class UpdateProfileActivity : AppCompatActivity() {
         if (binding.textInputEditEmail.text!!.isEmpty()) binding.textInputEditEmail.setError("Harap Masukkan Email")
         if (binding.textInputEditUsername.text!!.isEmpty()) binding.textInputEditUsername.setError("Harap Masukkan Nama Lengkap anda")
         if (binding.textInputEditPhone.text!!.isEmpty()) binding.textInputEditPhone.setError("Harap Masukkan Nomor HP")
-
+        if(binding.textInputPassword.length() > 1 && binding.textInputPassword.length() < 6)
+            return binding.textInputPassword.setError("Bila ingin mengganti password mohon masukkan 6 karakter atau lebih")
 
         val idUser = Prefs.getPegawai()?.id_pegawai
         val body = UpdateProfileRequest(
             idUser ?: 0,
-            nama = binding.textInputEditUsername.text.toString(),
             email = binding.textInputEditEmail.text.toString(),
-            nomor_hp = binding.textInputEditPhone.text.toString()
+            nomor_hp = binding.textInputEditPhone.text.toString(),
+            password = if(binding.textInputPassword.text!!.isEmpty())  "" else binding.textInputPassword.text.toString()
         )
 
         viewModel.updateUser(body).observe(this) {

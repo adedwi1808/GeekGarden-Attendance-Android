@@ -62,6 +62,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@color/danger"
             android:text="Logout" />
     </LinearLayout>
 </RelativeLayout>

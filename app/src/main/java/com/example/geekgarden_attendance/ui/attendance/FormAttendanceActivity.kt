@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.AttendanceRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.AbsenRequest
 import com.example.geekgarden_attendance.databinding.ActivityFormAttendanceBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
@@ -66,7 +66,7 @@ class FormAttendanceActivity : AppCompatActivity() {
 
     fun setButtonAction(){
         binding.buttonEdit.setOnClickListener {
-            doAttendance()
+            absenHadir()
         }
 
         binding.imageViewAttendance.setOnClickListener {
@@ -74,21 +74,21 @@ class FormAttendanceActivity : AppCompatActivity() {
         }
     }
 
-    private fun doAttendance() {
+    private fun absenHadir() {
 
         if (imageViewIsNull) {
             Toast.makeText(this,"Harap Masukkan gambar", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val body = AttendanceRequest(
+        val body = AbsenRequest(
             tempat = tempatAbsen ,
             status = "Hadir",
             longitude = Prefs.getLongitude(),
             latitude = Prefs.getLatitude()
             )
 
-        viewModel.doAttendance(body).observe(this) {
+        viewModel.absensiHadir(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     binding.progressBar.isVisible = false
@@ -158,7 +158,7 @@ class FormAttendanceActivity : AppCompatActivity() {
         if (checkDistance() > 100) {
             tempatAbsen = "DiLuar Kantor"
         }else{
-            tempatAbsen = "Di Area Kantor"
+            tempatAbsen = "Dikantor"
         }
     }
     fun checkDistance(): Double{

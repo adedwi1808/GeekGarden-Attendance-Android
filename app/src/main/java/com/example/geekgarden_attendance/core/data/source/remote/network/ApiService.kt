@@ -50,7 +50,7 @@ interface ApiService {
     @POST("absensi-hadir")
     suspend fun absensiHadir(
         @Header("Authorization") token: String,
-        @Body data: AttendanceRequest
+        @Body data: AbsenRequest
         ): Response<AttendanceResponse>
 
 
@@ -65,7 +65,7 @@ interface ApiService {
     @POST("absensi-pulang")
     suspend fun absensiPulang(
         @Header("Authorization") token: String,
-        @Body data: CompleteAttendanceRequest
+        @Body data: absensiPulangRequest
     ):Response<AttendanceResponse>
 
     @POST("pengajuan-izin")

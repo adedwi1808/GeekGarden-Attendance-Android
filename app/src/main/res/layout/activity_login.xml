@@ -103,6 +103,7 @@
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_gravity="center"
+        android:backgroundTint="@color/success"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="@dimen/_14sdp"

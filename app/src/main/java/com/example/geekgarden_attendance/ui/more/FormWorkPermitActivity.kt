@@ -90,13 +90,13 @@ class FormWorkPermitActivity : AppCompatActivity(){
             if (binding.alasanIzin.length() < 1 || tanggalMulaiIzin.length < 1 || tanggalSelesaiIzin.length < 1){
                 Toast.makeText(this, "Silahkan Lengkapi Form", Toast.LENGTH_SHORT).show()
             }else {
-                workPermit()
+                pengajuanIzin()
             }
         }
     }
 
 
-    private fun workPermit() {
+    private fun pengajuanIzin() {
 
         val body = PengajuanIzinRequest(
             jenis_izin = binding.spinner.selectedItem.toString(),
@@ -106,11 +106,11 @@ class FormWorkPermitActivity : AppCompatActivity(){
             status_izin = "diAjukan"
         )
 
-        viewModel.workPermit(body).observe(this) {
+        viewModel.pengajuanIzin(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     if (fileImage?.exists() == true){
-                        uploadWorkPermitApplicationLetter()
+                        uploadSuratIzin()
                     }else{
                         Toast.makeText(this, "Anda Berhasil Mengajukan Izin", Toast.LENGTH_SHORT).show()
                         binding.progressBar.isVisible = false
@@ -131,11 +131,11 @@ class FormWorkPermitActivity : AppCompatActivity(){
         }
     }
 
-    private fun uploadWorkPermitApplicationLetter(){
+    private fun uploadSuratIzin(){
         val id_pengajuan_izin = Prefs.getPengajuanIzin()?.id_pengajuan_izin
 
         val file = fileImage.toMultipartBody()
-        viewModel.uploadWorkPermitApplicationLetter(id_pengajuan_izin, file).observe(this) {
+        viewModel.uploadSuratIzin(id_pengajuan_izin, file).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     Toast.makeText(this, "Anda Berhasil Mengajukan Izin", Toast.LENGTH_SHORT).show()

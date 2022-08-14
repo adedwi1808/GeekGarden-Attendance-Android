@@ -81,6 +81,7 @@
                     android:background="@color/white"
                     android:hint="Full Name"
                     android:inputType="textPersonName"
+                    android:focusable="false"
                     android:text="Ade Uhuy" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,12 +116,28 @@
                     android:text="082222" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@color/white"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonEdit"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:backgroundTint="@color/warning"
                 android:text="Edit"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_14sdp" />

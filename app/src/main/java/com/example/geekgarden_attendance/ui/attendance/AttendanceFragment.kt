@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
@@ -62,9 +61,9 @@ class AttendanceFragment : Fragment() {
 
     fun setupData() {
         if (checkDistance() > 100) {
-            binding.textViewLocation.text = "DiLuar Kantor"
+            binding.textViewLocation.text = "Diluar Kantor"
         } else {
-            binding.textViewLocation.text = "Di Area Kantor"
+            binding.textViewLocation.text = "Dikantor"
         }
 
         when(Prefs.getCheckAbsensi()?.jumlah_absen_hari_ini){

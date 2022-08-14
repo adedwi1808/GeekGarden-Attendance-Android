@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.CompleteAttendanceRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.absensiPulangRequest
 import com.example.geekgarden_attendance.databinding.ActivityFormCompleteAttendanceBinding
 import com.example.geekgarden_attendance.extension.toMultipartBody
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
@@ -42,10 +42,17 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
     }
 
     private fun picImage() {
-        ImagePicker.with(this)
-            .crop()
-            .maxResultSize(1920,1920,true)
-            .createIntentFromDialog { launcher.launch(it) }
+        launcher.launch(
+            ImagePicker.with(this)
+                .crop()
+                .cameraOnly()
+                .maxResultSize(1080, 1080, true)
+                .createIntent()
+        )
+//        ImagePicker.with(this)
+//            .crop()
+//            .maxResultSize(1920,1920,true)
+//            .createIntentFromDialog { launcher.launch(it) }
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -66,7 +73,7 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
 
     fun setButtonAction(){
         binding.buttonSubmit.setOnClickListener {
-            doAttendance()
+            absensiPulang()
         }
 
         binding.imageViewCompleteAttendance.setOnClickListener {
@@ -74,13 +81,13 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
         }
     }
 
-    private fun doAttendance() {
+    private fun absensiPulang() {
 
         if (imageViewIsNull) {
             Toast.makeText(this,"Harap Masukkan gambar", Toast.LENGTH_SHORT).show()
             return
         }
-        val body = CompleteAttendanceRequest(
+        val body = absensiPulangRequest(
             tempat = tempatAbsen ,
             status = "Pulang",
             longitude = Prefs.getLongitude(),
@@ -88,7 +95,7 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
             progress_hari_ini = binding.textViewProgresshariIni.text.toString()
             )
 
-        viewModel.completeAttendance(body).observe(this) {
+        viewModel.absensiPulang(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     uploadAttendanceImage()
@@ -154,7 +161,7 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
         if (checkDistance() > 100) {
             tempatAbsen = "DiLuar Kantor"
         }else{
-            tempatAbsen = "Di Area Kantor"
+            tempatAbsen = "Dikantor"
         }
     }
     fun checkDistance(): Double{
