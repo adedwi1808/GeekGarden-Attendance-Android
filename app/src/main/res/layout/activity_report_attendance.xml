@@ -101,6 +101,8 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@color/warning"
+            android:textStyle="bold"
             android:text="Laporkan Absensi"
             android:textAllCaps="false"
             android:textSize="@dimen/_19sdp"
