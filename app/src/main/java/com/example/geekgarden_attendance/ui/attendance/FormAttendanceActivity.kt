@@ -42,10 +42,13 @@ class FormAttendanceActivity : AppCompatActivity() {
     }
 
     private fun picImage() {
-        ImagePicker.with(this)
-            .crop()
-            .maxResultSize(1920,1920,true)
-            .createIntentFromDialog { launcher.launch(it) }
+        launcher.launch(
+            ImagePicker.with(this)
+                .crop()
+                .cameraOnly()
+                .maxResultSize(1080, 1080, true)
+                .createIntent()
+        )
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

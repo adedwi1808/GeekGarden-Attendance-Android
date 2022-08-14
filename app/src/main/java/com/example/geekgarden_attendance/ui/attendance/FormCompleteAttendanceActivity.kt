@@ -49,10 +49,6 @@ class FormCompleteAttendanceActivity : AppCompatActivity() {
                 .maxResultSize(1080, 1080, true)
                 .createIntent()
         )
-//        ImagePicker.with(this)
-//            .crop()
-//            .maxResultSize(1920,1920,true)
-//            .createIntentFromDialog { launcher.launch(it) }
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
