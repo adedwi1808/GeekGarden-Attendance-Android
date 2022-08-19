@@ -21,7 +21,6 @@ class FormReportAttendanceActivity : AppCompatActivity() {
     private val viewModel: NavigationViewModel by viewModel()
     private var _binding: ActivityReportAttendanceBinding? = null
     private val binding get() = _binding!!
-    private var cal = Calendar.getInstance()
     private var tanggalAbsensi: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +33,7 @@ class FormReportAttendanceActivity : AppCompatActivity() {
 
     private fun setToolBar() {
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
-        toolBar?.title = "Form Melaporkan Absensi"
+        toolBar?.title = "Form Pengaduan Absensi"
         setSupportActionBar(toolBar)
     }
 

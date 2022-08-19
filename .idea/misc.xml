@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/activity_report_attendance.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_status_laporan.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_status_laporan_absensi.xml" value="0.1015625" />
+        <entry key="app/src/main/res/layout/activity_status_pengaduan_absensi.xml" value="0.2328125" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_work_permit.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />
