@@ -147,17 +147,17 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun riwayatLaporanAbsensi() = channelFlow{
+    fun riwayatPengaduanAbsensi() = channelFlow{
         send(Resource.loading(null))
         try {
-            remote.riwayatLaporanAbsensi().let {
+            remote.riwayatPengaduanAbsensi().let {
                 if (it.isSuccessful){
                     val body = it.body()
-                    val riwayatlaporanAbsensi = body?.data
+                    val riwayatPengaduanAbsensi = body?.data
 
-                    Prefs.setLaporanAbsensi(riwayatlaporanAbsensi)
+                    Prefs.setPengaduanAbsensi(riwayatPengaduanAbsensi)
 
-                    async {send(Resource.success(riwayatlaporanAbsensi))}
+                    async {send(Resource.success(riwayatPengaduanAbsensi))}
                 }else{
                     async {
                         val errJSON = JSONObject(it.errorBody()?.string())
@@ -167,7 +167,7 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
             }
         }catch (err:Exception){
             async {
-                send(Resource.error(null, err.message ?: "Fail to get riwayat laporan absensi"))
+                send(Resource.error(null, err.message ?: "Fail to get riwayat Pengaduan absensi"))
             }
         }
     }
@@ -319,18 +319,18 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
-    fun LaporkanAbsensi(data: LaporkanAbsensiRequest) = flow {
+    fun AdukanAbsensi(data: AdukanAbsensiRequest) = flow {
         emit(Resource.loading(null))
         try {
-            remote.laporkanAbsensi(data).let {
+            remote.AdukanAbsensi(data).let {
                 if (it.isSuccessful){
                     val body = it.body()
-                    val laporkanAbsensi = body?.data
-                    Prefs.setLaporanAbsensi(laporkanAbsensi)
+                    val adukanAbsensi = body?.data
+                    Prefs.setPengaduanAbsensi(adukanAbsensi)
 
                     Log.d("SUCC", body.toString())
-                    Log.d("INILAPORANABSENSI", Prefs.getLaporanAbsensi().toString())
-                    emit(Resource.success(laporkanAbsensi))
+                    Log.d("INILAPORANABSENSI", Prefs.getPengaduanAbsensi().toString())
+                    emit(Resource.success(adukanAbsensi))
                 }else{
                     val errJSON = JSONObject(it.errorBody()?.string())
                     emit(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))

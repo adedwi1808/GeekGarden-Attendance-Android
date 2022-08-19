@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/keteranganLaporan"
+                        android:id="@+id/keteranganPengaduan"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:background="@drawable/rounded_edittext"
@@ -103,7 +103,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:backgroundTint="@color/warning"
             android:textStyle="bold"
-            android:text="Laporkan Absensi"
+            android:text="Adukan Absensi"
             android:textAllCaps="false"
             android:textSize="@dimen/_19sdp"
             app:cornerRadius="@dimen/_12sdp" />

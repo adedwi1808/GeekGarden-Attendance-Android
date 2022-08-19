@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.geekgarden_attendance.core.data.repository.AppRepository
 import com.example.geekgarden_attendance.core.data.source.remote.request.AbsenRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.absensiPulangRequest
-import com.example.geekgarden_attendance.core.data.source.remote.request.LaporkanAbsensiRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.AdukanAbsensiRequest
 import com.example.geekgarden_attendance.core.data.source.remote.request.PengajuanIzinRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.absensiPulangRequest
 import okhttp3.MultipartBody
 
 
@@ -22,7 +22,7 @@ class NavigationViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun pengajuanIzin(data: PengajuanIzinRequest) = repository.WorkPermit(data).asLiveData()
 
-    fun laporkanAbsensi(data: LaporkanAbsensiRequest) = repository.LaporkanAbsensi(data).asLiveData()
+    fun adukanAbsensi(data: AdukanAbsensiRequest) = repository.AdukanAbsensi(data).asLiveData()
 
     fun checkAbsensi() = repository.checkAbsensi().asLiveData()
 

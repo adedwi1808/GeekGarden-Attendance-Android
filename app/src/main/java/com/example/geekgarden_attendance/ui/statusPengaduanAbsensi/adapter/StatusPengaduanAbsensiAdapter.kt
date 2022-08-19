@@ -5,23 +5,23 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.geekgarden_attendance.core.data.source.model.LaporanAbsensi
-import com.example.geekgarden_attendance.databinding.ItemStatusLaporanAbsensiBinding
+import com.example.geekgarden_attendance.core.data.source.model.PengaduanAbsensi
+import com.example.geekgarden_attendance.databinding.ItemStatusPengaduanAbsensiBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("NotifyDataSetChanged")
-class StatusLaporanAbsensiAdapter: RecyclerView.Adapter<StatusLaporanAbsensiAdapter.ViewHolder>() {
+class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensiAdapter.ViewHolder>() {
 
-    private var data = mutableListOf<LaporanAbsensi>()
+    private var data = mutableListOf<PengaduanAbsensi>()
 
-    inner class ViewHolder(private val itemBinding: ItemStatusLaporanAbsensiBinding): RecyclerView.ViewHolder(itemBinding.root){
-        fun bind(item: LaporanAbsensi, position: Int){
+    inner class ViewHolder(private val itemBinding: ItemStatusPengaduanAbsensiBinding): RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(item: PengaduanAbsensi, position: Int){
             itemBinding.apply {
-                textViewTanggalLaporan.text = tanggalFormat(item.tanggal_laporan)
-                textViewHariLaporan.text = hariFormat(item.tanggal_laporan)
+                textViewTanggalLaporan.text = tanggalFormat(item.tanggal_pengaduan)
+                textViewHariLaporan.text = hariFormat(item.tanggal_pengaduan)
                 textViewTanggalAbsen.text = tanggalAbsenFormat(item.tanggal_absen)
-                textViewStatusLaporan.text = item.status_laporan
+                textViewStatusLaporan.text = item.status_pengaduan
                 textViewKonfirmator.text = item.admin?.nama ?: "-"
                 if (position%2 == 1){
                     cardMain.setCardBackgroundColor(Color.rgb(104,121,157))
@@ -35,7 +35,7 @@ class StatusLaporanAbsensiAdapter: RecyclerView.Adapter<StatusLaporanAbsensiAdap
         }
     }
 
-    fun addItems(item: List<LaporanAbsensi>){
+    fun addItems(item: List<PengaduanAbsensi>){
             data.clear()
             data.addAll(item)
             notifyDataSetChanged()
@@ -80,7 +80,7 @@ class StatusLaporanAbsensiAdapter: RecyclerView.Adapter<StatusLaporanAbsensiAdap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemStatusLaporanAbsensiBinding.inflate(
+            ItemStatusPengaduanAbsensiBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false))

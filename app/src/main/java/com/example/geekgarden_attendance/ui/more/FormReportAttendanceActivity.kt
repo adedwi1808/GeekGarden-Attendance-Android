@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.core.data.source.remote.request.LaporkanAbsensiRequest
+import com.example.geekgarden_attendance.core.data.source.remote.request.AdukanAbsensiRequest
 import com.example.geekgarden_attendance.databinding.ActivityReportAttendanceBinding
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -44,10 +44,10 @@ class FormReportAttendanceActivity : AppCompatActivity() {
         }
 
         binding.buttonSubmit.setOnClickListener {
-            if (binding.keteranganLaporan.length() < 1 || tanggalAbsensi.length < 1){
+            if (binding.keteranganPengaduan.length() < 1 || tanggalAbsensi.length < 1){
                 Toast.makeText(this, "Silahkan Lengkapi Form", Toast.LENGTH_SHORT).show()
             }else {
-                laporkanAbsensi()
+                adukanAbsensi()
             }
         }
     }
@@ -82,17 +82,17 @@ class FormReportAttendanceActivity : AppCompatActivity() {
         }
     }
 
-    private fun laporkanAbsensi() {
+    private fun adukanAbsensi() {
 
-        val body = LaporkanAbsensiRequest(
+        val body = AdukanAbsensiRequest(
             tanggal_absen = tanggalAbsensi,
-            keterangan_laporan = binding.keteranganLaporan.text.toString()
+            keterangan_pengaduan = binding.keteranganPengaduan.text.toString()
         )
 
-        viewModel.laporkanAbsensi(body).observe(this) {
+        viewModel.adukanAbsensi(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
-                    Toast.makeText(this, "Berhasil Melaporkan Absensi", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Berhasil Mengadukan Absensi", Toast.LENGTH_SHORT)
                         .show()
                     binding.progressBar.isVisible = false
                 }

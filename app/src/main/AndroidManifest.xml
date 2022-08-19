@@ -70,7 +70,7 @@
         <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
         <activity android:name=".ui.more.FormWorkPermitActivity" />
         <activity android:name=".ui.more.FormReportAttendanceActivity" />
-        <activity android:name=".ui.statusLaporanAbsensi.StatusLaporanAbsensiActivity" />
+        <activity android:name=".ui.statusPengaduanAbsensi.StatusPengaduanAbsensiActivity" />
         <activity android:name=".ui.login.LupaPasswordActivity" />
         <activity android:name=".ui.home.DetailMading.DetailMadingActivity" />
     </application>

@@ -1,4 +1,4 @@
-package com.example.geekgarden_attendance.ui.statusLaporanAbsensi
+package com.example.geekgarden_attendance.ui.statusPengaduanAbsensi
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,22 +9,22 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
-import com.example.geekgarden_attendance.databinding.ActivityStatusLaporanAbsensiBinding
-import com.example.geekgarden_attendance.ui.history.adapter.StatusLaporanAbsensiAdapter
+import com.example.geekgarden_attendance.databinding.ActivityStatusPengaduanAbsensiBinding
+import com.example.geekgarden_attendance.ui.history.adapter.StatusPengaduanAbsensiAdapter
 import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StatusLaporanAbsensiActivity : AppCompatActivity() {
+class StatusPengaduanAbsensiActivity : AppCompatActivity() {
 
-    private val viewModel: StatusLaporanAbsensiViewModel by viewModel()
-    private var _binding: ActivityStatusLaporanAbsensiBinding? = null
-    private val adapterStatusLaporanAbsensi = StatusLaporanAbsensiAdapter()
+    private val viewModel: StatusPengaduanAbsensiViewModel by viewModel()
+    private var _binding: ActivityStatusPengaduanAbsensiBinding? = null
+    private val adapterStatusLaporanAbsensi = StatusPengaduanAbsensiAdapter()
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityStatusLaporanAbsensiBinding.inflate(layoutInflater)
+        _binding = ActivityStatusPengaduanAbsensiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setToolBar()
@@ -44,9 +44,9 @@ class StatusLaporanAbsensiActivity : AppCompatActivity() {
     }
 
     private fun setupRiwayatAbsensi(){
-        viewModel.listStatusLaporanAbsensi.observe(this) {
+        viewModel.listStatusPengaduanAbsensi.observe(this) {
             if(!it.isNullOrEmpty()) {
-                adapterStatusLaporanAbsensi.addItems(it.sortedByDescending { it.id_laporan_absensi })
+                adapterStatusLaporanAbsensi.addItems(it.sortedByDescending { it.id_pengaduan_absensi })
             }
         }
     }

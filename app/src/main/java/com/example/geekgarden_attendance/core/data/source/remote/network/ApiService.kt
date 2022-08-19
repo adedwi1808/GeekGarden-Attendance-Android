@@ -82,16 +82,16 @@ interface ApiService {
         @Part data: MultipartBody.Part? = null,
     ): Response<PengajuanIzinResponse>
 
-    @POST("laporkan-absensi")
-    suspend fun laporkanAbsensi(
+    @POST("pengaduan-absensi")
+    suspend fun adukanAbsensi(
         @Header("Authorization") token: String,
-        @Body data: LaporkanAbsensiRequest
-    ):Response<LaporkanAbsensiResponse>
+        @Body data: AdukanAbsensiRequest
+    ):Response<AdukanAbsensiResponse>
 
-    @GET("riwayat-laporan-absensi")
-    suspend fun riwayatLaporanAbsensi(
+    @GET("riwayat-pengaduan-absensi")
+    suspend fun riwayatPengaduanAbsensi(
         @Header("Authorization") token: String,
-    ): Response<RiwayatLaporanAbsensiResponse>
+    ): Response<RiwayatPengaduanAbsensiResponse>
 
     @GET("data-absensi")
     suspend fun dataAbsensi(
