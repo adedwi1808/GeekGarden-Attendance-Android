@@ -17,5 +17,5 @@ class StatusPengaduanAbsensiViewModel(private val repository: AppRepository) : V
 
     fun checkAbsensi() = repository.checkAbsensi().asLiveData()
 
-    fun riwayatLaporanAbsensi() = repository.riwayatPengaduanAbsensi().asLiveData()
+    fun riwayatPengaduanAbsensi() = repository.riwayatPengaduanAbsensi().asLiveData()
 }

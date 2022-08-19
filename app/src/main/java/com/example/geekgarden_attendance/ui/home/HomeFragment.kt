@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
                 intent.putExtra("informasi", Prefs.getMading()!![position].informasi)
                 intent.putExtra("foto", Prefs.getMading()!![position].foto)
                 intent.putExtra("tanggal", Prefs.getMading()!![position].create_at)
-//
+
                 startActivity(intent)
             }
         })

@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail_mading.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_status_pengaduan_absensi.xml" value="0.2404139162019918" />
         <entry key="app/src/main/res/layout/activity_form_attendance.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_form_complete_attendance.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18792785644531249" />

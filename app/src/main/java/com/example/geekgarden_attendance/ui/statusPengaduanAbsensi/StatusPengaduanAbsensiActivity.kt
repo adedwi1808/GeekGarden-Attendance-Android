@@ -12,6 +12,7 @@ import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.databinding.ActivityStatusPengaduanAbsensiBinding
 import com.example.geekgarden_attendance.ui.history.adapter.StatusPengaduanAbsensiAdapter
 import com.example.geekgarden_attendance.ui.login.LoginActivity
+import com.example.geekgarden_attendance.ui.statusPengaduanAbsensi.detailStatusPengaduanAbsensi.DetailStatusPengaduanAbsensiActivity
 import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,7 +20,7 @@ class StatusPengaduanAbsensiActivity : AppCompatActivity() {
 
     private val viewModel: StatusPengaduanAbsensiViewModel by viewModel()
     private var _binding: ActivityStatusPengaduanAbsensiBinding? = null
-    private val adapterStatusLaporanAbsensi = StatusPengaduanAbsensiAdapter()
+    private val adapterStatusPengaduanAbsensi = StatusPengaduanAbsensiAdapter()
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class StatusPengaduanAbsensiActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setToolBar()
-        riwayatLaporanAbsensi()
+        riwayatPengaduanAbsensi()
         setupAdapter()
         setupRiwayatAbsensi()
     }
@@ -40,19 +41,31 @@ class StatusPengaduanAbsensiActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter(){
-        binding.recylerViewStatusLaporanAbsensi.adapter = adapterStatusLaporanAbsensi
+        binding.recylerViewStatusPengaduanAbsensi.adapter = adapterStatusPengaduanAbsensi
+        adapterStatusPengaduanAbsensi.setOnItemClickListener(object : StatusPengaduanAbsensiAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@StatusPengaduanAbsensiActivity, DetailStatusPengaduanAbsensiActivity::class.java)
+                intent.putExtra("konfirmator", Prefs.getPengaduanAbsensi()!![position].admin?.nama)
+                intent.putExtra("keteranganAdmin", Prefs.getPengaduanAbsensi()!![position].keterangan_admin)
+                intent.putExtra("keteranganPengaduan", Prefs.getPengaduanAbsensi()!![position].keterangan_pengaduan)
+                intent.putExtra("statusPengaduan", Prefs.getPengaduanAbsensi()!![position].status_pengaduan)
+                intent.putExtra("tanggalAbsen", Prefs.getPengaduanAbsensi()!![position].tanggal_absen)
+                intent.putExtra("tanggalPengaduan", Prefs.getPengaduanAbsensi()!![position].tanggal_pengaduan)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setupRiwayatAbsensi(){
         viewModel.listStatusPengaduanAbsensi.observe(this) {
             if(!it.isNullOrEmpty()) {
-                adapterStatusLaporanAbsensi.addItems(it.sortedByDescending { it.id_pengaduan_absensi })
+                adapterStatusPengaduanAbsensi.addItems(it)
             }
         }
     }
 
-    fun riwayatLaporanAbsensi(){
-        viewModel.riwayatLaporanAbsensi().observe(this) {
+    fun riwayatPengaduanAbsensi(){
+        viewModel.riwayatPengaduanAbsensi().observe(this) {
             when(it.state){
                 State.SUCCES -> {
                     binding.progressBar.isVisible = false

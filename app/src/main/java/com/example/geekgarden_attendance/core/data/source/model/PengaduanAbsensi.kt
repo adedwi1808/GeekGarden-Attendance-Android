@@ -6,6 +6,7 @@ data class PengaduanAbsensi(
     val id_admin: String? = null,
     val tanggal_absen: String? = null,
     val keterangan_pengaduan: String? = null,
+    val keterangan_admin: String? = null,
     val tanggal_pengaduan: String? = null,
     val status_pengaduan: String? = null,
     val admin: Admin? = null

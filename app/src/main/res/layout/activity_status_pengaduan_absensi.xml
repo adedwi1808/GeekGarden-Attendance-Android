@@ -29,7 +29,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recylerViewStatusLaporanAbsensi"
+            android:id="@+id/recyler_view_status_pengaduan_absensi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

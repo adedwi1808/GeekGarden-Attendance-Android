@@ -15,7 +15,17 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
 
     private var data = mutableListOf<PengaduanAbsensi>()
 
-    inner class ViewHolder(private val itemBinding: ItemStatusPengaduanAbsensiBinding): RecyclerView.ViewHolder(itemBinding.root){
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
+
+    inner class ViewHolder(private val itemBinding: ItemStatusPengaduanAbsensiBinding, listener: onItemClickListener): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: PengaduanAbsensi, position: Int){
             itemBinding.apply {
                 textViewTanggalLaporan.text = tanggalFormat(item.tanggal_pengaduan)
@@ -31,6 +41,12 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
                 }else{
                     cardMain.setCardBackgroundColor(Color.rgb(244,248,255))
                 }
+            }
+        }
+
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
             }
         }
     }
@@ -83,7 +99,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
             ItemStatusPengaduanAbsensiBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false))
+            false), mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
