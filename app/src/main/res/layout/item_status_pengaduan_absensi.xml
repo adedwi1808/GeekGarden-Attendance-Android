@@ -59,13 +59,23 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-        <TextView
-            android:id="@+id/textViewStatusLaporan"
-            android:layout_width="@dimen/_55sdp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bannerStatus"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sdp"
-            android:textAlignment="center"
-            android:text="Diajukan"/>
+            app:cardCornerRadius="@dimen/_10sdp">
+            <TextView
+                android:id="@+id/textViewStatusLaporan"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="Diajukan"/>
+        </com.google.android.material.card.MaterialCardView>
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"

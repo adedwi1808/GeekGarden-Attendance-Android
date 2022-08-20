@@ -33,9 +33,17 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
                 textViewTanggalAbsen.text = tanggalAbsenFormat(item.tanggal_absen)
                 textViewStatusLaporan.text = item.status_pengaduan
                 textViewKonfirmator.text = item.admin?.nama ?: "-"
+                when(item.status_pengaduan){
+                    "Diterima"->
+                        bannerStatus.setCardBackgroundColor(Color.parseColor("#23CF92"))
+                    "Ditolak"->
+                        bannerStatus.setCardBackgroundColor(Color.parseColor("#FF6359"))
+                    else->
+                        bannerStatus.setCardBackgroundColor(Color.parseColor("#FFBD59"))
+                }
+
                 if (position%2 == 1){
                     cardMain.setCardBackgroundColor(Color.rgb(104,121,157))
-                    textViewStatusLaporan.setTextColor(Color.WHITE)
                     textViewKonfirmator.setTextColor(Color.WHITE)
                     textViewTanggalAbsen.setTextColor(Color.WHITE)
                 }else{

@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_menu_history.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_more.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_pengajuan_izin.xml" value="0.1085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_status_laporan.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/ic_baseline_status_pengajuan.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/ic_baseline_touch.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_clock_plus.xml" value="0.1205" />
@@ -39,7 +40,7 @@
         <entry key="app/src/main/res/layout/activity_report_attendance.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_status_laporan.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_status_laporan_absensi.xml" value="0.1015625" />
-        <entry key="app/src/main/res/layout/activity_status_pengaduan_absensi.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/activity_status_pengaduan_absensi.xml" value="0.5693161010742188" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_work_permit.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.15117645263671878" />
@@ -51,6 +52,7 @@
         <entry key="app/src/main/res/layout/item_mading_geekgarden.xml" value="0.23387683370838996" />
         <entry key="app/src/main/res/layout/item_riwayat_absensi.xml" value="0.43626861572265624" />
         <entry key="app/src/main/res/layout/item_status_laporan_absensi.xml" value="0.24473419189453127" />
+        <entry key="app/src/main/res/layout/item_status_pengaduan_absensi.xml" value="0.4810810810810811" />
         <entry key="app/src/main/res/layout/layout_data_kehadiran.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/layout_info_absen.xml" value="0.2141119221411192" />
         <entry key="app/src/main/res/layout/layout_mini_profile.xml" value="0.6173116048177083" />

@@ -28,7 +28,7 @@ class OtherMoreButtonAdapter: RecyclerView.Adapter<OtherMoreButtonAdapter.ViewHo
             itemBinding.apply {
                 textViewNamaButton.text = item.namaButton
                 imageViewIcon.setImageResource(item.icon)
-                if (position == 2){
+                if (position == 3){
                     bottomBorder.isVisible = false
                 }
             }
