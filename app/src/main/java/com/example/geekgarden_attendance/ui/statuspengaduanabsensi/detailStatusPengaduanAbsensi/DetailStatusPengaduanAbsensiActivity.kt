@@ -1,7 +1,8 @@
-package com.example.geekgarden_attendance.ui.statusPengaduanAbsensi.detailStatusPengaduanAbsensi
+package com.example.geekgarden_attendance.ui.statuspengaduanabsensi.detailStatusPengaduanAbsensi
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -66,6 +67,10 @@ class DetailStatusPengaduanAbsensiActivity : AppCompatActivity() {
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
         toolBar?.title = "Status Pengaduan"
         setSupportActionBar(toolBar)
+
+        binding.textViewKeteranganAdmin.movementMethod = ScrollingMovementMethod()
+        binding.textViewKeteranganPengaduan.movementMethod = ScrollingMovementMethod()
+
         binding.textViewTanggalPengaduan.text = dateFormat(tanggalPengaduan)
         binding.textViewTanggalAbsen.text = dateFormat2(tanggalAbsen)
         binding.textViewKeteranganPengaduan.text = keteranganPengaduan

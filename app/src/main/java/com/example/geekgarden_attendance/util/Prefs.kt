@@ -11,6 +11,7 @@ object Prefs: KotprefModel(){
     var userToken by stringPref()
     var attendance by stringPref()
     var pengajuanIzin by stringPref()
+    var riwayatPengajuanIzin by stringPref()
     var dataAbsensi  by stringPref()
     var madings by stringPref()
     var pengaduanAbsensi by stringPref()
@@ -19,6 +20,18 @@ object Prefs: KotprefModel(){
     var userLatitude by stringPref("0.0")
     var userDidNotFinishAttendance by booleanPref(false)
     var checkAbsensi by stringPref()
+
+    fun setRiwayatPengajuanIzin(data: List<PengajuanIzin>?){
+        val gson = Gson()
+        riwayatPengajuanIzin = gson.toJson(data)
+    }
+
+    fun getRiwayatPengajuanIzin(): List<PengajuanIzin>? {
+        if (riwayatPengajuanIzin.isEmpty()) return null
+        val gson = Gson()
+        val myType = object : TypeToken<List<PengajuanIzin>>() {}.type
+        return gson.fromJson<List<PengajuanIzin>>(riwayatPengajuanIzin, myType)
+    }
 
     fun setPengajuanIzin(data: PengajuanIzin?){
         val gson = Gson()

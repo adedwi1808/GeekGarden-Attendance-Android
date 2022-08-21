@@ -86,12 +86,17 @@ interface ApiService {
     suspend fun adukanAbsensi(
         @Header("Authorization") token: String,
         @Body data: AdukanAbsensiRequest
-    ):Response<AdukanAbsensiResponse>
+    ):Response<PengaduanAbsensiResponse>
 
     @GET("riwayat-pengaduan-absensi")
     suspend fun riwayatPengaduanAbsensi(
         @Header("Authorization") token: String,
     ): Response<RiwayatPengaduanAbsensiResponse>
+
+    @GET("riwayat-pengajuan-izin")
+    suspend fun riwayatPengajuanIzin(
+        @Header("Authorization") token: String,
+    ): Response<RiwayatPengajuanIzinResponse>
 
     @GET("data-absensi")
     suspend fun dataAbsensi(

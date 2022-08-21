@@ -94,6 +94,7 @@ class FormReportAttendanceActivity : AppCompatActivity() {
                     Toast.makeText(this, "Berhasil Mengadukan Absensi", Toast.LENGTH_SHORT)
                         .show()
                     binding.progressBar.isVisible = false
+                    onBackPressed()
                 }
                 State.ERROR -> {
                     val message = it.message.toString()

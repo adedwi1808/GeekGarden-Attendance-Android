@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardMain"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_60sdp"
+    android:layout_height="@dimen/_70sdp"
     app:cardCornerRadius="0dp"
     app:cardBackgroundColor="@color/colorSecondary"
     tools:context=".MainActivity">
@@ -13,48 +13,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_8sdp"
         android:orientation="horizontal">
+
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="@dimen/_45sdp"
+            android:layout_width="@dimen/_55sdp"
             android:layout_height="match_parent"
-            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/white">
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <TextView
-                    android:id="@+id/textViewTanggalPengaduan"
+                    android:id="@+id/textViewTanggalPengajuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="21"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:text="21"/>
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:id="@+id/textViewHariPengaduan"
+                    android:id="@+id/textViewHariPengajuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Kam"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_15sdp"
-                    android:text="Kam"/>
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15sdp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewTanggalMulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:text="30/08/2022"/>
+
+            <TextView
+                android:id="@+id/iconSampaiDengan"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-9dp"
+                android:text="-"
+                android:textAlignment="center"
+                android:textSize="@dimen/_14sdp" />
+            <TextView
+                android:id="@+id/textViewTanggalSelesai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:text="30/08/2022"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <TextView
-            android:id="@+id/textViewTanggalAbsen"
-            android:layout_width="@dimen/_80sdp"
+            android:id="@+id/textViewJenisIzin"
+            android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:textSize="@dimen/_12sdp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="30/08/2022"/>
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="Sakit"/>
+
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -63,15 +112,16 @@
             android:id="@+id/bannerStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/warning"
             app:cardCornerRadius="@dimen/_10sdp">
             <TextView
-                android:id="@+id/textViewStatusPengaduan"
+                android:id="@+id/textViewStatusPengajuan"
                 android:layout_width="@dimen/_55sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginVertical="@dimen/_2sdp"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:text="Diajukan"/>
@@ -82,13 +132,17 @@
             android:layout_weight="1" />
         <TextView
             android:id="@+id/textViewKonfirmator"
-            android:layout_width="@dimen/_70sdp"
+            android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_12sdp"
             android:maxLines="1"
             android:ellipsize="end"
             android:textAlignment="center"
             android:text="Ade "/>
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

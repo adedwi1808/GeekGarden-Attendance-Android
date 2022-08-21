@@ -5,15 +5,15 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.geekgarden_attendance.core.data.source.model.PengaduanAbsensi
-import com.example.geekgarden_attendance.databinding.ItemStatusPengaduanAbsensiBinding
+import com.example.geekgarden_attendance.core.data.source.model.PengajuanIzin
+import com.example.geekgarden_attendance.databinding.ItemStatusPengajuanIzinBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("NotifyDataSetChanged")
-class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensiAdapter.ViewHolder>() {
+class StatusPengajuanIzinAdapter: RecyclerView.Adapter<StatusPengajuanIzinAdapter.ViewHolder>() {
 
-    private var data = mutableListOf<PengaduanAbsensi>()
+    private var data = mutableListOf<PengajuanIzin>()
 
     private lateinit var mListener: onItemClickListener
 
@@ -25,15 +25,17 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
         mListener = listener
     }
 
-    inner class ViewHolder(private val itemBinding: ItemStatusPengaduanAbsensiBinding, listener: onItemClickListener): RecyclerView.ViewHolder(itemBinding.root){
-        fun bind(item: PengaduanAbsensi, position: Int){
+    inner class ViewHolder(private val itemBinding: ItemStatusPengajuanIzinBinding, listener: onItemClickListener): RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(item: PengajuanIzin, position: Int){
             itemBinding.apply {
-                textViewTanggalLaporan.text = tanggalFormat(item.tanggal_pengaduan)
-                textViewHariLaporan.text = hariFormat(item.tanggal_pengaduan)
-                textViewTanggalAbsen.text = tanggalAbsenFormat(item.tanggal_absen)
-                textViewStatusLaporan.text = item.status_pengaduan
+                textViewTanggalPengajuan.text = tanggalFormat(item.tanggal_mengajukan_izin)
+                textViewHariPengajuan.text = hariFormat(item.tanggal_mengajukan_izin)
+                textViewTanggalMulai.text = tanggalIzin(item.tanggal_mulai_izin)
+                textViewTanggalSelesai.text = tanggalIzin(item.tanggal_selesai_izin)
+                textViewStatusPengajuan.text = item.status_izin
                 textViewKonfirmator.text = item.admin?.nama ?: "-"
-                when(item.status_pengaduan){
+                textViewJenisIzin.text = item.jenis_izin
+                when(item.status_izin){
                     "Diterima"->
                         bannerStatus.setCardBackgroundColor(Color.parseColor("#23CF92"))
                     "Ditolak"->
@@ -45,7 +47,10 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
                 if (position%2 == 1){
                     cardMain.setCardBackgroundColor(Color.rgb(104,121,157))
                     textViewKonfirmator.setTextColor(Color.WHITE)
-                    textViewTanggalAbsen.setTextColor(Color.WHITE)
+                    textViewTanggalMulai.setTextColor(Color.WHITE)
+                    textViewTanggalSelesai.setTextColor(Color.WHITE)
+                    textViewJenisIzin.setTextColor(Color.WHITE)
+                    iconSampaiDengan.setTextColor(Color.WHITE)
                 }else{
                     cardMain.setCardBackgroundColor(Color.rgb(244,248,255))
                 }
@@ -59,7 +64,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
         }
     }
 
-    fun addItems(item: List<PengaduanAbsensi>){
+    fun addItems(item: List<PengajuanIzin>){
             data.clear()
             data.addAll(item)
             notifyDataSetChanged()
@@ -68,7 +73,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
     @SuppressLint("SimpleDateFormat")
     fun tanggalFormat(date: String?): String?{
         if(date == null) return null
-        val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
+        val myFormat = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID")).parse(date)
         val formattedDatesString = myFormat?.let {
             SimpleDateFormat("dd", Locale("in", "ID")).format(
                 it
@@ -79,7 +84,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
 
 
     @SuppressLint("SimpleDateFormat")
-    fun tanggalAbsenFormat(date: String?): String?{
+    fun tanggalIzin(date: String?): String?{
         if(date == null) return null
         val myFormat = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID")).parse(date)
         val formattedDatesString = myFormat?.let {
@@ -93,7 +98,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
     @SuppressLint("SimpleDateFormat")
     fun hariFormat(date: String?): String?{
         if(date == null) return null
-        val myFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale("in", "ID")).parse(date)
+        val myFormat = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID")).parse(date)
         val formattedDatesString = myFormat?.let {
             SimpleDateFormat("EEE", Locale("in", "ID")).format(
                 it
@@ -104,7 +109,7 @@ class StatusPengaduanAbsensiAdapter: RecyclerView.Adapter<StatusPengaduanAbsensi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemStatusPengaduanAbsensiBinding.inflate(
+            ItemStatusPengajuanIzinBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false), mListener)

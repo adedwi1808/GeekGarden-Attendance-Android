@@ -52,6 +52,7 @@ class AttendanceFragment : Fragment() {
         return root
     }
 
+
     override fun onResume() {
         super.onResume()
         getCurrentLocation()
@@ -135,12 +136,12 @@ class AttendanceFragment : Fragment() {
         val df = DecimalFormat("#.##")
 
         if(diffHours>=1){
-            return df.format(diffHours).toString()
+            return df.format(diffHours).toString().replace(".","J ") + "m"
         }else{
             if(diffMinutes.toString().length > 1) {
-                return "00.${diffMinutes.toString().substring(0, 2)}"
+                return "0J ${diffMinutes.toString().substring(0, 2)}m"
             }else{
-                return "00.$diffMinutes"
+                return "0J ${diffMinutes}m"
             }
         }
     }

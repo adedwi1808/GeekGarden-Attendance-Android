@@ -1,4 +1,4 @@
-package com.example.geekgarden_attendance.ui.statusPengaduanAbsensi
+package com.example.geekgarden_attendance.ui.statuspengaduanabsensi
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

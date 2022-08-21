@@ -70,10 +70,12 @@
         <activity android:name=".ui.attendance.FormCompleteAttendanceActivity" />
         <activity android:name=".ui.more.FormWorkPermitActivity" />
         <activity android:name=".ui.more.FormReportAttendanceActivity" />
-        <activity android:name=".ui.statusPengaduanAbsensi.StatusPengaduanAbsensiActivity" />
+        <activity android:name=".ui.statuspengaduanabsensi.StatusPengaduanAbsensiActivity" />
         <activity android:name=".ui.login.LupaPasswordActivity" />
         <activity android:name=".ui.home.DetailMading.DetailMadingActivity" />
-        <activity android:name=".ui.statusPengaduanAbsensi.detailStatusPengaduanAbsensi.DetailStatusPengaduanAbsensiActivity" />
+        <activity android:name=".ui.statuspengaduanabsensi.detailStatusPengaduanAbsensi.DetailStatusPengaduanAbsensiActivity" />
+        <activity android:name=".ui.statuspengajuanizin.StatusPengajuanIzinActivity" />
+        <activity android:name=".ui.statuspengajuanizin.detailpengajuanizin.DetailStatusPengajuanIzinActivity" />
     </application>
 
 </manifest>

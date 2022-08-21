@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.statuspengaduanabsensi.StatusPengaduanAbsensiActivity">
+    tools:context=".ui.statuspengajuanizin.StatusPengajuanIzinActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,13 +29,13 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyler_view_status_pengaduan_absensi"
+            android:id="@+id/recyler_view_status_pengajuan_izin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="2"
-            tools:listitem="@layout/item_status_pengaduan_absensi" />
+            tools:listitem="@layout/item_status_pengajuan_izin" />
 
     </LinearLayout>
 

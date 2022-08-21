@@ -173,6 +173,33 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
+    fun riwayatPengajuanIzin() = channelFlow{
+        send(Resource.loading(null))
+        try {
+            remote.riwayatPengajuanIzin().let {
+                if (it.isSuccessful){
+                    val body = it.body()
+                    val riwayatPengajuanIzin = body?.data
+
+                    Prefs.setRiwayatPengajuanIzin(riwayatPengajuanIzin)
+
+                    async {send(Resource.success(riwayatPengajuanIzin))}
+                }else{
+                    async {
+                        val errJSON = JSONObject(it.errorBody()?.string())
+                        send(Resource.error(null, errJSON.getString("message") ?:"Failed to update"))
+                    }
+                }
+            }
+        }catch (err:Exception){
+            async {
+                send(Resource.error(null, err.message ?: "Fail to get riwayat Pengajuan izin"))
+            }
+        }
+    }
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun dataAbsensi() = channelFlow{
         send(Resource.loading(null))
         try {

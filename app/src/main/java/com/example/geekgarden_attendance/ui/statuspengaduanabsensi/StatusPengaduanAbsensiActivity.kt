@@ -1,4 +1,4 @@
-package com.example.geekgarden_attendance.ui.statusPengaduanAbsensi
+package com.example.geekgarden_attendance.ui.statuspengaduanabsensi
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.databinding.ActivityStatusPengaduanAbsensiBinding
 import com.example.geekgarden_attendance.ui.history.adapter.StatusPengaduanAbsensiAdapter
 import com.example.geekgarden_attendance.ui.login.LoginActivity
-import com.example.geekgarden_attendance.ui.statusPengaduanAbsensi.detailStatusPengaduanAbsensi.DetailStatusPengaduanAbsensiActivity
+import com.example.geekgarden_attendance.ui.statuspengaduanabsensi.detailStatusPengaduanAbsensi.DetailStatusPengaduanAbsensiActivity
 import com.example.geekgarden_attendance.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
