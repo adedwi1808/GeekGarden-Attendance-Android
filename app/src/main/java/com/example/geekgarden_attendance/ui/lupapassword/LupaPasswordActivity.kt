@@ -29,7 +29,7 @@ class LupaPasswordActivity : AppCompatActivity() {
     }
 
     private fun lupaPassword() {
-        if (binding.textInputEmail.text!!.isEmpty()) binding.textInputEmail.setError("Harap Masukkan Email")
+        if (binding.textInputEmail.text!!.isEmpty()) binding.textInputEmail.error = "Harap Masukkan Email"
 
         val body = LupaPasswordRequest(
             binding.textInputEmail.text.toString(),

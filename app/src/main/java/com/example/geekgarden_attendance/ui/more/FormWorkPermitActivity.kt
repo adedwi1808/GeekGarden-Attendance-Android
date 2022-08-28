@@ -232,7 +232,7 @@ class FormWorkPermitActivity : AppCompatActivity(){
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+            onBackPressed()
         return true
     }
 }

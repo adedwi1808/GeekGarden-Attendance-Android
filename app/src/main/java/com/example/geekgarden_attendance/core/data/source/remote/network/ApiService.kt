@@ -51,7 +51,7 @@ interface ApiService {
     suspend fun absensiHadir(
         @Header("Authorization") token: String,
         @Body data: AbsenRequest
-        ): Response<AttendanceResponse>
+        ): Response<AbsenResponse>
 
 
     @Multipart
@@ -60,13 +60,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id_absensi") int: Int? = null,
         @Part data: MultipartBody.Part? = null,
-    ): Response<AttendanceResponse>
+    ): Response<AbsenResponse>
 
     @POST("absensi-pulang")
     suspend fun absensiPulang(
         @Header("Authorization") token: String,
         @Body data: absensiPulangRequest
-    ):Response<AttendanceResponse>
+    ):Response<AbsenResponse>
 
     @POST("pengajuan-izin")
     suspend fun pengajuanIzin(

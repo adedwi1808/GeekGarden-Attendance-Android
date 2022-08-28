@@ -1,5 +1,6 @@
 package com.example.geekgarden_attendance.ui.more
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -10,7 +11,9 @@ import com.example.geekgarden_attendance.R
 import com.example.geekgarden_attendance.core.data.source.remote.network.State
 import com.example.geekgarden_attendance.core.data.source.remote.request.AdukanAbsensiRequest
 import com.example.geekgarden_attendance.databinding.ActivityReportAttendanceBinding
+import com.example.geekgarden_attendance.ui.login.LoginActivity
 import com.example.geekgarden_attendance.ui.navigation.NavigationViewModel
+import com.example.geekgarden_attendance.util.Prefs
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -82,12 +85,10 @@ class FormReportAttendanceActivity : AppCompatActivity() {
     }
 
     private fun adukanAbsensi() {
-
         val body = AdukanAbsensiRequest(
             tanggal_absen = tanggalAbsensi,
             keterangan_pengaduan = binding.keteranganPengaduan.text.toString()
         )
-
         viewModel.adukanAbsensi(body).observe(this) {
             when(it.state){
                 State.SUCCES -> {
@@ -99,17 +100,29 @@ class FormReportAttendanceActivity : AppCompatActivity() {
                 State.ERROR -> {
                     val message = it.message.toString()
                     Log.d("ERR", message)
-//                    checkToken(message)
+                    checkToken(message)
                     binding.progressBar.isVisible = false
                 }
                 State.LOADING -> {
                     binding.progressBar.isVisible = true
                 }
             }
-
         }
     }
 
+    fun checkToken(message: String){
+        if(message == "Token is Expired" || message == "Authorization Token not found" || message == "Token is Invalid"){
+            Toast.makeText(this, "Sessi Telah Selesai, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+            Prefs.isLogin = false
+            Prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

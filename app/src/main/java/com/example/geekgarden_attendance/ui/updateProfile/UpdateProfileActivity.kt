@@ -81,7 +81,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                 textInputEditUsername.setText(pegawai.nama)
                 textInputEditEmail.setText(pegawai.email)
                 textInputEditPhone.setText(pegawai.nomor_hp)
-                textViewNameInitial.setText(userNameInitial)
+                textViewNameInitial.text = userNameInitial
                 Picasso.get().load(Constants.PEGAWAI_URL + pegawai.foto_profile)
                     .into(binding.imageViewProfile)
             }
@@ -90,9 +90,9 @@ class UpdateProfileActivity : AppCompatActivity() {
 
     private fun updateUser() {
 
-        if (binding.textInputEditEmail.text!!.isEmpty()) binding.textInputEditEmail.setError("Harap Masukkan Email")
-        if (binding.textInputEditUsername.text!!.isEmpty()) binding.textInputEditUsername.setError("Harap Masukkan Nama Lengkap anda")
-        if (binding.textInputEditPhone.text!!.isEmpty()) binding.textInputEditPhone.setError("Harap Masukkan Nomor HP")
+        if (binding.textInputEditEmail.text!!.isEmpty()) binding.textInputEditEmail.error = "Harap Masukkan Email"
+        if (binding.textInputEditUsername.text!!.isEmpty()) binding.textInputEditUsername.error = "Harap Masukkan Nama Lengkap anda"
+        if (binding.textInputEditPhone.text!!.isEmpty()) binding.textInputEditPhone.error = "Harap Masukkan Nomor HP"
         if(binding.textInputPassword.length() > 1 && binding.textInputPassword.length() < 6)
             return binding.textInputPassword.setError("Bila ingin mengganti password mohon masukkan 6 karakter atau lebih")
 

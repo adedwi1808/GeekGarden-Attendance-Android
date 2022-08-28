@@ -29,13 +29,13 @@ class StatusPengajuanIzinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setToolBar()
-        riwayatPengaduanAbsensi()
+        riwayatPengajuanIzin()
         setupAdapter()
     }
 
     override fun onStart() {
         super.onStart()
-        setupRiwayatAbsensi()
+        setupRiwayatPengajuanIzin()
     }
 
     fun setToolBar(){
@@ -64,7 +64,7 @@ class StatusPengajuanIzinActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupRiwayatAbsensi(){
+    private fun setupRiwayatPengajuanIzin(){
         viewModel.listStatusPengajuanIzin.observe(this) {
             if(!it.isNullOrEmpty()) {
                 adapterStatusPengajuanIzin.addItems(it)
@@ -72,13 +72,7 @@ class StatusPengajuanIzinActivity : AppCompatActivity() {
         }
     }
 
-    private fun restartActivity(){
-        val intent = intent
-        finish()
-        startActivity(intent)
-    }
-
-    fun riwayatPengaduanAbsensi(){
+    fun riwayatPengajuanIzin(){
         viewModel.riwayatPengajuanIzin().observe(this) {
             when(it.state){
                 State.SUCCES -> {

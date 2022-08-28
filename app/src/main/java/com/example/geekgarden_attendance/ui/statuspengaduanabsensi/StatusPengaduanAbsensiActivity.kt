@@ -31,12 +31,12 @@ class StatusPengaduanAbsensiActivity : AppCompatActivity() {
         setToolBar()
         riwayatPengaduanAbsensi()
         setupAdapter()
-        setupRiwayatAbsensi()
+        setupRiwayatPengaduanAbsensi()
     }
 
     fun setToolBar(){
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
-        toolBar?.title = "Status Laporan Absen"
+        toolBar?.title = "Status Pengaduan Absen"
         setSupportActionBar(toolBar)
     }
 
@@ -56,7 +56,7 @@ class StatusPengaduanAbsensiActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupRiwayatAbsensi(){
+    private fun setupRiwayatPengaduanAbsensi(){
         viewModel.listStatusPengaduanAbsensi.observe(this) {
             if(!it.isNullOrEmpty()) {
                 adapterStatusPengaduanAbsensi.addItems(it)

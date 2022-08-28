@@ -71,7 +71,7 @@ class DetailStatusPengajuanIzinActivity : AppCompatActivity() {
 
     private fun setupLayout(){
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
-        toolBar?.title = "Status Pengaduan"
+        toolBar?.title = "Status Pengajuan Izin"
         binding.textViewKeteranganAdmin.movementMethod = ScrollingMovementMethod()
         binding.textViewAlasanIzin.movementMethod = ScrollingMovementMethod()
 
