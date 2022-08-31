@@ -150,7 +150,7 @@
                             android:maxLines="1"
                             android:gravity="center"
                             android:textColor="@color/colorPrimary"
-                            android:text="Pilih Surat"
+                            android:text="Upload Surat"
                             android:textSize="@dimen/_13sdp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
